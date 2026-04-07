@@ -1178,6 +1178,171 @@ def main():
     p(f"     For Stollberg → Beeston ({m2km(d_st):.0f} km), {g_air_st['d_shadow_km']:.0f} km are")
     p(f"     beyond radio line-of-sight (46% of the total path).")
 
+    # ---------------------------------------------------------------
+    #  TELEFUNKEN RANGE TABLE COMPARISON (4,000 m altitude)
+    #
+    #  The Telefunken company documented operational ranges for the
+    #  Knickebein system at 4,000 m flight altitude over sea, based on
+    #  measurements from July 1939 onwards.  This section computes what
+    #  each propagation model predicts at those distances and compares
+    #  to the documented ranges.
+    #
+    #  Source: Appendix 2 to D.R.d.L.u.Ob.d.L. (German Air Ministry &
+    #  C-in-C Luftwaffe), Ref. 47 F 68, No. 2/14/39, Secret Command
+    #  Matter, dated 10 September 1939.
+    #  Title: "Range of VHF Guide Beams over Sea at 4,000 m Flight
+    #  Altitude (in km)"
+    # ---------------------------------------------------------------
+    p(banner("7. TELEFUNKEN RANGE TABLE COMPARISON  (4,000 m altitude)"))
+    p("""
+  Source: Telefunken range table, 10 September 1939 (D.R.d.L.u.Ob.d.L.)
+  "Range of VHF Guide Beams over Sea at 4,000 m Flight Altitude (in km)"
+  Basis: Measurements by Chief NVW and LC 4 since 1 July 1939.
+
+  The Knickebein row shows 1:64 gain (18 dB) over standard Lorenz, at
+  3,000 W.  Ranges documented with six different receiver/antenna configs.""")
+
+    H_TEST = 4000.0   # Telefunken test altitude (m)
+
+    # Line-of-sight geometry at 4,000 m
+    geo_test = geometry(1000, H_TX, H_TEST)
+    p(f"\n  Line-of-sight at 4,000 m:")
+    p(f"    TX horizon (200 m):       {geo_test['d_tx_km']:.1f} km")
+    p(f"    RX horizon (4000 m):      {geo_test['d_rx_km']:.1f} km")
+    p(f"    Total LoS range:          {geo_test['d_los_km']:.1f} km")
+    p(f"    → Every documented Knickebein range above {geo_test['d_los_km']:.0f} km")
+    p(f"      is BEYOND radio line-of-sight on a globe.")
+
+    # Telefunken Knickebein documented ranges (min, max, typical) in km
+    # and the receiver configurations with estimated gain offsets.
+    #
+    # Receiver sensitivity modelling:
+    #   Rod antenna:      ~0 dBi  (quarter-wave whip on fuselage)
+    #   Trailing wire:    ~+3 dBi (longer effective aperture, lower drag)
+    #   Cross-dipole:     ~+5 dBi (polarisation-matched to beam)
+    #   Regen stage:      ~+6 dB  effective sensitivity (regenerative
+    #                      feedback lowers effective noise figure)
+    #   Special RX:       ~+10 dB effective sensitivity (purpose-built
+    #                      receiver with better front-end and matching)
+    TELEFUNKEN = [
+        #  (label, min_km, max_km, typ_km, rx_gain_offset_dB)
+        ("FuBl 1, rod antenna",            300,  500,  400,  0.0),
+        ("FuBl 1, trailing wire",          400,  600,  500,  3.0),
+        ("FuBl 1 + regen, rod",            500,  800,  700,  6.0),
+        ("FuBl 1 + regen, trailing wire",  550,  900,  800,  9.0),
+        ("Special RX, cross-dipole",       800, 1200, 1000, 15.0),
+        ("Special RX, trailing wire",      800, 1200, 1000, 15.0),
+    ]
+
+    p(f"\n  {'Config':<35} {'Telefunken':>12} {'Flat max':>10} {'Globe max':>10} {'Globe':>8}")
+    p(f"  {'':35} {'typical km':>12} {'eqsig km':>10} {'eqsig km':>10} {'detect':>8}")
+    p(f"  {'-'*35} {'-'*12} {'-'*10} {'-'*10} {'-'*8}")
+
+    for cfg_name, tf_min, tf_max, tf_typ, rx_offset in TELEFUNKEN:
+        eff_gain = 3.0 + rx_offset   # baseline 3 dBi + config offset
+
+        # Find max range on each model where equisignal SNR >= 10 dB
+        flat_max_km = 0
+        globe_max_km = 0
+        globe_detect_km = 0   # peak SNR >= 0 dB (bare detection)
+        for test_km in range(100, 2001, 10):
+            td = test_km * 1000.0
+            lk_f = link_budget(td, 0.0, rx_gain_dBi=eff_gain)
+            if lk_f['SNR_dB'] + crossover_dB >= 10.0:
+                flat_max_km = test_km
+
+            fk_t = fock_loss(td, H_TX, H_TEST)
+            lk_g = link_budget(td, fk_t['loss_dB'], rx_gain_dBi=eff_gain)
+            if lk_g['SNR_dB'] + crossover_dB >= 10.0:
+                globe_max_km = test_km
+            if lk_g['SNR_dB'] >= 0.0:
+                globe_detect_km = test_km
+
+        shortfall = tf_typ - globe_max_km
+        status = f"-{shortfall} km" if shortfall > 0 else "OK"
+        p(f"  {cfg_name:<35} {tf_typ:>12} {flat_max_km:>10} {globe_max_km:>10} {status:>8}")
+
+    p(f"""
+  The globe model's maximum equisignal range caps at ~360-410 km regardless
+  of receiver sensitivity.  Adding +15 dB of receiver advantage (special RX
+  + trailing wire) only extends the range from 360 to 410 km because the
+  Fock exponential decay (~0.29 dB/km) overwhelms any linear gain improvement.
+
+  At the documented typical ranges:
+    400 km (baseline):   Globe equisignal SNR = -0.2 dB  (UNUSABLE)
+    700 km (regen):      Globe peak SNR = -71 dB  (UNDETECTABLE)
+    1000 km (special):   Globe peak SNR = -160 dB  (160 dB below noise)
+
+  The flat model gives usable equisignal SNR (>58 dB) at ALL documented
+  distances.  The globe model cannot reproduce Telefunken's own measured
+  range data.""")
+
+    # ---------------------------------------------------------------
+    #  MT EVEREST TRANSMITTER ALTITUDE TEST
+    #
+    #  Even if the transmitter were placed at the highest point on Earth
+    #  (Mt Everest, 8,849 m), giving maximum possible height gain G(Y1),
+    #  the equisignal still fails on a globe.  This is a stress-test of
+    #  the globe model: if it can't work from Everest, it certainly can't
+    #  work from a 200 m hilltop.
+    # ---------------------------------------------------------------
+    p(banner("8. MT EVEREST TRANSMITTER TEST  (maximum possible height gain)"))
+    p("""
+  Thought experiment: place the Knickebein transmitter at the summit of
+  Mt Everest (8,849 m).  This maximises the height-gain factor G(Y₁) and
+  extends the radio horizon.  Does the equisignal become usable?""")
+
+    H_EVEREST = 8849.0   # Summit of Mt Everest (m)
+
+    geo_ev = geometry(1000, H_EVEREST, H_AIRCRAFT)
+    p(f"\n  TX height:                {H_EVEREST:.0f} m  (Mt Everest summit)")
+    p(f"  RX height:                {H_AIRCRAFT:.0f} m  (operational altitude)")
+    p(f"  TX horizon (Everest):     {geometry(1000, H_EVEREST, 0)['d_tx_km']:.1f} km")
+    p(f"  Total LoS range:          {geo_ev['d_los_km']:.0f} km")
+
+    p(f"\n  {'Path':<30} {'Dist':>8} {'Shadow':>8} {'Fock':>8} "
+      f"{'Globe':>10} {'Globe':>10} {'Flat':>10}")
+    p(f"  {'':30} {'km':>8} {'km':>8} {'loss dB':>8} "
+      f"{'peak dB':>10} {'eqsig dB':>10} {'eqsig dB':>10}")
+    p(f"  {'-'*30} {'-'*8} {'-'*8} {'-'*8} "
+      f"{'-'*10} {'-'*10} {'-'*10}")
+
+    for path in PATHS:
+        d = path["d"]
+        name = path["name"]
+        geo_e = geometry(d, H_EVEREST, H_AIRCRAFT)
+        fk_e  = fock_loss(d, H_EVEREST, H_AIRCRAFT)
+        lk_ge = link_budget(d, fk_e['loss_dB'], rx_gain_dBi=3.0)
+        lk_fe = link_budget(d, 0.0, rx_gain_dBi=3.0)
+
+        p(f"  {name:<30} {m2km(d):>8.0f} {geo_e['d_shadow_km']:>8.0f} "
+          f"{fk_e['loss_dB']:>8.1f} {lk_ge['SNR_dB']:>10.1f} "
+          f"{lk_ge['SNR_dB']+crossover_dB:>10.1f} "
+          f"{lk_fe['SNR_dB']+crossover_dB:>10.1f}")
+
+    # Compute specific values for the text
+    fk_ev_kl = fock_loss(d_kl, H_EVEREST, H_AIRCRAFT)
+    lk_ev_kl = link_budget(d_kl, fk_ev_kl['loss_dB'], rx_gain_dBi=3.0)
+    fk_ev_st = fock_loss(d_st, H_EVEREST, H_AIRCRAFT)
+    lk_ev_st = link_budget(d_st, fk_ev_st['loss_dB'], rx_gain_dBi=3.0)
+
+    p(f"""
+  Even from the summit of Mt Everest:
+
+    Kleve → Spalding ({m2km(d_kl):.0f} km):
+      Path is within LoS ({geo_ev['d_los_km']:.0f} km > {m2km(d_kl):.0f} km), but Fock diffraction
+      still applies.  Globe equisignal SNR = {lk_ev_kl['SNR_dB']+crossover_dB:.1f} dB.
+      Below the ~10-20 dB threshold for Lorenz discrimination.  UNUSABLE.
+
+    Stollberg → Beeston ({m2km(d_st):.0f} km):
+      Globe peak SNR = {lk_ev_st['SNR_dB']:.1f} dB — {abs(lk_ev_st['SNR_dB']):.0f} dB below noise
+      at beam peak, before any equisignal crossover correction.
+      Equisignal SNR = {lk_ev_st['SNR_dB']+crossover_dB:.1f} dB.  UNUSABLE.
+
+  The transmitter at the actual Kleve/Stollberg stations was at ~200 m.
+  Even a 44× increase in TX height (200 m → 8,849 m) cannot overcome
+  the exponential Fock decay in the shadow zone.""")
+
     p()
     p(SEP)
     p("  CONCLUSION: The measured beam properties (narrow equisignal, sufficient")
@@ -1224,6 +1389,14 @@ def main():
 
   [10] Bauer, A.O. (2004). "Some historical and technical aspects of radio
        navigation, in Germany, over the period 1907 to 1945."
+
+  [11] Jones, R.V. (1978). Most Secret War. Hamish Hamilton.
+
+  [12] Price, A. (2017). Instruments of Darkness. Frontline Books.
+
+  [13] D.R.d.L.u.Ob.d.L., Ref. 47 F 68, No. 2/14/39 (10 Sept 1939).
+       "Range of VHF Guide Beams over Sea at 4,000 m Flight Altitude."
+       Secret Command Matter.  Telefunken measurements since 1 July 1939.
 """)
 
     text = "\n".join(out)

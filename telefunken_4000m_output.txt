@@ -1,0 +1,212 @@
+==============================================================================
+  TELEFUNKEN 4,000 m ALTITUDE COMPARISON — FLAT vs GLOBE
+==============================================================================
+
+  Source: Telefunken range table, 10 September 1939
+  All ranges measured over sea at 4,000 m flight altitude
+  TX: Knickebein (31.5 MHz, 3 kW, 99m array, 1:64 gain)
+  TX elevation: 200 m ASL
+
+------------------------------------------------------------------------------
+  1. LINE-OF-SIGHT GEOMETRY AT 4,000 m
+------------------------------------------------------------------------------
+  TX horizon (200 m):         58.3 km
+  RX horizon (4000 m):        260.7 km
+  Total LoS range:            319.0 km
+
+  Compare to operational 6,000 m:
+  RX horizon (6000 m):        319.3 km
+  Total LoS range:            377.6 km
+
+------------------------------------------------------------------------------
+  2. GLOBE MODEL: FOCK DIFFRACTION AT TELEFUNKEN DISTANCES
+------------------------------------------------------------------------------
+
+  Using standard RX gain = 3 dBi (FuBl 1 rod baseline)
+  Noise floor = -137.2 dBW
+
+    Dist   Shadow     Fock    |V(xi)|  G(Y_tx)  G(Y_rx)   Flat SNR  Globe SNR   Eqsig yd
+    (km)     (km)  loss dB                  dB       dB    peak dB    peak dB     (flat)
+  ------ -------- -------- ---------- -------- -------- ---------- ---------- ----------
+     300      0.0     39.7   6.71e-04      6.0     17.8       89.0       49.3        378
+     400     81.0     67.7   2.69e-05      6.0     17.8       86.5       18.8        504
+     440    121.0     78.9   7.35e-06      6.0     17.8       85.7        6.8        554  <- Kleve-Spalding
+     500    181.0     95.9   1.04e-06      6.0     17.8       84.6      -11.3        630
+     600    281.0    124.3   3.96e-08      6.0     17.8       83.0      -41.3        756
+     694    375.0    151.1   1.81e-09      6.0     17.8       81.7      -69.4        874  <- Stollberg-Beeston
+     700    381.0    152.8   1.49e-09      6.0     17.8       81.7      -71.2        882
+     800    481.0    181.5   5.51e-11      6.0     17.8       80.5     -101.0       1008
+     900    581.0    210.1   2.03e-12      6.0     17.8       79.5     -130.7       1134
+    1000    681.0    238.9   7.41e-14      6.0     17.8       78.6     -160.3       1260
+    1200    881.0    296.5   9.77e-17      6.0     17.8       77.0     -219.5       1512
+
+------------------------------------------------------------------------------
+  3. SNR AT EQUISIGNAL (crossover correction: -19 dB from peak)
+------------------------------------------------------------------------------
+
+  The pilot doesn't fly at beam peak -- they fly at the equisignal
+  crossover, which is ~19 dB below peak for a 500 yd corridor.
+
+    Dist   Flat SNR  Globe SNR     Flat    Globe
+    (km)   eqsig dB   eqsig dB  detect?  detect?
+  ------ ---------- ---------- -------- --------
+     300       70.0       30.3      YES      YES
+     400       67.5       -0.2      YES       NO
+     440       66.7      -12.2      YES       NO
+     500       65.6      -30.3      YES       NO
+     600       64.0      -60.3      YES       NO
+     694       62.7      -88.4      YES       NO
+     700       62.7      -90.2      YES       NO
+     800       61.5     -120.0      YES       NO
+     900       60.5     -149.7      YES       NO
+    1000       59.6     -179.3      YES       NO
+    1200       58.0     -238.5      YES       NO
+
+------------------------------------------------------------------------------
+  4. TELEFUNKEN DOCUMENTED RANGES vs MODEL PREDICTIONS
+------------------------------------------------------------------------------
+
+  For each receiver config, we compute the maximum range where
+  SNR at the EQUISIGNAL exceeds 10 dB (usable equisignal discrimination).
+
+  Crossover correction: -19 dB (for ~500 yd equisignal width)
+
+  --- FuBl 1, rod antenna ---
+  Telefunken documented: 300-500 km (typical 400 km)
+  Effective RX advantage: +0 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   360 km
+  Globe model max range (peak SNR >= 0 dB):          460 km
+  Telefunken documented typical:                     400 km
+  * Globe model below typical documented range *
+
+  --- FuBl 1, trailing wire ---
+  Telefunken documented: 400-600 km (typical 500 km)
+  Effective RX advantage: +3 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   370 km
+  Globe model max range (peak SNR >= 0 dB):          470 km
+  Telefunken documented typical:                     500 km
+  *** Globe model falls 30 km SHORT of even the minimum documented range ***
+
+  --- FuBl 1 + regen, rod ---
+  Telefunken documented: 500-800 km (typical 700 km)
+  Effective RX advantage: +6 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   380 km
+  Globe model max range (peak SNR >= 0 dB):          480 km
+  Telefunken documented typical:                     700 km
+  *** Globe model falls 120 km SHORT of even the minimum documented range ***
+
+  --- FuBl 1 + regen, trailing wire ---
+  Telefunken documented: 550-900 km (typical 800 km)
+  Effective RX advantage: +9 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   390 km
+  Globe model max range (peak SNR >= 0 dB):          490 km
+  Telefunken documented typical:                     800 km
+  *** Globe model falls 160 km SHORT of even the minimum documented range ***
+
+  --- Special RX, cross-dipole ---
+  Telefunken documented: 800-1200 km (typical 1000 km)
+  Effective RX advantage: +15 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   410 km
+  Globe model max range (peak SNR >= 0 dB):          510 km
+  Telefunken documented typical:                    1000 km
+  *** Globe model falls 390 km SHORT of even the minimum documented range ***
+
+  --- Special RX, trailing wire ---
+  Telefunken documented: 800-1200 km (typical 1000 km)
+  Effective RX advantage: +15 dB over baseline
+
+  Flat model max range (equisignal SNR >= 10 dB):   2000 km
+  Globe model max range (equisignal SNR >= 10 dB):   410 km
+  Globe model max range (peak SNR >= 0 dB):          510 km
+  Telefunken documented typical:                    1000 km
+  *** Globe model falls 390 km SHORT of even the minimum documented range ***
+
+------------------------------------------------------------------------------
+  5. OPERATIONAL PATHS: 4,000 m vs 6,000 m ALTITUDE
+------------------------------------------------------------------------------
+
+  Kleve -> Spalding  (440 km / 273 mi)
+
+    Altitude: 4,000 m
+      LoS range:          319 km
+      Shadow distance:    121 km
+      Fock loss:          78.8 dB
+      Flat SNR (peak):    85.7 dB
+      Globe SNR (peak):   6.9 dB
+      Flat SNR (eqsig):   66.7 dB
+      Globe SNR (eqsig):  -12.1 dB
+      Equisignal (flat):  554 yd
+      Globe beam peak:    MARGINAL
+      Globe equisignal:   UNUSABLE
+
+    Altitude: 6,000 m
+      LoS range:          378 km
+      Shadow distance:    62 km
+      Fock loss:          77.1 dB
+      Flat SNR (peak):    85.7 dB
+      Globe SNR (peak):   8.6 dB
+      Flat SNR (eqsig):   66.7 dB
+      Globe SNR (eqsig):  -10.4 dB
+      Equisignal (flat):  554 yd
+      Globe beam peak:    MARGINAL
+      Globe equisignal:   UNUSABLE
+
+  Stollberg -> Beeston  (694 km / 431 mi)
+
+    Altitude: 4,000 m
+      LoS range:          319 km
+      Shadow distance:    375 km
+      Fock loss:          151.0 dB
+      Flat SNR (peak):    81.7 dB
+      Globe SNR (peak):   -69.3 dB
+      Flat SNR (eqsig):   62.7 dB
+      Globe SNR (eqsig):  -88.3 dB
+      Equisignal (flat):  874 yd
+      Globe beam peak:    UNDETECTABLE
+      Globe equisignal:   UNUSABLE
+
+    Altitude: 6,000 m
+      LoS range:          378 km
+      Shadow distance:    316 km
+      Fock loss:          149.3 dB
+      Flat SNR (peak):    81.7 dB
+      Globe SNR (peak):   -67.5 dB
+      Flat SNR (eqsig):   62.7 dB
+      Globe SNR (eqsig):  -86.5 dB
+      Equisignal (flat):  874 yd
+      Globe beam peak:    UNDETECTABLE
+      Globe equisignal:   UNUSABLE
+
+==============================================================================
+  SUMMARY
+==============================================================================
+
+  The Telefunken range table documents operational ranges of 300-1200 km
+  at 4,000 m altitude, measured over sea from July 1939 onwards.
+
+  FLAT MODEL: All documented ranges are easily achievable.
+    - Even the baseline FuBl 1 + rod has sufficient SNR to 1500+ km
+    - Equisignal discrimination works at all documented distances
+    - The limiting factor is atmospheric noise, not propagation loss
+
+  GLOBE MODEL: Most documented ranges are unreachable.
+    - At 400 km (baseline typical), globe SNR = 18.8 dB (peak)
+      Equisignal SNR = -0.2 dB
+    - At 1000 km (special RX typical), globe SNR = -160.3 dB (peak)
+      Signal is 160 dB below noise at beam peak
+    - The LoS range at 4000 m is only 319 km
+      Every Telefunken distance beyond this is in the shadow zone
+
+  The globe model cannot reproduce the Telefunken company's own documented
+  range measurements. The flat model reproduces them trivially.
+==============================================================================

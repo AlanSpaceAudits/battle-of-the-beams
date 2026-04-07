@@ -2,7 +2,7 @@
 ==============================================================================
   BATTLE OF THE BEAMS — VHF PROPAGATION ANALYSIS
 ==============================================================================
-  Generated: 2026-04-07 00:53
+  Generated: 2026-04-07 06:46
 
 
 ==============================================================================
@@ -379,6 +379,83 @@
      beyond radio line-of-sight (46% of the total path).
 
 ==============================================================================
+  7. TELEFUNKEN RANGE TABLE COMPARISON  (4,000 m altitude)
+==============================================================================
+
+  Source: Telefunken range table, 10 September 1939 (D.R.d.L.u.Ob.d.L.)
+  "Range of VHF Guide Beams over Sea at 4,000 m Flight Altitude (in km)"
+  Basis: Measurements by Chief NVW and LC 4 since 1 July 1939.
+
+  The Knickebein row shows 1:64 gain (18 dB) over standard Lorenz, at
+  3,000 W.  Ranges documented with six different receiver/antenna configs.
+
+  Line-of-sight at 4,000 m:
+    TX horizon (200 m):       58.3 km
+    RX horizon (4000 m):      260.7 km
+    Total LoS range:          319.0 km
+    → Every documented Knickebein range above 319 km
+      is BEYOND radio line-of-sight on a globe.
+
+  Config                                Telefunken   Flat max  Globe max    Globe
+                                        typical km   eqsig km   eqsig km   detect
+  ----------------------------------- ------------ ---------- ---------- --------
+  FuBl 1, rod antenna                          400       2000        360   -40 km
+  FuBl 1, trailing wire                        500       2000        370  -130 km
+  FuBl 1 + regen, rod                          700       2000        380  -320 km
+  FuBl 1 + regen, trailing wire                800       2000        390  -410 km
+  Special RX, cross-dipole                    1000       2000        410  -590 km
+  Special RX, trailing wire                   1000       2000        410  -590 km
+
+  The globe model's maximum equisignal range caps at ~360-410 km regardless
+  of receiver sensitivity.  Adding +15 dB of receiver advantage (special RX
+  + trailing wire) only extends the range from 360 to 410 km because the
+  Fock exponential decay (~0.29 dB/km) overwhelms any linear gain improvement.
+
+  At the documented typical ranges:
+    400 km (baseline):   Globe equisignal SNR = -0.2 dB  (UNUSABLE)
+    700 km (regen):      Globe peak SNR = -71 dB  (UNDETECTABLE)
+    1000 km (special):   Globe peak SNR = -160 dB  (160 dB below noise)
+
+  The flat model gives usable equisignal SNR (>58 dB) at ALL documented
+  distances.  The globe model cannot reproduce Telefunken's own measured
+  range data.
+
+==============================================================================
+  8. MT EVEREST TRANSMITTER TEST  (maximum possible height gain)
+==============================================================================
+
+  Thought experiment: place the Knickebein transmitter at the summit of
+  Mt Everest (8,849 m).  This maximises the height-gain factor G(Y₁) and
+  extends the radio horizon.  Does the equisignal become usable?
+
+  TX height:                8849 m  (Mt Everest summit)
+  RX height:                6000 m  (operational altitude)
+  TX horizon (Everest):     387.7 km
+  Total LoS range:          707 km
+
+  Path                               Dist   Shadow     Fock      Globe      Globe       Flat
+                                       km       km  loss dB    peak dB   eqsig dB   eqsig dB
+  ------------------------------ -------- -------- -------- ---------- ---------- ----------
+  Kleve → Spalding                    440        0     61.9       23.8        4.8       66.7
+  Stollberg → Beeston                 694        0    134.0      -52.3      -71.3       62.7
+
+  Even from the summit of Mt Everest:
+
+    Kleve → Spalding (440 km):
+      Path is within LoS (707 km > 440 km), but Fock diffraction
+      still applies.  Globe equisignal SNR = 4.8 dB.
+      Below the ~10-20 dB threshold for Lorenz discrimination.  UNUSABLE.
+
+    Stollberg → Beeston (694 km):
+      Globe peak SNR = -52.3 dB — 52 dB below noise
+      at beam peak, before any equisignal crossover correction.
+      Equisignal SNR = -71.3 dB.  UNUSABLE.
+
+  The transmitter at the actual Kleve/Stollberg stations was at ~200 m.
+  Even a 44× increase in TX height (200 m → 8,849 m) cannot overcome
+  the exponential Fock decay in the shadow zone.
+
+==============================================================================
   CONCLUSION: The measured beam properties (narrow equisignal, sufficient
   signal for precision navigation) are consistent with rectilinear
   propagation.  On a spherical Earth, the Fock diffraction loss combined
@@ -423,5 +500,10 @@
   [10] Bauer, A.O. (2004). "Some historical and technical aspects of radio
        navigation, in Germany, over the period 1907 to 1945."
 
+  [11] Jones, R.V. (1978). Most Secret War. Hamish Hamilton.
 
-[Saved to /home/alan/claude/BotB/botb_analysis_output.txt]
+  [12] Price, A. (2017). Instruments of Darkness. Frontline Books.
+
+  [13] D.R.d.L.u.Ob.d.L., Ref. 47 F 68, No. 2/14/39 (10 Sept 1939).
+       "Range of VHF Guide Beams over Sea at 4,000 m Flight Altitude."
+       Secret Command Matter.  Telefunken measurements since 1 July 1939.
