@@ -33,14 +33,18 @@ Predicts the equisignal corridor width from first principles using:
 
 ### `equisignal_globe_honest.py` — Step-by-step globe model walkthrough
 
-Traces what happens to the beam at each stage on a spherical Earth:
+The main analysis (`botb_propagation.py`) gives the globe model its best shot: peak SNR, clean beam pattern assumptions. This script asks: even with those generous numbers, what does the signal *actually look like* after diffracting around a sphere?
 
-1. Beam leaves the antenna
-2. Beam reaches the horizon (58 km)
-3. Beam couples into creeping wave modes (Fock modal decomposition)
-4. Creeping wave propagates in the shadow zone (0.292 dB/km attenuation)
-5. What the aircraft actually receives (SNR, amplitude fluctuations, fading)
-6. Coherence analysis (inter-modal phase velocities and dispersion)
+It walks through 6 steps of what happens to the beam on a globe:
+
+1. **Beam leaves the antenna** -- pattern intact, equisignal structure preserved
+2. **Beam reaches the horizon** (58 km) -- still coherent, no issues yet
+3. **Beam couples into creeping waves** -- vertical pattern destroyed, energy smeared into a 47.8 km ribbon regardless of original beam geometry
+4. **Creeping wave propagates in shadow zone** -- exponential decay at 0.292 dB/km per mode, multiple modes with different phase velocities
+5. **What the aircraft actually receives** -- SNR, amplitude fluctuations, Rayleigh fading statistics, AGC tracking failure during signal dropouts
+6. **Equisignal coherence analysis** -- inter-modal dispersion, comparison noise from amplitude instability, whether the Lorenz meter can still discriminate dots from dashes
+
+The name "globe_honest" is the point: the main script computes the numbers; this script examines whether the *quality* of the signal (not just its strength) could support precision navigation. Even if you had marginal SNR at beam peak, the creeping wave regime produces a fading, dispersed, multipath signal that a Lorenz equisignal receiver cannot use.
 
 ## Key results
 
@@ -72,7 +76,7 @@ Each script prints formatted output to the terminal and saves it to a correspond
 
 ## References
 
-1. Fock, V. (1945). "Diffraction of Radio Waves Around the Earth's Surface." *Zhur Eksp Teor Fiz* 15, 479-496.
+1. Fock, V.A. (1965). *Electromagnetic Diffraction and Propagation Problems*. Pergamon Press, Oxford. Ch. 10 reprints Fock (1945). Residue series: Eq. (6.10), p. 209. Flat Earth (Weyl-van der Pol): Eq. (3.23), p. 201. Equivalent radius critique: Ch. 13, p. 254.
 2. Eckersley, T.L. (1937). "Ultra-Short-Wave Refraction and Diffraction." *J.I.E.E.* 80, p.286.
 3. Vogler, L.E. (1961). "Smooth Earth Diffraction Calculations for Horizontal Polarization." *NBS J. Res.* 65D(4), 397-399.
 4. Neubauer, W.G., P. Ugincius, and H. Uberall (1969). "Theory of Creeping Waves in Acoustics." *Z. Naturforsch.* 24a, 691-700.
@@ -80,3 +84,6 @@ Each script prints formatted output to the terminal and saves it to a correspond
 6. Bird, J.F. (1985). *JOSA A* 2(6):945-953.
 7. Born, M. and E. Wolf. *Principles of Optics*, 7th ed., Sec. 8.4.3.
 8. Goodman, J. *Introduction to Fourier Optics*, 3rd ed., Ch. 4.
+9. Bauer, A.O. (2004). "Some historical and technical aspects of radio navigation, in Germany, over the period 1907 to 1945."
+10. Jones, R.V. (1978). *Most Secret War*. Hamish Hamilton.
+11. Price, A. (2017). *Instruments of Darkness*. Frontline Books.
