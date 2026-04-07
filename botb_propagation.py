@@ -40,12 +40,22 @@ Formulas used:
   6. Link budget with atmospheric noise           (ITU-R)
 
 References:
-  Fock, V. (1945). Zhur Eksp Teor Fiz 15, 479-496.
-  Eckersley, T.L. (1937). J. I.E.E. 80, p.286.
-  Vogler, L.E. (1961). NBS J. Res. 65D(4), 397-399.
-  Neubauer, Ugincius & Uberall (1969). Z. Naturforsch. 24a, 691-700.
-  Keller, J.B. Geometrical Theory of Diffraction (WHOI lectures).
-  Bird, J.F. (1985). JOSA A 2(6):945-953.
+  [1] Fock, V.A. (1965). Electromagnetic Diffraction and Propagation
+      Problems. Pergamon Press, Oxford. (Ch. 10 = Fock 1945 paper)
+      - Eq. (6.10), p. 209:  General attenuation factor V(x,y,q)
+      - Eq. (6.09), p. 209:  Root equation w'(t) - qw(t) = 0
+      - Eq. (5.15), p. 207:  Normalised distance x = (ka/2)^{1/3} theta
+      - Eq. (5.08), p. 205:  Normalised height y = kh/(ka/2)^{1/3}
+      - Eq. (3.22-3.23), p. 201: Weyl-van der Pol flat Earth formula
+      - Ch. 13, p. 254: "Equivalent radius has not received adequate
+        theoretical foundation"
+      - Ch. 15, p. 309: "In problems connected with superrefraction the
+        equivalent radius does not play the role..."
+  [2] Eckersley, T.L. (1937). J. I.E.E. 80, p.286.
+  [3] Vogler, L.E. (1961). NBS J. Res. 65D(4), 397-399.
+  [4] Neubauer, Ugincius & Uberall (1969). Z. Naturforsch. 24a, 691-700.
+  [5] Keller, J.B. Geometrical Theory of Diffraction (WHOI lectures).
+  [6] Bird, J.F. (1985). JOSA A 2(6):945-953.
 """
 
 import numpy as np
@@ -552,32 +562,62 @@ def fock_loss(d, h_tx, h_rx, R=R_EFF):
     Y1 = 2.0 * m**2 * h_tx / R
     Y2 = 2.0 * m**2 * h_rx / R
 
-    # tau_s (Airy zeros, dimensionless): the first 5 roots of Ai(-tau) = 0,
-    # where Ai is the Airy function of the first kind.  These are the
-    # mathematical eigenvalues that determine how fast each creeping-wave
-    # mode decays as it travels around the sphere.  The first zero
-    # tau_1 = 2.338 controls the dominant (slowest-decaying) mode.
-    # Higher zeros give faster-decaying modes that are important only
-    # near the shadow boundary.
-    # Source: Abramowitz & Stegun, "Handbook of Mathematical Functions,"
-    #         Table 10.13; also tabulated in Fock (1945).
-    tau = np.array([2.33811, 4.08795, 5.52056, 6.78671, 7.94413])
+    # tau_s (Airy zeros, dimensionless): the magnitudes |t^0_s| of the
+    # first 5 roots of w(t) = 0, where w(t) is the Fock-Airy function.
+    # These are tabulated directly in Fock (1965), Ch.10, p. 209, in the
+    # column headed |t^0_s| (the q -> infinity / perfectly conducting case).
+    #
+    # Each tau_s is an eigenvalue controlling one creeping-wave mode:
+    #   tau_1 = 2.338 -> slowest decay (dominant at long range)
+    #   tau_2 = 4.088 -> faster decay
+    #   tau_3 = 5.521 -> even faster
+    #   tau_4 = 6.787 ->  "
+    #   tau_5 = 7.944 -> fastest of the 5 modes we use
+    #
+    # The roots have complex phase pi/3 (Fock Eq. 6.11):
+    #   t_s = tau_s * e^{i*pi/3}
+    # The imaginary part tau_s * sin(60 deg) causes exponential decay;
+    # the real part tau_s * cos(60 deg) gives phase accumulation.
+    #
+    # Source: Fock (1965), Ch. 10, p. 209, root table.
+    #         Cross-check: Abramowitz & Stegun, Table 10.13 (Airy zeros).
+    tau = np.array([2.33811, 4.08795, 5.52056, 6.78671, 7.94417])
 
     # --- Distance factor V(xi) ---
-    # The residue series for creeping waves on a conducting sphere:
-    #   V(xi) = 2*sqrt(pi*xi) * SUM_s exp(j * e^{j*pi/3} * tau_s * xi)
-    #           / [Ai'(-tau_s)]^2
     #
-    # The exponential argument j * e^{j*pi/3} * tau * xi can be decomposed:
-    #   j * e^{j*pi/3} = e^{j*pi/2} * e^{j*pi/3} = e^{j*5*pi/6}
-    #                   = -sqrt(3)/2 + j/2
+    # GENERAL FOCK EQUATION (1965, Ch.10, p.209, Eq. 6.10):
+    #
+    #   V(x, y, q) = e^{i*pi/4} * 2*sqrt(pi*x)
+    #                * SUM_{s=1}^{inf}  e^{i*x*t_s} / (t_s - q^2)
+    #                                  * w(t_s - y) / w(t_s)
+    #
+    # where:
+    #   x = (ka/2)^{1/3} * theta    (normalised distance, = our xi)
+    #   y = kh / (ka/2)^{1/3}       (normalised height, = our Y)
+    #   q = surface impedance parameter
+    #   t_s = roots of w'(t) - q*w(t) = 0, with phase pi/3
+    #   w(t) = Fock-Airy function
+    #
+    # SPECIALISATION we use (q -> inf, y = 0 = surface-to-surface):
+    #
+    #   V(xi) = e^{i*pi/4} * 2*sqrt(pi*xi)
+    #           * SUM_s exp(i * e^{i*pi/3} * tau_s * xi)
+    #                   / [Ai'(-tau_s)]^2
+    #
+    # The e^{i*pi/4} is a constant phase factor that drops out when
+    # we take |V| (magnitude). We include it for completeness.
+    #
+    # The exponential argument i * e^{i*pi/3} * tau * xi decomposes:
+    #   i * e^{i*pi/3} = e^{i*pi/2} * e^{i*pi/3} = e^{i*5*pi/6}
+    #                   = -sqrt(3)/2 + i/2
     # The NEGATIVE real part (-sqrt(3)/2 * tau * xi) gives exponential
     # DECAY in the shadow -- each mode attenuates as it creeps.
-    # The imaginary part (j/2 * tau * xi) gives a phase shift -- the
+    # The imaginary part (i/2 * tau * xi) gives a phase shift -- the
     # creeping wave accumulates phase as it travels.
     #
-    # Source: Fock (1945); Neubauer et al. (1969) eq. 22.
-    ej = np.exp(1j * np.pi / 3.0)        # e^{j*pi/3} = cos(60) + j*sin(60)
+    # Source: Fock (1965), Ch. 10, p. 209, Eq. (6.10).
+    #         Neubauer et al. (1969), eq. 20-26 (cross-reference).
+    ej = np.exp(1j * np.pi / 3.0)        # e^{i*pi/3} = cos(60) + i*sin(60)
 
     V_sum = 0.0 + 0.0j   # accumulator for the residue series sum
     for ts in tau:
@@ -599,13 +639,16 @@ def fock_loss(d, h_tx, h_rx, R=R_EFF):
         V_sum += np.exp(arg) * wt
 
     # V(xi): the surface-to-surface field ratio (complex).
+    # Full form: V = e^{i*pi/4} * 2*sqrt(pi*xi) * V_sum
+    # The e^{i*pi/4} is the constant phase factor from Fock Eq. (6.10).
     # The prefactor 2*sqrt(pi*xi) comes from the asymptotic normalisation
     # of the Fock-Airy integral representation.
     # If |V| = 10^{-6}, the signal on the surface at that distance is
     # one millionth of the free-space value.
-    # Source: Fock (1945).
-    V  = 2.0 * np.sqrt(np.pi * max(xi, 1e-30)) * V_sum
-    V_abs = abs(V)   # magnitude of V (we only need the amplitude ratio)
+    # Source: Fock (1965), Ch. 10, p. 209, Eq. (6.10).
+    phase_factor = np.exp(1j * np.pi / 4.0)   # e^{i*pi/4} from Eq. 6.10
+    V  = phase_factor * 2.0 * np.sqrt(np.pi * max(xi, 1e-30)) * V_sum
+    V_abs = abs(V)   # magnitude of V (phase factor drops out: |e^{i*pi/4}| = 1)
 
     # --- Height-gain function G(Y) for each antenna ---
     # G(Y) accounts for the fact that an antenna raised above the surface
@@ -615,15 +658,22 @@ def fock_loss(d, h_tx, h_rx, R=R_EFF):
     # For Y = 0 (antenna on the surface), G = 1 (no gain).
     #
     # The smooth interpolation G(Y) = sqrt(1 + pi*Y) satisfies both limits:
-    #   G(0) = sqrt(1) = 1
-    #   G(Y>>1) ~ sqrt(pi*Y)     (the Fock asymptotic result)
+    #   G(0) = sqrt(1) = 1           (antenna on surface)
+    #   G(Y>>1) ~ sqrt(pi*Y)         (Fock asymptotic for large height)
     #
-    # For an aircraft at 6 km, Y ~ 139, so G ~ sqrt(pi*139) ~ 20.9
-    # which is about 26.4 dB of height gain.
+    # NOTE: This is an ENGINEERING INTERPOLATION, not Fock's exact formula.
+    # Fock's exact height factor is the ratio w(t_s - y) / w(t_s) inside
+    # the residue series (Eq. 6.10), which is mode-dependent.  Our approach
+    # factors out the height gain as a separate multiplier, which is a good
+    # approximation when the dominant first mode controls the sum (i.e., at
+    # the ranges we care about, 440-694 km deep in the shadow zone).
     #
-    # Source: Fock (1945), asymptotic analysis;
-    #         the sqrt(1+pi*Y) interpolation is a standard smooth fit
-    #         used in engineering implementations.
+    # For an aircraft at 6 km, Y ~ 28 (see below), so G ~ sqrt(1 + pi*28)
+    # = sqrt(89.0) ~ 9.4, which is about 19.5 dB of height gain.
+    #
+    # Source: Fock (1965), Ch. 10, Sec. 5 (asymptotic height gain).
+    #         The sqrt(1+pi*Y) form is a standard engineering fit used in
+    #         radio propagation codes (cf. Vogler 1961).
     def hgain(Y):
         """Height-gain function G(Y) (linear magnitude).
 
@@ -670,6 +720,55 @@ def fock_loss(d, h_tx, h_rx, R=R_EFF):
                 V_abs=V_abs, G1=G1, G2=G2,
                 F=F, loss_dB=loss_dB,
                 alpha1_dB_per_km=alpha1_dB_per_km)
+
+
+# ================================================================
+#  4b. WEYL-VAN DER POL FLAT EARTH FORMULA (Fock's illuminated region)
+# ================================================================
+def weyl_van_der_pol_gain_dB():
+    """
+    Additional signal gain from ground reflection on a flat conducting surface.
+
+    In the illuminated region (no curvature obstruction), Fock derives the
+    attenuation factor W using the Weyl-van der Pol formula.  For a
+    PERFECTLY CONDUCTING flat surface:
+
+        W = 2
+
+    This means the electric field is doubled compared to pure free space,
+    because the direct wave and the ground-reflected wave add constructively.
+    In POWER terms, doubling the field means quadrupling the power:
+
+        Power gain = |W|^2 = 4  ->  +6 dB
+
+    This is the standard "ground reflection gain" for a vertical dipole
+    over a perfect ground plane at low grazing angles.
+
+    Source: Fock (1965), Ch. 10, p. 200-201, Eq. (3.22)-(3.23).
+            In the limit sigma -> 0 (perfect conductor), W -> 2.
+
+    For REAL ground (finite conductivity), the gain is between 0 and +6 dB
+    depending on:
+      - Ground conductivity (sigma_ground)
+      - Polarisation (horizontal vs vertical)
+      - Grazing angle (very low angles reduce the gain for horiz. pol.)
+
+    At 31.5 MHz over seawater (most of the Kleve-Spalding path), the
+    ground is a good conductor at VHF, so the gain is close to +6 dB.
+    Over land, conductivity is lower and the gain is reduced.
+
+    For the Knickebein analysis, we use this as an OPTIONAL comparison
+    alongside the conservative pure-FSPL flat model.  The Weyl-van der Pol
+    result makes the flat model STRONGER (more SNR headroom), not weaker.
+
+    Returns
+    -------
+    gain_dB : float
+        Power gain in dB from ground reflection.  +6.0 for perfect conductor.
+    """
+    W_flat = 2.0   # Weyl-van der Pol: field doubled on perfect conductor
+    gain_dB = 20.0 * np.log10(W_flat)   # = 20*log10(2) = 6.02 dB
+    return gain_dB
 
 
 # ================================================================
@@ -912,6 +1011,14 @@ def main():
         p(f"  → Signal {'detectable' if lk_flat['SNR_dB'] >= 10 else 'marginal'}"
           f" with {lk_flat['SNR_dB']:.0f} dB margin above noise")
 
+        # Weyl-van der Pol flat Earth comparison
+        wvdp_gain = weyl_van_der_pol_gain_dB()
+        p(f"\n  --- Fock Flat Earth (Weyl-van der Pol, Eq. 3.23) ---")
+        p(f"  Ground reflection gain   +{wvdp_gain:.1f} dB  (W=2 for perfect conductor)")
+        p(f"  *** SNR (Fock flat)       {lk_flat['SNR_dB'] + wvdp_gain:.1f} dB ***")
+        p(f"  → Conservative FSPL model used above is {wvdp_gain:.0f} dB LOWER than")
+        p(f"    Fock's own flat-Earth solution.  Source: Fock (1965), p. 201.")
+
     # ---------------------------------------------------------------
     #  EQUISIGNAL CROSSOVER ANALYSIS
     #
@@ -1086,8 +1193,13 @@ def main():
     # ---------------------------------------------------------------
     p(banner("REFERENCES"))
     p("""
-  [1] Fock, V. (1945). "Diffraction of Radio Waves Around the Earth's
-      Surface." Zhur Eksp Teor Fiz 15, 479-496. (DRIC Transl. No. 2747)
+  [1] Fock, V.A. (1965). Electromagnetic Diffraction and Propagation
+      Problems. Pergamon Press, Oxford. (Int. Series Monographs on EM
+      Waves, Vol. 1.)  Ch. 10 reprints Fock (1945).
+      Key equations: Eq. (6.10) p.209 (residue series), Eq. (3.22-3.23)
+      p.201 (Weyl-van der Pol flat Earth), Eq. (5.08) p.205 (normalised
+      height), Eq. (5.15) p.207 (normalised distance).
+      DRIC Translation No. 2747 (April 1972) is the typewriter scan.
 
   [2] Eckersley, T.L. (1937). "Ultra-Short-Wave Refraction and Diffraction."
       J.I.E.E. 80, p.286.
@@ -1097,7 +1209,7 @@ def main():
 
   [4] Neubauer, W.G., P. Ugincius, and H. Uberall (1969). "Theory of
       Creeping Waves in Acoustics and Their Experimental Demonstration."
-      Z. Naturforsch. 24a, 691-700.
+      Z. Naturforsch. 24a, 691-700.  Cross-reference: Eq. 20-26.
 
   [5] Keller, J.B. "Geometrical Theory of Diffraction." WHOI Lecture Notes.
 
@@ -1109,6 +1221,9 @@ def main():
   [8] Goodman, J. Introduction to Fourier Optics, 3rd ed., Ch. 4.
 
   [9] Shim, J. and H.-T. Kim (1999). PIER 21:293-306.
+
+  [10] Bauer, A.O. (2004). "Some historical and technical aspects of radio
+       navigation, in Germany, over the period 1907 to 1945."
 """)
 
     text = "\n".join(out)
