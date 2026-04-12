@@ -1,0 +1,48 @@
+# Knickebein station-to-target path dataset (REVISED 2026-04-12)
+# ================================================================
+# TX altitudes: terrain elevation + antenna frame height
+#   Large stations (95m track): 28m frame (christianch.ch "Kink leg",
+#     citing Trenkle, Die deutschen Funk-Navigations- und Funk-
+#     Fuehrungsverfahren bis 1945, p.67)
+#   Small stations (30m track): 15m antenna (estimated, half scale)
+# Coordinates and terrain elevations: christianch.ch Kink leg article
+#   (2018-2024), cross-checked SRTM/EU-DEM
+# Noise floor: FA=17.5 dB galactic (ITU-R P.372 Eq.14 at 31.5 MHz)
+# Sources: Jones (1978); Price (2017); Bauer (2004);
+#          Telefunken Sep 1939; christianch.ch station database
+# ================================================================
+#
+path_id,type,target,tx_station,tx_lat,tx_lon,tx_alt_m,rx_lat,rx_lon,rx_alt_m,freq_mhz,rx_gain_dbi,distance_m,source
+# ================================================================
+# CONFIRMED OPERATIONAL PAIRINGS
+# ================================================================
+KL_DERBY,operational,Derby (Rolls-Royce),Kleve (Kn-4),51.7886,6.1031,111,52.9220,-1.4750,6000,31.5,3,529000,Jones p.182; Price p.38
+ST_DERBY,operational,Derby (Rolls-Royce),Stollberg (Kn-2),54.6436,8.9447,72,52.9220,-1.4750,6000,31.5,3,711000,Jones p.182; Price p.38
+KL_BIRMINGHAM,operational,Birmingham,Kleve (Kn-4),51.7886,6.1031,111,52.4862,-1.8904,6000,31.5,3,550000,Price p.38 caption
+ST_BIRMINGHAM,operational,Birmingham,Stollberg (Kn-2),54.6436,8.9447,72,52.4862,-1.8904,6000,31.5,3,754000,Price p.38 caption
+GR_LONDON,operational,London,Greny (Kn-7),49.9467,1.2900,162,51.5074,-0.1278,6000,31.5,3,201000,Price p.37
+BH_LONDON,operational,London,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.5074,-0.1278,6000,31.5,3,237000,Price p.37
+BH_CARDIFF,operational,Cardiff,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.4816,-3.1791,6000,31.5,3,222000,Price p.38 caption
+BH_PLYMOUTH,operational,Plymouth,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,50.3755,-4.1427,6000,31.5,3,181000,Price p.38 caption
+ST_LIVERPOOL,operational,Liverpool,Stollberg (Kn-2),54.6436,8.9447,72,53.4084,-2.9916,6000,31.5,3,791000,Price p.35 (likely)
+# ================================================================
+# BEAM MEASUREMENT / DETECTION EVENTS
+# ================================================================
+KL_SPALDING,measurement,Spalding,Kleve (Kn-4),51.7886,6.1031,111,52.7870,-0.1530,6000,31.5,3,439000,Jones p.181 (Bufton 21 Jun 1940)
+ST_BEESTON,measurement,Beeston,Stollberg (Kn-2),54.6436,8.9447,72,52.9270,-1.2150,6000,30.0,3,694000,Jones p.181 (Bufton 21 Jun 1940)
+KL_RETFORD,intercept,Retford,Kleve (Kn-4),51.7886,6.1031,111,53.4000,-1.0000,6000,31.5,3,512000,Jones p.163 (Enigma 5 Jun 1940)
+# ================================================================
+# TELEFUNKEN TEST RANGES (Sep 1939, 4000m alt, over sea)
+# TX from Kleve or Stollberg (the only stations built by Sep 1939)
+# Using Stollberg specs (73m) as the likely test station (North Sea)
+# ================================================================
+TF_400,telefunken,400km (FuBl1 rod),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,3.1,4000,31.5,0,400000,Telefunken Sep 1939
+TF_500,telefunken,500km (FuBl1 wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,1.8,4000,31.5,0,500000,Telefunken Sep 1939
+TF_700,telefunken,700km (regen rod),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-1.2,4000,31.5,3,700000,Telefunken Sep 1939
+TF_800,telefunken,800km (regen wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-2.6,4000,31.5,5,800000,Telefunken Sep 1939
+TF_1000,telefunken,1000km (special xdip),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-5.5,4000,31.5,10,1000000,Telefunken Sep 1939
+TF_1000B,telefunken,1000km (special wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-5.5,4000,31.5,15,1000000,Telefunken Sep 1939
+# ================================================================
+# BAUER MAX RATED RANGE (6500m altitude)
+# ================================================================
+BAUER_MAX,telefunken,500km max rated,Kleve (Kn-4),51.7886,6.1031,111,52.0,0.0,6500,31.5,3,500000,Bauer (2004) p.12

@@ -1,0 +1,79 @@
+# X-Gerät (X-Verfahren, Wotan I) station-to-target path dataset
+# =================================================================
+# Station coordinates: de.wikipedia X-Verfahren + Jones (1978) pp.163-171
+#                      + Price (2017) pp.39-50 + Bauer (2004) pp.10-16
+# Elevations: EU-DEM 25m terrain + antenna bunker height (~20m for large)
+# Cotentin X-Gerät site = plateau above Baie d'Écalgrain ~150m
+#   (Jones: "on the Hague peninsula NW of Cherbourg")
+#   Using 170m effective TX height (150m terrain + 20m bunker/mast)
+# Audembert X-Gerät = Pas-de-Calais cross beam site near Calais
+#   64m village + 20m mast = 84m effective
+# Julianadorp X-Gerät = Den Helder transmitter (Jones p.165)
+#   1.6m terrain + 20m mast = 22m effective
+# Morlaix X-Gerät = Ploujean airfield area near Brest (added Jan 1941)
+#   30m terrain + 20m mast = 50m effective
+#
+# Frequencies: 66.5-71.5 MHz directors, 71.5-75.0 MHz cross beams
+#              Using mid-band 69.0 MHz (director) and 73.0 MHz (cross)
+# Modulation: 2000 Hz +/- 50 Hz audio (Bauer p.10; Price p.44)
+# Bombing altitude: 6000m standard (Battle of Britain; Bauer p.11)
+#
+# Beam widths: coarse ~4 deg, fine ~0.1 deg, equisignal ~0.05 deg
+# Equisignal at 320km = 91m (100 yd) per Jones p.163
+# 1936 trial: 300m x 300m CEP at 350km range (Bauer p.11)
+#
+# Sources: Jones pp.163-171 Figs 3,4 Pl.7; Price pp.39-50 p.83;
+#          Bauer pp.10-16; Radio War 2 Ch.2; de.wikipedia X-Verfahren
+# =================================================================
+#
+path_id,type,target,tx_station,tx_lat,tx_lon,tx_alt_m,rx_lat,rx_lon,rx_alt_m,freq_mhz,rx_gain_dbi,distance_m,source
+# =================================================================
+# COVENTRY RAID 14/15 November 1940 - "Moonlight Sonata"
+# Weser director + 3 cross beams (Elbe, Oder, Rhein from Calais area)
+# =================================================================
+XG_COV_WESER,operational,Coventry (Moonlight Sonata),Weser director (Cotentin),49.6898,-1.9326,170,52.4081,-1.5106,6000,69.0,3,303696,Jones p.163 Fig3; Price p.43
+XG_COV_SPREE,operational,Coventry (reserve director),Spree reserve (Cotentin),49.6898,-1.9326,170,52.4081,-1.5106,6000,69.5,3,303696,Jones p.163 Fig3
+XG_COV_RHEIN,operational,Coventry (crossbeam Rhein),Rhein cross (Audembert),50.8614,1.6931,84,52.4081,-1.5106,6000,72.5,3,280074,Price p.43; Jones p.163
+XG_COV_ELBE,operational,Coventry (crossbeam Elbe),Elbe cross (Audembert),50.8614,1.6931,84,52.4081,-1.5106,6000,73.0,3,280074,Price p.43; Jones p.163
+XG_COV_ODER,operational,Coventry (crossbeam Oder),Oder cross (Audembert),50.8614,1.6931,84,52.4081,-1.5106,6000,74.0,3,280074,Price p.43; Jones p.163
+# =================================================================
+# BIRMINGHAM RAID 26/27 October 1940 - "first published bomb signature"
+# Jones Fig 4 shows 3-pencil pattern 140-180m east of predicted aim
+# =================================================================
+XG_BIR_WESER,operational,Birmingham (26 Oct 1940),Weser director (Cotentin),49.6898,-1.9326,170,52.4862,-1.8904,6000,69.0,3,310959,Jones Fig 4 p.249
+XG_BIR_SPREE,operational,Birmingham reserve,Spree reserve (Cotentin),49.6898,-1.9326,170,52.4862,-1.8904,6000,69.5,3,310959,Jones p.163
+XG_BIR_CROSS,operational,Birmingham crossbeam,Cross beam (Audembert),50.8614,1.6931,84,52.4862,-1.8904,6000,73.0,3,306049,Jones p.163
+# =================================================================
+# DERBY 8/9 May 1941 - intended target, jammed, fell on Nottingham
+# =================================================================
+XG_DER_WESER,operational,Derby (8 May 1941 intended),Weser director (Cotentin),49.6898,-1.9326,170,52.9220,-1.4750,6000,69.0,3,360807,Jones p.167
+XG_DER_CROSS,operational,Derby crossbeam,Cross beam (Audembert),50.8614,1.6931,84,52.9220,-1.4750,6000,73.0,3,315798,Jones p.167
+# =================================================================
+# CARDIFF 1 and 3 March 1941
+# =================================================================
+XG_CAR_WESER,operational,Cardiff (Mar 1941),Weser director (Cotentin),49.6898,-1.9326,170,51.4816,-3.1791,6000,69.0,3,217801,Radio War 2 p.95
+XG_CAR_CROSS,operational,Cardiff crossbeam,Cross beam (Audembert),50.8614,1.6931,84,51.4816,-3.1791,6000,73.0,3,346541,Radio War 2 p.95
+# =================================================================
+# LIVERPOOL - attacks during Blitz, Jones p.166
+# =================================================================
+XG_LIV_WESER,operational,Liverpool (Nov 1940 raids),Weser director (Cotentin),49.6898,-1.9326,170,53.4084,-2.9916,6000,69.0,3,419910,Jones p.166
+XG_LIV_CROSS,operational,Liverpool crossbeam,Cross beam (Audembert),50.8614,1.6931,84,53.4084,-2.9916,6000,73.0,3,426975,Jones p.166
+# =================================================================
+# LONDON (first operational test 20 Dec 1939)
+# =================================================================
+XG_LON_WESER,operational,London (first op test Dec 1939),Weser (Cotentin),49.6898,-1.9326,170,51.5074,-0.1278,6000,69.0,3,238885,Wikipedia KGr100
+XG_LON_JULI,operational,London from Julianadorp,Julianadorp (Den Helder),52.8907,4.7446,22,51.5074,-0.1278,6000,69.0,3,365865,de.wikipedia X-Verfahren; Jones p.165
+# =================================================================
+# PLYMOUTH / SW ENGLAND - Morlaix stations added Jan 1941
+# =================================================================
+XG_PLY_MOR,operational,Plymouth (Jan 1941+),Morlaix (Ploujean),48.6075,-3.8385,50,50.3755,-4.1427,6000,69.0,3,198000,Radio War 2 p.95
+# =================================================================
+# BRISTOL 24 Nov 1940 raid
+# =================================================================
+XG_BRI_WESER,operational,Bristol (24 Nov 1940),Weser director (Cotentin),49.6898,-1.9326,170,51.4545,-2.5879,6000,69.0,3,201607,Radio War 2 p.94
+XG_BRI_CROSS,operational,Bristol crossbeam,Cross beam (Audembert),50.8614,1.6931,84,51.4545,-2.5879,6000,73.0,3,305700,Radio War 2 p.94
+# =================================================================
+# 1936 TRIAL - Berlin test range (reference baseline)
+# 50% CEP in 300m x 300m at 350km range
+# =================================================================
+XG_TRIAL_1936,trial,1936 trial target (350km),Berlin-Adlershof DVL,52.4350,13.5408,40,52.4350,8.2000,6000,69.0,3,361977,Bauer p.11
