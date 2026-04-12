@@ -533,12 +533,14 @@ def print_results(results):
 
         for r in group:
             d_km = r["distance_m"] / 1000.0
+            # Binary classification: the +30 dB audibility threshold is the
+            # only operational criterion.  Below it, the path fails, full
+            # stop.  DEAD is a subcategory meaning the signal is literally
+            # below the thermal noise floor (not just below audibility).
             if r["globe_SNR_eq"] >= AF_AUDIBLE_dB:
                 status = "USABLE"
-            elif r["globe_SNR_eq"] >= RF_DETECT_dB:
-                status = "MARGINAL"
             elif r["globe_SNR_eq"] >= 0:
-                status = "INAUDIBLE"
+                status = "UNUSABLE"
             else:
                 status = "DEAD"
 
@@ -553,32 +555,29 @@ def print_results(results):
     print("  SUMMARY")
     print(f"  {'=' * 86}")
 
-    usable    = [r for r in results if r["globe_SNR_eq"] >= AF_AUDIBLE_dB]
-    marginal  = [r for r in results if RF_DETECT_dB <= r["globe_SNR_eq"] < AF_AUDIBLE_dB]
-    inaudible = [r for r in results if 0 <= r["globe_SNR_eq"] < RF_DETECT_dB]
-    dead      = [r for r in results if r["globe_SNR_eq"] < 0]
+    usable   = [r for r in results if r["globe_SNR_eq"] >= AF_AUDIBLE_dB]
+    unusable = [r for r in results if 0 <= r["globe_SNR_eq"] < AF_AUDIBLE_dB]
+    dead     = [r for r in results if r["globe_SNR_eq"] < 0]
 
     print(f"\n  Globe equisignal USABLE (>= {AF_AUDIBLE_dB:.0f} dB):  {len(usable)} paths")
     for r in usable:
+        margin = r["globe_SNR_eq"] - AF_AUDIBLE_dB
         print(f"    {r['tx_station']} > {r['target']}: "
               f"{r['distance_m']/1000:.0f} km, "
-              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
+              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB "
+              f"(+{margin:.1f} dB over threshold)")
 
-    print(f"\n  Globe equisignal MARGINAL ({RF_DETECT_dB:.0f}-{AF_AUDIBLE_dB:.0f} dB): "
-          f"{len(marginal)} paths")
-    for r in marginal:
+    print(f"\n  Globe equisignal UNUSABLE (0-{AF_AUDIBLE_dB:.0f} dB, "
+          f"fails audibility): {len(unusable)} paths")
+    for r in unusable:
+        deficit = AF_AUDIBLE_dB - r["globe_SNR_eq"]
         print(f"    {r['tx_station']} > {r['target']}: "
               f"{r['distance_m']/1000:.0f} km, "
-              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
+              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB "
+              f"({deficit:.1f} dB BELOW threshold)")
 
-    print(f"\n  Globe equisignal INAUDIBLE (0-{RF_DETECT_dB:.0f} dB): "
-          f"{len(inaudible)} paths")
-    for r in inaudible:
-        print(f"    {r['tx_station']} > {r['target']}: "
-              f"{r['distance_m']/1000:.0f} km, "
-              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
-
-    print(f"\n  Globe equisignal DEAD (< 0 dB):      {len(dead)} paths")
+    print(f"\n  Globe equisignal DEAD (< 0 dB, below noise floor): "
+          f"{len(dead)} paths")
     for r in dead:
         print(f"    {r['tx_station']} > {r['target']}: "
               f"{r['distance_m']/1000:.0f} km, "
