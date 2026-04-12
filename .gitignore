@@ -1,2 +1,31 @@
 *.pyc
 __pycache__/
+
+# Generated per-path graphs are not tracked except for the Telefunken series.
+# run_all_systems.py regenerates all of them locally; only the Telefunken ones
+# are committed because those are the figures used in the prezzie/null doc.
+kb_bauer_max.png
+kb_bh_*.png
+kb_gr_*.png
+kb_kl_*.png
+kb_st_*.png
+kbeq_bauer_max.png
+kbeq_bh_*.png
+kbeq_gr_*.png
+kbeq_kl_*.png
+kbeq_st_*.png
+xg_*.png
+xgeq_*.png
+yg_*.png
+ygeq_*.png
+
+# Station maps, master comparisons, legacy graphs
+map_*.png
+botb_snr_*.png
+itu_master_comparison.png
+shatz_validation_comparison.png
+
+# Non-Telefunken bar graphs
+bargraph_flat_vs_globe.png
+bargraph_kleve_spalding.png
+bargraph_stollberg_beeston.png
