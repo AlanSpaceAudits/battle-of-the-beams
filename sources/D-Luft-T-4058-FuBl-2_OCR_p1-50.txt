@@ -1,0 +1,2845 @@
+D. (Luft) T. 4058
+
+Nur fir den Dienstgebrauch!
+
+- Funk-Landegerit Fu Bl 2
+
+| Gekéite- Handbuch
+
+Februar 1943
+Der Reichsminister der Luftfahrt ,
+und Oberbefehlshaber der Lufiwaffe
+
+Berlin, den 2. Februar 1943
+
+Technisches Amt
+GL/C-E_4 IR
+
+Diese D.(Luft) T.4058 — N.f.D. — Funk-lande-Gerdt FuBI2, Gerate-
+Haridbuch, Februar 1943, wird hiermit genehmigt. Sie tritt mit dem Tage der
+Herausgabe in Kraft.
+
+Mit ihrem Erscheinen tritt die D. (Luft) T. 4058 — N.f.D. — Funk-Lande-
+Gerat FuBl2, Gerate-Handbuch, Beschreibur{g sowie Betriebs- und
+Wartungsvorschrift — September 1941, und D. (Luft) T. 4206 — N.f.D. —
+PrUf-Qudrz-Kon’rroHer PQK4, Gerdte-Handbuch — Beschreibung und
+Wirkungsweise sowie Bedienung und Wartung — Mai 1941, auber Kraft.
+Sie sind gemdB Vorbemerkungen zur L. Dv. 1/1 zu vernichten.
+
+A
+Vorwald
+- Seite
+L. Beschreibung ... o 7
+A. Verwendungszweck .......................... T e 7
+B. Allgemeine Kennzeichnung des Landeverfahrens .......................... 7
+C. Avfbauplan ... e R -9
+D. Technische Merkmale und Arbeitsweise des Gesamtgerdtes ................ 10
+E. Aufbau, Schaltung und Wirkungsweise der Gerdte und Einbauteile . ....... 12
+1. Empfanger EBI3 ..., e 12
+al Empfanger EBISH ... 13
+b) Empfanger EBIBHT ..ooooiuii e 20
+. € Empfanger EBIBF ..o 21
+di Empfanger EBIBG ...oooviiii e 23
+20 Empfanger EBlI2 oo 24
+3. Fern-Bedien-Gerdit FBG 2 ..ottt 27
+4. Fern-Bedien-Gerdt FBG 6 .......c...ueeeei oo 31
+5. Antennen-Anpassungs-Gerat AAGTA ..... s e e 33
+6. Ausfahrbarer Antennen-Mast AMS5 ............ B 35
+7. Dipol-Anpassungs-Gerdt DAG1 .....ooooiiiivniioiii. . e . 38
+8. Anzeigegerdt fur Funk-Navigation AFN2 ............ ..o, 39
+9. Umformer U8 ...t [ 40
+F. Mafle, Gewichte und Anforderungszeichen ................ ... 42
+I Betriebsvorschrift ........., ..o i 51
+A. Vorbereitungen ...... e e e e 51
+1. Einhdngen des Gerates «.....oovvvriiiinevennnnnn... e 51 .
+2. Anschliefen der Kopfhauben ..., e, 59
+B. Erstmalige Abstimmung am Boden ........... P -
+1. Vorbereitungen und Einschalten ..........coooviiin.... e 5o
+2. Abstimmen des Empfangers EBI3 .........cooviiiiiiiin... e 53
+3. Abstimmen des Empféngers EBI2 ...................... P ... B4
+4. Ausschalten ....... e R PP 55
+* C. Betdtigung wéhrend des Fluges ...t P 56
+1. Vorbereitungen vor dem Start ..., e . 56
+2. Funk-landeempfang ............. [ e 56
+3. Einfahren des Antennen-Mastes und Ausschalten «...ooovnvnenin. .. 57
+4. Verkehrsordnung ... e e ..... B8
+lll. Betriebshinweise und Wartung .............. S 59
+A. Betriebshinweise .................. P PRI 59
+1. Llage der Sicherungen ....... ..o 59
+
+2. Handhabung der Abstimmung ... 59
+3. Erklarung der Farbenmarkierungen ... 59
+
+4. Handhabung der ausfahrbaren Stabantenne bei Sté’)rungen ........ e B0
+
+B. Réhrenwechsel, Eichpriifung und Nacheichung ...................... ... 60
+1. Empfanger EBI3 ..o | 60
+
+a) Auswechseln der Réhren .......... U TR 60
+
+b} Eichprifung und Nacheichung ..................... U .. 61
+
+2. Empfainger EBI2 ... oo ceee. 62
+a} Auswechseln der Rohren ................. e el 62
+
+b) Abstimmung nach erfolgtem Réhrenwechsel ........................ 63
+
+C. Prifgerdte ............o.oiiii... i . 63
+D. Wartung SO 63
+1. Wartung des Geraes -« ... ...uuutunuunuennnetnans 63
+
+2. InStANASEIZUNG  « v ot 64
+3. Umformer .....ooviiiiiiiinans. e 64
+4. Ausfahrbarer Antennen-Mast AMSE ..o .67
+5. Fern-Bedien-Gerat FBG2 .......oo...t. I e 67
+E. Hinweise fir Einbav und Umriistung .......... e e .. 67
+1. Antennen-Anpassungs-Gerdt AAGTA .............. P 67
+ a) Wahl des Einbauortes «............. e e ..... 67
+
+b) BINDau v Creeeeeeeiiiean 67
+2. Empfanger EBI3H  ....... D . L R 68
+ANlOQENVEIZEICHNIS vttt ettt et ettt 69
+
+Zeichnung 1:
+Zeichnung 2:
+
+Zeichnung 3:
+
+Zeichnung 4:
+Zeichnung 5:
+
+Zeichnung 6:
+
+Abb. 7:
+Zeichnung 8:
+Zeichnung 9:
+- Abb.10:
+Zeichnung 11:
+
+Abbildungen und Zéichhungen
+
+‘Die Ansteverung des Lande-Funkfeuers (LFF),Darstellung in Aufsicht 7
+
+Tastzeichen des Ansteverungs-Funkfeuers (AFF)  (Frequenz im
+
+Bereich: 30,0—33,33MHz; Ton 1150Hz) ....c..ovvvvivniiin 8
+
+Tastzeichen des Vor-Einflugzeichens (VEZ) (Frequenz 38,0 MHz;
+
+Ton 700 HZ) o oeiree e e .. 8
+
+Die Ansteverung des Lande-Funkfeuers (LFF), Darstellung in g
+SEItENANSICT  « vt e e et e e e iii e 0O
+
+Tastzeichen des Haupt-Einflugzeichens (HEZ) (Frequenz 38,0 MHz;
+
+Ton 1700Hz) ....coonvn.n. e e iteaeeraieniea 9
+
+Leitungsplan ™ «.ooevii e e 9
+Empfanger EBI3H, Frontansicht i 13
+
+Ubersichtsschaltplan for Empfanger EBI3H U . 16
+Darstellung des optischen Anzeigevorganges .................... 19
+
+Empfanger EBI3F, Frontansicht ...........ooviieiiiinnennie. 21
+
+For Empfanger EBI3F erweiterter Ubersichtsschaltplan {Deckblatt .
+zu Zeichnung8) ....oooiiiiiinn e e I 29
+Abb. 12:
+Abb. 13:
+Abb. 14:
+Zeichnung 15:
+Abb. 16:
+Abb. 17:
+Zeichnung 18:
+Abb. 19:
+Abb. 20:
+Abb. 21:
+
+~ Abb.22:
+Abb. 23:
+Abb. 24.
+Abb. 25:
+Abb. 26:
+Abb. 27.
+Abb. 28:
+Abb. 29:
+Abb. 30:
+Abb. 31:
+Abb. 32:
+Abb. 33:
+Zeichnung 34:
+
+Relaiskasten RELK2, geschlossen «.....oovoeiiieniiisonn o, 23
+Relaiskasten RELK2, offen ...ooevvurnoeos 23
+Empfanger EBI2, Frontansicht ............ e e e 24 -
+Ubersichtsschaltplan des Empfangers EBI2 ................cc..... 26
+Fern-Bedien-Gerat FBG 2, AuBenansicht .......oooovvveeeoinnn... 27
+Fern-Bedien-Gerat FBG 2, Innenansicht mit Fubplatte .......... .. o8
+Ubersichtsschaltplan for Fernabstimmung ............. ...l 30
+Fern-Bedien-Gerat FBG 6, AuBenansicht ......vvverueneernnnn... 3
+Fern-Bedien-Gerat FBG 6, Innenansicht mit FuBplatte ............ 32
+Antennen-Anpassungs-Gerat AAG 1 A, AuBenansicht ............ 33
+Antennen-Anpassungs-Gerat AAG 1 A, Innenansicht  «.o....... L. 34
+Ausfahrbarer Antennen-Mast AM &, eingefahren - ........ e 35
+Austahrbarer' Antennen-Mast AM 5, ausgefahren ................ 35
+Bedien-Gerét BGE ..o 36
+Dipol-Anpassungs-Gerét DAG 1, AuBenansicht «.o..oennvnn... ... 38
+Dipol-Anpassungs-Gerat DAG 1, Innenansicht «.o.ovvvivennn.. ... 39
+Anzeigegerat for Funk-Navigation AFN2-........................ 39
+Umformer U8, AuBenansicht «...ovvniniiiini e 40
+Empfanger EBI3H, Rickansicht ohne Geh@use ....eovevrvn..... 60
+Empfanger EBI3F, Rickansicht ohne Gehduse ...ovovnvvnnn.. ... 61
+Empfanger EBI2, Rickansicht ohne Gehduse ............... PR 62
+Umformer U8, Innenansicht ............... PO e 64
+Beispiel fur erforderlichen Kohlebirstenwechsel .................. 65
+l. Beschreibung
+
+A. Verwendu ngszweck
+
+1. Das Funk-Landegerdt FuBl2 dient zur Durchfthrung von Fligen auf Leitstrahlen
+der Lande-Funkfeuer (LFF) und &hnlicher Anlagen.
+
+2. Es ist ein Teilgerdt im Rahmen einer Bordfunkanlage und wird hauptsdchlich
+
+mit dem Bordfunkgeréat FuG 10 und dem Peil-Gerét PeilGV oder PeilG VI zusammen-
+geschaltet. ‘ \ :
+
+B. Aligemeine Kennzeichnung des Landeverfahrens
+
+3. Die grundsatzlichen Kennzeichen des Verfahrens der Landung nach einem Lande-
+funkfeuer, die in gleicher Weise fiir das bisherige Funk-Landegeréat FuBl| (Empfanger -
+EBI1 und EBI2) wie fir das vorliegende Funk-Landegerdt FuBI2 (Empfanger EBI3 und
+EBI2) Galtigkeit haben, sind folgende: : ’
+
+4. Das Lande-Funkfeuer (LFF) besteht aus einem Ansteuerungs-Funkfeuer (AFF) und
+zwei Einflugzeichen-Sendern (EZ). ‘
+
+Das Ansteuerungs-Funkfeuer (AFF} strahlt Ansteuerungszeichen aus, durch die vom
+Boden aus eine hindernisfreie Anflugrichtung festgelegt wird. Die Ansteuerungszeichen
+werden mit dem Funk-Landegerdt empfangen und dem Flugzeugfihrer Obermittelt;
+diesem wird also nicht wie beim Zielflug (ZFF) irgendein Kurs zum Flughafen gewiesen,
+sondern ein eindeutiger, hindernisfreier Anflugweg vorgeschrieben. Zusdizlich erhalt
+der Flugzeugfihrer bestimmte Einflugzeichen (EZ), die ihm zwei for den Ansteuerungs-
+vorgang wichtige Entferningsangaben von der Rollfeldgrenze vermitteln.
+
+3. Das vollstandige Funk-Landeverfahren ist somit im wesentlichen gekennzeichnet
+durch: ‘
+
+2weite Anflugrichlung Haupt-Anflugrichtung
+-
+
+Strich-ZON8 v =
+— T R
+
+|-
+Leitstrahl (Dauerstrich-Zone)
+
+Rolifeld
+HEZ VEZ
+
+Panlrt-z,;, -
+Zeichnung 1:
+Die Ansteverung des Lande-Funkfevers (LFF)
+Darstellung in Aufsicht
+
+a) Festlegung der durch Flughindernisse nicht getdhrdeten Anflugrichtung (Leitstrahl).
+
+b} Ubermittlung von Einflugzeichen (EZ), und zwar einem Vor-Einflugzeichen (VEZ),
+das dem Flugzeugfihrer anzeigt, daB er noch 3km von der Rollteldgrenze ent-
+fernt ist, und einem Haupt-Einflugzeichen (HEZ), das thm anzeigt, daB er noch
+300 m von der Rollfeldgrenze entfernt ist. ‘
+6. Das Funk-Landegerat FuBI2 dient zur Aufnahme der Ansteuerungs--und Einflug-
+seichen. Die von ihm aufgenommenen Zeichen werden gleichzeitig akustisch und
+optisch kenntlich gemacht. Dem Flugzeugfihrer wird hierdurch eine standige Uber-
+wachung des Kurses und die Feststellung bestimmter Entfernungen (3000 und 300 m}
+vom Lande-Flughafen ermoglicht. Auferdem kann er bei groferen Entfernungen vom
+Lande-Flughafen ungefdhr den Abstand schaizen. )
+
+7. Die akustische Kursiiberwachung' erfolgt durch Abhdren verschiedener Zeichen
+der AFF-Strahlung. Bei Abweichungen vom Leitstrahl nach Backbord, sind punkiférmige
+
+Morsezeichen, bei Abweichung nach Steverbord. dagegen sirichfdrmige Morsezeichen
+Die Tonhdhe aller dieser der Leitstrahlkennung dienenden Zeichen entspricht hierbei
+der Modelungsfrequenz des AFF (1150 Hz). ‘
+
+8. Die optische Kursiberwachung wird nach dem Kurszeiger des Anzeigegerates for
+Funk-Navigation durchgefihrt. Der Kurszeiger nimmt bei Flug auf dem Leitstrahl die
+Mittelstellung ein. Bei Abweichungen vom Leitstrahl schldgt der Zeiger im Takte der
+Tastzeichen der AFF-Strahlung nach links aus, wenn das Flugzeug links vom Leitstrahl
+fliegt, bzw. nach rechts, wenn es sich rechts desselben befindet. Der Flugzeugfihrer er-
+kennt daraus zusatzlich zur akustischen Kursiberwachung, welchen Kurs er zu steuern
+hat, um die vorgeschriebene Anflugbahn zu finden bzw. zu halten.
+
+Zeichnuﬁg 2: ,
+Tastzeichen des Ansteuerungs-Funkfevers (AFF)
+(Frequenz.im Bereich: 30,0—33,33 MHz; Ton 1150 Hz)
+
+Ein zweiter Zeiger am lAnzeigeger("j’r zeigt die ‘Ausgangsspannung des Funk-Lande-
+gerdtes an und 3Bt so einen erfahrungsmaBigen Rickschluf auf die ungefdhre Ent-
+fernung bis zum Flughafen zu.
+
+Zeichnung 3:
+
+Tastzeichen ‘des Vor-Einflugzeichens (VEZ)
+(Frequenz 38,0 MHz; Ton 700 Hz)
+
+9. Das Vor-Einflugzeichen (VEZ) wird in 3km Entfernung von der Rollfeldgrenze als
+langsam getastetes, strichformiges Morsezeichen in tiefem Ton (700 Hz) empfangen und
+zugleich durch Aufleuchten einer Glimmlampe im Takt der Morsezeichen am Anzeige-
+gerdt sichtbar gemacht. Fir die Landung verringert der Flugzeugfihrer die Flughohe
+auf die jeweils am Haupt-Einflugzeichen (HEZ) vorgeschriebene Mindesthdhe ,,h".
+
+Haupt -Einflug -Zeichen Vor-Eintlug-Zeichen
+HEZ VEZ
+
+Anflugrichtung
+
+AFF o Z
+punkt " otwaka—J . Y
+Zeichnung 4: Zeichnung 5:
+Die Ansteverung des Lande-Funkfeuers (LFF)- Tastzeichen des Haupt-Einflugzeichens (HEZ)
+Darstellung in Seitenansicht . (Frequenz 38 OMHz, Ton 1700 Hz)
+
+10. Das Haupt-Einflugzeichen (HEZ) wird dann auf dem Leitstrahl 300 m vor der Roll-
+feldgrenze als schnellgetastetes, punktférmiges Morsezeichen in hohem Ton (1700 Hz)
+
+empfangen und wiederum gleichzeitig durch Aufleuchten der Glimmlampe im Tck’r der
+Morsezeichen am Anzeigeger&t angezeigt.
+
+C. Aufbauplan
+
+Stabantenne |
+(Bakenstab) [N .
+I ‘ . Fu
+[
+. Fern -Bedien - Gera! —_—
+Antennen- aies r— ]
+-Geré 2 Widerstands -
+Anpassungs - Gerdt | !_F 86 2_] WK 25 Kasten
+! " j ® I x‘lg) [ix
+5— - e i vm va Relals Kasten
+' Emptanger il D et 2
+Lﬂ - ER nn i JEa? )
+f [ r—@—'vmc v — win -———| RELK 2 |
+[ : LeJ L'u L3 L
+Anpassungs - v\ Empfanger ! el L! ) . K
+5 e e — T Ll LAl
+' .
+L- Anschiulldose
+Dipol . l_. c—d o ——le .l !FUGXJ
+l i Schaltkasten N ADD "
+.l SchK 13 I
+l_ - | [ Ml [, ] . .
+'——-———@—'vm V”f] l .
+Enlon er :
+Bedien- o . — . . Brech-
+r 1 9 , Gerdt !_865 1, fo o ! \’ ) Kupplung
+| AMS ! ¥ .I oder | \® % Brech- °e_°
+i -~ Fahrwerk- ” BGSA J Kupplung
+Schalter I I ' —_—
+' )
+Ausfahrbarer I ~
+Antennenmast AFN1 oder AFN2 AFN1 oder AFN 2
+' ! .
+VIRV
+' LoV Lo\
+Ywahiweise statt Stabantenne verwendoar +
+' DNur ber Einbau des EBIIF oder EBIIG I
+vorhanden
+-
+
+Bordnetz
+
+Zeichnung 6:
+Leitungspian
+
+11. Die genaue Verkabelung ist aus dem Leitungsplan der jeweiligen Bordfunkanlage
+zu ersehen. Eine Zusammenschaltung mit dem Bordfunkgerét FuG 10 zeigen die als An-
+lagen 9 und 11 beigefigten Stromlaufpldne.
+D. Technische Merkmale und Arbeitsweise des
+Gesamtgerites
+
+12. Die mechorﬁsche Ausfihrung umfaBt folgende Kennzeichen:
+
+a)’ Bausfoﬁ fir die Gerdte und Einbauteile:
+
+Fir den Gestellaufbau der Empféanger und Eianuteile‘isf Leichtmetallgu®} ver-
+wendet. Die Gehduse, Kappen und Aufthdngerahmen bestehen aus Leichtmetall-
+
+blech. Das Dipol-Anpassungs-Gerat DAG 1 ist in einem Gehduse aus Prefstoff
+untergebracht.
+
+b) Aufhdngung der auswechselbaren Geréte und Einbauteile:
+
+Zwecks Austausches mit wenigen Handgriffen durch Verriegelung auf dafir vor-
+gesehenen Aufhéngerahmen bzw. FuBplatten, und zwar:
+
+federnd fir die Empféanger und den Umformer,
+nicht federnd fir das Fern-Bedien-Gerdt.
+c) Anschlu der auswechselbaren Gerdte und Einbauteile:
+
+_Verbindung mit der Verkabelung Uber Kabelschwénze mit achtpoligen Leitungs-
+kupplungen (LKVIII f und g).
+
+d) Betriebssicherheit bei Hohenfligen:
+Bei Flogen bis 12000 m Héhe.
+
+13. Frequenzbereiche:
+
+a} Beim Empfanger EBI3H und EBI3H 1 kann ieweﬂs einer von 34 Empfangskandlen
+durch Handantrieb eingestellt werden. :
+
+Beim Empfénger EBI3F und EBI3 G kann jeweils einer von 33 E‘rhpfangskonélén
+
+durch Fernanirieb vom Fern-Bedien-Gerat FBG2 bzw. FBG6 aus eingestellt
+werden. '
+
+Achtung! Die Kandle 1 (30,0 MHz) bis 32 (33,1 MHz) sind bei beiden Empfangern
+gleichmafig Gber den Frequenzbereich verteilt.
+
+Der Empfénger EBI3H bzw. EBI3H 1 verfugt auBerdem noch ober den Kanal 33
+(33,2 MHz} und 34 (33,33 MHz). '
+
+Beim Empfanger EBI3F entfallt .aus technischen Grinden der Kanal 34. Die
+- Frequenz 33,33 MHz ist dem Kanal 33 zugeordnet. '
+
+Beim EBI3H, H1, F und G entspricht:
+
+Kanal 1 30,0 MHz
+Kanal 16 31,5 MHz.
+
+b) for Empfanger EBI2: f = 38,0 MHz.
+
+14. Antennen )
+a) For Empfanger EBI3H, H1, F u. G:
+
+Senkrechter Stab (sog. Bakenstab) von émm g und 0,8m Hoéhe (ber Deck, ein-
+gebaut in Abspannmast for Fest-Antenne. Wenn dieser nicht vorhanden, erfolgt
+der Einbau in windschnittiger Verkleidung.
+
+10
+oder ausfahrbarer Antennenmast AM 5, der am Heck des Flugzeuges {unterhalb
+des Leitwerkes) angeordnet ist und vom Bedien-Gerat BG 5 oder BG 5 A aus Uber
+einen elekirischen Antrieb aus- und eingefahren werden kann.
+
+b) For Empfanger EBI2:
+
+Dipol von 2x1m Lénge im Abstand von 7cm unterhalb des Flugzeugrumpfes
+in Richtung der Flugzeug-Langsachse mit windschnittigen Tragern befestigt.
+
+15. Réhren
+
+Fir das Funk-Landegerdt FuBl2 werden zwei Rohrenbaumuster bendtigt:
+
+a) For EBIS: Us = 126V
+7 Stock RV 12 P2000 I ~ 0,07 Amp.
+b For EBI2:  Us = 126V
+5Stick NF2 J ~ 0,195 Amp.
+
+Hiervon in der Audionstufe eine nach bestimmten Toleranzen ausgesuchte Rohre
+
+NF2A.
+
+16. Stromquellen und Energlebedarf
+o) Stromquellen:
+
+24-Volt-Bordbatterie, die als Pufferbatterie zum Flugzeug-Generator geschaltet
+ist. Aus ihr werden die Heizkreise der Empfé@nger-Réhren unmittelbar gespeist.
+Die Anoden- und Ubrigen Hllfsspannungen liefert ein Umformer U8, der eben-
+falls aus der Bordbaﬁene gespeist wird.
+
+b) Energiebedarf:
+
+Verbraucher
+Réhrenheizung for EBI3
+Réhrenbeheizung for EBI 2 ) | } 07
+‘ 2229
+
+Symmetrier-Widerstand WK 25 : ‘ 1,0
+Umformer U8 . . l - o 3,0
+
+| Gesamt: .51
+Zusatzlich:
+Wahrend der Fernabstimmung des EBI3F bzw. G mit Fern- ,
+Bedien-Gerat FBG 2 bzw. FBG. 6 L i 43
+
+| Wahrend des Aus- oder Einfahrens des Antennenmastes AM5 _ 2,35 ) I
+
+17. Arbeitsweise
+
+Die Betatigung des Fuhk—Londegeréfes wahrend des Fluges erfolgt ausschlieflich
+durch den Funker (Fu), an dessen Platz das hierzu erforderliche Gerdt mit den dazu-
+gehérigen Einbauteilen angeordnet ist (s. Zeichnung 6).
+
+1) Die Angaben gelten fir eine Bordboﬁerlesponnung von 27 Volt. Das Gerdt ist jedoch bei Bord-
+bcﬁerlespannungen zwischen 22 und 29 Volt betriebsfahig.
+
+1
+Die wichtigsten Merkmale der Betdtigung des Funk-Lgndegerdtes FuBI2, ‘das im
+Rahmen einer Bordfunkanlage vorzugsweise mit FuG 10 und PeilGV oder PeilG VI
+zusammengeschaltet wird, sind unter Voraussetzung dieser Zusammenschaltung
+folgende:
+
+a) Einschalten (bzw. Ausschalted):
+Durch Druckknopfe an Selbstschaltern auf dem Bordstromverteiler.
+
+b) Etwa 30 Sekunden nach erfolgtem Einschalten ist das Gerat betriebsklar!
+
+c) Verkehrsartenwahl:
+
+Am Schaltkasten SchK 13 des Bordfunkgerates FuG 10 mit den ZFF/LFF-Schaltern.
+Mit diesen wird vom Funker die Hérkappe des Flugzeugfihrers (AnschluBBdose
+ADb 11) — und falls erforderlich auch die eigene Hérkappe — an den Hor-
+ausgang des Funk-Landegerdtes eingeschaltet. Gleichzeitig werden die Anzeige-
+gerate fir Funk-Navigation, die auch der Anzeige bei Zielflug-Betrieb dienen,
+auf das Funk-Landegerat umgeschaltet.
+
+Damit der Flugzeugfihrer den Funk-landeempfang hort, muB er an seiner
+AnschluBdose ADb 11 auf ,,NFF” schalten.
+
+d) Frequenzeinstellung:
+
+Bei allen Ausfihrungen des Empféangers EBI3 (H, H1, F, G} vor ‘oder wéhreﬁd
+des Fluges.
+
+. Beim Empfanger EBI2 vor dem Fluge.
+
+" E. Aufbau, Schaltung und Wirkungsweise der Gerite
+“und Einbauteile |
+
+1. Empfénger EBI3
+
+18. Achtung!
+
+Es gibt vier verschiedene Austihrungen von Empféngern EBI3, die in den nach-
+folgenden Abschnitten
+
+a) Empfanger EBI3H  (Ziffer 19 bis 25)
+b) Empfanger EBISH1 (Ziffer 26 bis 28)
+c) Empfénger EBI3F  (Ziffer 29 bis 32)
+d) Empfanger EBI3G  (Ziffer 33 bis 36)
+
+beschrieben sind.
+
+Die Empfanger unterscheiden sich im Grundaufbau der Schaltung nur geringfigig.
+Es haben daher die Ausfihrungen unter Ziffer 19 bis 25 {ir alle Baumuster des
+Empfangers EBI3 Gdltigkeit. Die zusdtzlichen Angaben unter Ziffer 26 bis 36 weisen
+an Hand der ausfUhrlichen Schalibilder im wesentlichen nur auf die schaltungs-
+technischen Unterschiede und betriebstechnisch zu beachtenden Gesichtspunkte hin.
+
+12
+‘ a) Empfanger EBI3 H
+19. Aufbau
+Der auBere Aufbau ist aus Abb.7, der innere Aufbau aus Abb.30 im Abschnitt il
+Ziffer 101, zu ersehen.
+
+Haltewinkel Lautstarkeregler (W42 Kanal-
+anzeige
+
+AnschluB for HFKabe!
+zum AAG 1A
+
+Anschluf %
+
+for Prifgerat,
+
+Eichkorrektur
+C 50
+
+Abstimmung Feststell-
+hebel -
+
+Kabelschwanz Nr. 3
+
+Abb.7: Empfdnger EBI3H
+
+Frontansicht
+20. Betdtigungsgriffe und Anschlijsse
+
+a) Abstimmung:
+
+Mit Kurbeltrieb auf der Frontplatte Einstellung eines der 34 Empfangskandle nach
+einer in Kandlen geeichten Skala (beachte Ziffer 13a).
+
+Fir Zwecke der Eichprifung ist auf der Skala der Kanal21 rot gekennzeichnei.
+
+b) Feststellhebel mit den Stellungen ,,Fest — Lose”:
+
+Zum Festklemmen des Kurbeltriebes for Abstimmung als Sicherung gegen
+unbeabsichtigte Verstellung.
+
+c) Lautstirkeregler (Pegelregler):
+Einstellung mit grinem Einstellschlissel oder Schraubenzieher auf rote Marke?).
+
+d) Eichkorrektur:
+
+Einstellung eines Trimmers mit Schraubenzieher nur nach erfolgtem Réhrenwechsel.
+der Eichtrimmer ist nach Offnen einer Drehklappe zugdnglich, und zwar: bei den
+ersten Empfangern des Baumusters EBI3H von der rechten Seite, bei allen
+anderen Empfangern von der Frontplatte.
+
+e) AnschluB} fir Prifgerat:
+
+Fir Anschaltung des Frequenz-Kontrollgerates PQK4 A oder des Prif- Vol‘rmeters
+PV 10 oder des Empfanger-Prifgerates EPG 3.
+
+®) Der Empfénger wird von der Lieferfirma mit dieser Einstellung des Pegelreglers geliefert. Je
+nach dem Entstérungsgrad des Flugzeuges kann eine Nachstellung erforderlich werden. (Siehe
+Betriebsvorschrift, Ziffer 85, Punkt 7.)
+
+13
+fl AnschluB for HF-Kabel:' |
+Fir Anschlufd des zum Antennen-Anpassungs-Gerdt AAG 1A fGhrenden Kabels.
+
+g) Kabelschwanz Nr.3:
+
+Kabel mit achtpoliger Leitungskupplung fir Zusammenschaltung des Empf'dng\ers
+EBI3H mit dem Empfanger EBI2 und Anschluf. an die Stromversorgung.
+
+21. Empfindlichkeit .
+
+Sichere optische und akustische Anzeige des Ansteuerungskurses in.200 m Flughéhe'
+ab 70 km Entfernung vom Flughafen {Strahlungsleistung des AFF am Boden: 500 Watt).
+
+22. Selektivitat
+
+Bei Abstimmung auf Kanal 16 ist nach einer VerstimmUng um 100 kHz eine 300- bis
+400-fache -Eingangsspannung erforderlich, um die gleiche Ausgangsspannung zu
+.erzielen. ,
+
+23. Stromquellen und Energiebedarf
+
+Stromquellen: _
+RShrenheizung aus 24-Volt-Bordbatterie,
+
+Anoden- und Hilfsspannungen aus Umformer U 8.
+
+Energiebedarf:
+
+For Rohrenheizung For Anoden- und Hilfskreise
+
+24, Schaltung
+
+Der Empfanger EBI3H ist ein Zwischenfrequenz-Empfénger mit sieben Rohren. Im
+Gegensatz zum Geradeaus-Empféanger EBI 1 wird beim EBI 3 die empfangene Frequenz
+~ zundchst in eine niedrigere Hochfrequenz umgeformt, diese verstarkt und gleichgerichtet.
+
+Der Empfanger hat dementsprechend schaltungsmabig folgenden Aufbau:
+1 Hochfrequenz-Verstarkerstufe mit induktiv angekoppeltem Spiegelfrequenz-
+. Saugkreis im Eingang, T
+1 Mischstufe,
+3 Zwischenfrequenz-Verstarkerstufen,
+
+1 Gleichrichterstufe, , «
+1 in den Empfanger EBI2 rdumlich eingeordneter Niederfrequenz-Verstérker fir:
+
+2-stufige Verstarkung fir Sichtanzeige des AFF,
+2-stufige Verstarkung fir Horempfang des AFF,
+
+dazu:
+
+1 Schwingstufe (Oszillator), wirkt auf die Mischstufe zwecks Bildung der Zwischen-
+frequenz, ’
+
+1 Regelanordnung zur selbsttatigen Regelung der Verstdrkung der Hochfrequenz-
+sowie ersten und zweiten Zwischenfrequenz-Verstérkerstufe (Regelung der
+
+3) Siehe Fubnote 1) zu\ZiFFer 16.
+
+14
+Gittervorspannung). Die Regelspannung wird einer besonderen — dem
+Empfanger EBI2 eingegliederten — Regelcnordnung entnommen,
+
+Ein Empfindlichkeitsregler wirkt durch Verstérkungsanderung der Hochfrequenz- und
+Ersten Zwischenfrequenz-Verstérkerstufe.
+
+Vom
+»
+
+HE- | [ Misch- | | 1.2 8 | [ Gleich- '
+AAGiA| Stufe Stufe ZF-Stufe richter I
+Schwing-
+- Stufe
+
+EBI3 | EBI2
+Sieb- NF- | Zum Hor-
+
+Stufe kreis Stufe |_>WTe | AnschluB
+
+\l T |
+
+Vom Empfangs-
+teil fiir die EZ
+
+Stufe
+
+[y
+
+Die grundsdtzliche Arbeitsweise des Empféangers, dessen Ubersichtsschaltplan
+Zeichnung 8 und dessen Stromlaufschaltplan Anlage 1 zeigt, ist folgende:
+
+a)
+
+- b)
+
+Die von der Stabantenne avfgenommene Empfangsenergie wird bei ein-
+geschaltetem Empfdnger in der Hochfrequenz-Verstarkerstufe verstdrkt.
+
+Die Empfangsenergie wird Uber das Antennen-Anpassungs-Gerat AAG 1A dem
+Empfanger zugeleitet, in induktiver Kopplung auf den Schwingkreis (L10, C 36,
+L15, C29} Gbertragen und durch (R66) verstarkt. Der jeweilige Empfangskanal
+wird durch ,,Frequenzwahl” mit (C29) eingestellt.
+
+An die in der Antennenzuleitung liegende Spule (L8) ist auferdem ein zweiter .
+Schwingkreis (L8, C28) angekoppelt, der als Sperrkreis fir die Spiegelfrequenz
+(Empfangsfrequenz plus doppelte Zwischenfrequenz) stets auf die Spiegel-
+frequenz abgestimmt sein muf. Die Abstimmung erfolgt durch (C28), der gleich-
+zeitig mit den Ubrigen Abstimmitteln des EBI3 eingestellt wird. Der Sperrkreis
+verhindert, daf ein Stérer auf der Spiegelfrequenz, die ja in der Mischrohre die
+gleiche Zwischenfrequenz ergeben wirde, wie die .Empfangsfrequenz in den
+Empfénger gelangt.
+
+Zur Regelung der Empfindlichkeit des Gescm’rempfdhgers wird die Verstarkung
+von [R66) durch Anderung der Schirmgitterspannung am Pegelregler mit Potentio-
+
+meter (W 42) eingestellt. Zum Ausgleich von Lautstdrkednderungen ist zusatzlich
+
+eine selbsttdtige Lautstdrkeregelung vorgesehen (siehe unter g).
+
+Die verstarkte Empfangsenergie wird der Mischstufe zugeleitet und dort zwecks
+
+- Erzeugung der Zwischenfrequenz mit einer Hilfsfrequenz gemischt.
+
+Von der Anode (R6 6] gelangt die verstérkte Empfangsenergie an den Schwing-
+kreis (L11, C30/C43), der durch (C30} abgestimmt wird. Uber (C45) wird die
+verstdrkte Empfangsenergie dem Gitter der Mischréhre (R67) zugeleitet.
+
+15
+c) Die zur Erzeugung der Zwischenfrequenz erforderliche Hilfsfrequenz wird in der
+Schwingstufe erzeugt.
+
+Die Schwingstufe mit (R 8) ist in indukfiver Rickkopplungsschaltung mit ab-
+gestimmtem Anodenkreis (L12, C31/C53) aufgebaut. Die Frequenz der Hilfs-
+schwingung, die sich um den Betrag der Zwischenfrequenz von der Empfangs-
+frequenz unterscheiden muB, wird durch (C31) eingestelit. Durch ,Eichkorrektur®
+ist nach erfolgtem Rohrenwechsel tber Trimmer (C 50) eine Nachstimmung méglich.
+
+Die erzeugte Hilfsfrequenz wird (R67) der Mischstufe Uber die in deren Gitter-
+kreis liegende Ankopplungswicklung des Spulensatzes (L 12} zugefihrt.
+
+- d) Die durch Mischung von: Empfangs- und Hilfsfrequenz entstandene Zwischen-
+frequenz (ZF) wird in einem dreistufigen bandfiltergekoppelten ZF-Verstdrker
+verstarkt.
+
+Im Anodenkreis von (R&7) liegt das auf die ZF abgestimmte Bandfilter (Bf 1),
+von dessen Sekunddr-Schwingungskreis die ZF der (Ro1) zur Verstérkung zu-
+geleitet wird.
+
+EBI2
+
+fir die EZ+|tA
+
+Zeichnung 8:
+Ubersichtsschaltplan fir Empfénger EBI3 H
+
+Die Verstarkung von (R& 1) wird durch Anderung der Schirmgitterspannung mit
+Potentiometer (W 42) und selbsttatig nach Absatz g geregelt. ’
+
+Vom Anodenkreis (R&1) gelangt die einstufig verstérkte ZF Gber (BF2) zu (RS2
+und von dort Uber (Bf3) zu (R&3). (R62) ist an die selbsitdtige Lautstarke-
+regelung Uber (W7} angeschlossen. :
+
+e) Die dreistufig verstdrkte Zwischenfrequenz wird in der Gleichrichterstufe gleich-
+gerichtet.
+
+(RS 3) arbeitet auf den auf die ZF abgestimmten Schwingkreis (L7, C24). Uber
+(C25) wird die ZF von hier der als Diode geschalteten (Ré 4) zur Gleichrichtung
+zugeleitet..
+
+16
+_f) Die durch Gleichrichtung in der Gleichrichterstufe ausgesiebte Tonfrequenz wird
+
+~im Empfdnger EBI2 weiter versidrkt, ge5|ebt und dem Hoér- und Sichtempfang
+zugefihrt.
+
+Zy diesem Zweck wird die erhaltene Tonfrequenz vom Arbeitswiderstand (W 17)
+der Diode Uber den Ubertrager (44) der Réhre (47) des NF-Verstarkers zugeleitet
+und verstdrkt. Im Anodenkreis der Réhre (47) wird die verstarkte Tonfrequenz
+an einem zweikreisigen Siebkreis SK — einem auf 1150 Hz abgestimmten NF-
+
+- Bandfilter — avufgeteilt. Fir Horempfang wird die Tonfrequenz Gber das Sieb-
+glied (&6, 93) der Rohre (36) zur Verstérkung zugeleitet und Ober den Ausgangs-
+_Ubertrager (40) abgehort. Fur Sichtanzeige am AFN 2 wird die Tonfrequenz Uber
+Kondensator (63) der Rdhre (68) zugeleitet, verstarki und von einer Wicklung
+des Ausgangsubertragers (73) abgegriffen.
+
+Durch die Verwendung eines auf 1150 Hz abgestimmten ‘Kopplungsgliédes
+zwischen Rohre (47) und (68} wird verhindert, daP die ebenfalls in Rohre (36)
+verstarkten tonfrequenten Zeichen der EZ-Sender die Kursanzeige am AFN 2
+
+beeintrachtigen, da die Frequenzen 700 und. 1700 Hz am Slebkrels SK zusammen-
+brechen.
+
+g) Fir die selbsttdtige Verstdrkungsregelung des Empféngers EBI3 erhalten die
+Rohren der Hochfrequenz- und ersten sowie zweiten Zwischenfrequenz-
+
+Verstarkersiufe eine von der Ausgangsspannuing des Empféngers abhdngige
+Regelgittervorspannung.
+
+Hierfir wird von einer Wicklung des Ausgangs-Ubertragers {73) die Tonfrequenz
+dem Gleichrichter (75} zugefthrt und gleichgerichtet. Damit die Regelung erst
+in geringerer Entfernung vom AFF einsetzt — wenn also die volle Verstarkung
+des Empféngers nicht mehr benétigh wird — erhdlt der Gleichrichter (75) Uber
+Widerstand (74) eine Vorspannung. Uberschreitet die Tonfrequenzspannung an
+der Wicklung des Ausgangs-Uberiragers (73) die Hoéhe dieser Vorspannung,
+so wird sie vom Gleichrichter (75) gleichgerichtet. Dessen im Takt der Ton-
+frequenz (1150 Hz) schwankender Richistrom fliet durch die Erstwicklung des
+Ubertragers (77) und induziert in dessen Zweitwicklung eine Wechselspannung,
+die der Gleichrichter {78) gleichrichtet. Der Richtstrom dieses Gleichrichters, der
+von der Ausgangsspannung — und somit auch mittelbar von der Eingangs-
+spannung — abhdngig ist, erzeugt an den Widersidnden (W13, W 14} im EBI3
+einen Spannungsabfall. Dieser Spannungsabfall wird in voller Hohe als Regel-
+gittervorspannung fir (R66) benutzt, ein Teil wird vom Verbindungspunkt (W 13,
+W 14} abgegriffen und Ober die Widerstande (W2 bzw. W7) [R&1) bzw. (R62)
+als Regelgittervorspannung zugeleitet. Es wird somit die Verstarkung der zuvor
+genannten drei Rohren in Abhdngigkeit von der Eingangsspannung gesteuert.
+
+Der parallel zu (W13, W 14) geschaltete Kondensator (82) bewirkt eine starke
+
+Verzégerung (Tragheit) der Regelung, so dab die Zeichen des AFF mcht durch die
+Regelung beeintrachtigt werden. :
+
+"~ h) Bei Vornahme von Abstimmungen am Empfdnger EBI3 wird die selbsttdtige
+
+Verstdrkungsregelung durch Rechtsdrehen der Abstimmtaste am EBI2 aus-
+geschaltet.
+
+Die selbsttatige Regelung wi‘rd mit dem Schalter (79) in der Weise ausgeschaltet,
+daf die Gitter der Rohren (R66, R6 1, R 2) Uber den Widerstand (80) an Masse
+
+2 — T 4058 » : ) i | : ) 17
+gelegt werden. Der Gleichrichter (78) arbeitet in diesem Falle auf keinen ge-
+
+schlossenen Stromkreis und ist somit wirkungslos.
+
+'25. Wirkungsweise. bej Empfang der Zeichen des AFF
+
+q)
+
+Abweichungen vom Leitstrahl werden durch Ausschlag des Kurszeigers im AFN2
+und durch Wahrnehmung des Kennungszeichens im Fernhérer der Fliegerkopf-
+haube angezeigt.
+
+Bei Abweichungen vom Leitstrahl Uberwiegt die Lautsidirke von Punkt- oder
+Strichzeichen des AFF, und Gleichrichter (83) (siche Anlage 13) liefert Richisirom-
+stéfe von der Dauer der auvfgenommenen Zeichen. Dieser Richtstrom flieBt durch
+Wicklung Il des Ubertragers (86) und induziert in dessen Wicklung | bei Strom-
+
+dnderungen Stromstéfe, die einen Ausschlag des Kurszeigers verursachen. Durch
+
+~den parallel zur Wicklung | des Ubertragers (8¢) ~geschalteten  Amplituden-
+
+begrenzer (87) ist das Mefwerk des Kurszeigers vor Uberlastung geschitzt.
+
+Der Kurszeigerausschlag am AFN 2 wird stets durch die Richtung des ersten der
+beiden kurz aufeinanderfolgenden StromstéBe enigegengesetzter Richtung be-
+stimmt, die auf der Ausgangsseite des Ubertragers (86) durch die periodischen
+
+~ Anderungen des Richtstromes von Gleichrichter (83) entstehen.
+
+18
+
+Da im Strichgebiet der Richtstrom zundchst ab- und dann zunimmt, im Punktgebiet
+aber erst zu- und dann abnimmt, erfolgt der erste Stromstof und damit der Kurs-
+zeigerausschlag in den beiden Gebieten in enfgegengesetzter Richtung. Die
+Magnetpole des Kurszeiger-MeBwerkes sind so ausgebildet, daf® die durch den
+ersten Impuls ausgelenkte Drehspule durch den zweiten nur /s Sek. spater erfol-
+genden nicht mehr beeinflupt wird. :
+
+Strichgebiet des AFF). :
+
+Bestimmend fir den Ausschlag des Zeigers am AFN 2 sind die in Verbindung mit
+den Pausen des Strichzeichens avftretenden Stromimpulse, und zwar wird die
+Richtung des Ausschlages durch die Abnahme des Richtstroms am Ende jedes
+Striches bestimmt, also dem Zeiger ein Impuls nach rechts gegeben. Der mit der
+Wiederzunahme des Richtstromes (Beginn des neuen Strichzeichens) verbundene
+entgegengesetzte Impuls kommt nicht zur Wirkung.
+
+Bei Abweichung ins Punktgebiet des AFF bestimmen die mit'"dem Empfang des
+Punkizeichens verbundenen Richtstroménderungen  (Zunahme und Wieder-
+abnahme) die Bewegung des Zeigers. For die Richtung des Ausschlages ist die
+Zunahme des Richtstromes mafigebend, also Ausschlag nach links.
+
+Der Au‘sschlag des Zeigers nach rechts und links hat nach vorstehendem den
+gleichen zeitlichen Verlauf. '
+
+Die Starke der Stromimpulse fir das Anzeigegerdt nimmt bei Anndherung an den
+Leitstrahl ab, da der Empfang und damit der Richtstrom in den Zeichenpausen
+zunimmt. Die durch die einfallenden Zeichen des AFF hervorgerufenen Richt-
+stroménderungen und damit die vom Ubertrager an das Anzeigegerét Gber-
+mittelten Impulse werden somit kleiner. Auf dem Leitstrahl ist der Richtstrom
+konstant, Impulse sind nicht vorhanden.
+c) Der richtige Flug auf dem Leitstrahl wird durch bleibende Nullage des Kurszeigers
+angezeigt. Zu Uberwachungszwecken mu3 jedoch der Entfernungszeiger am
+“AFN 2 beobachtet werden, da die Stellung des Kurszeigers bei Flug auf dem
+Leitstrahl mit der Stellung bei ausgeschaltetem Gerdét iibereinstimmt. '
+
+vom AAG la
+
+i
+
+I
+’M'l
+
+l‘|
+
+" Mllllln,uu
+
+’al.llllhll' ’l‘l’l’l’l’"‘“
+
+e
+
+""’""""'l'l'i!i'l’li'rrvﬂu
+
+‘I‘I‘I‘l‘lll[
+
+Mi
+
+|~ |
+
+i
+
+|
+
+i
+
+|l|n|lll|:l||l'l
+
+i ‘la , l'lllllml'l
+
+il
+
+|
+
+lig
+
+HF-Teil
+und
+
+ZF-Teil
+
+R;chtstrom- des G;eichr/'cht;rs (83)
+
+.
+
+Stromimpulse fir Anzeige-Gerdt
+
+NF-Teil
+
+Gleichrichter(83)
+
+bzw Jn dieser ‘Stellung Jn dieser Steilung
+AFN2 i Jostrument empfindlich Jnstrument unempfindlich
+o
+Zeichnung 9:
+
+Darstellung des optischen Anzeigevorganges
+
+Bei Flug auf dem Lleitstrahl liefert der Gleichrichter (83) einen durch Konden-
+sator (84) gegldtteten Gleichstrom. Er bleibt ohne Einflu® auf den Ubertrager (86)
+und somit auf den Kurszeiger, der in diesem Falle nicht ausgelenkt wird.
+
+Zu Uberwachungszwecken wird jedoch der Richistrom des Gleichrichters (83)
+stdndig durch den Entfernungszeiger im AFN 2 angezeigt. Der gréfBtmégliche
+Ausschlag des Entfernungszeigers ist im Herstellerwerk durch Einstellung des
+Widerstandes (85) festgelegt. Die Einstellung ist so vorgenommen, daf der Ent-
+fernungszeiger bei Uberfliegen des AFF voll ausschlGgt.
+
+19
+b) Empfdnger EBI3H 1
+
+26 Aufbau
+
+. Der aubere Aufbau entspricht dem des EBI3H (Abb.7). Zu beachten ist, daf bei
+diesem Empfénger der Trimmer fir Eichkorrektur nur von der Frontplatte aus zugdnglich
+ist. Beim Einbau braucht also an der rechten Seite kein Platz fir die Betdtigung des
+. Eichtrimmers gelassen zu werden. Der innere Aufbau ist aus Abb.30 im Abschnitt i,
+Ziffer 101, zu ersehen. Beim Empfdanger EBI3H1 kann — in Abweichung vom
+Empfanger EBI3H — der Handantrieb gegen einen Fernantrieb ausgewechselt werden.
+For diesen Austausch des Antriebes ist der Empié&nger jedoch unbedingt in das Her-
+stellerwerk zurickzusenden, da er neu geeicht werden mub.
+
+27. Betdtigungsgriffe und Anschlﬁsse
+
+a} Abstimmung:
+
+Mit Kurbeltrieb auf der Frontplatte Einstelling eines der 34 Empfangskanéle
+nach einer in Kandlen geeichten Skala.
+
+Fur Zwecke der Eichprifung ist auf der Skala der Kanal 21 rot gekennzeichnet.
+Nach Austausch des Handantriebes gegen einen Fernantrieb: Mit Fern-Bedien-
+
+Gerdat FBG?2 Einstellung eines der 33 gerasteten Empfangskandle (beachte
+Ziffer 13a) nach einer die Kandle anzeigenden Skala am FBG 2 (siehe Ziffer 43).
+
+Fesistellhebel mit den Stellungen ,,Fest — Lose”:
+
+Zum Festklemmen des  Kurbeltriebes fir Abstimmung als Sicherung gegen
+unbeabsichtigte Verstellung.
+
+Lautstdrkeregler:
+Einstellung mit grinem Einstellschiiissel oder Schraubenzieher auf rote Marke?).
+
+Eichkorrektur:
+
+Einstellung eines Trimmers mit Schraubenzieher nur nach erfolgtem Rohrenwechsel.
+Der Eichirimmer ist nach Offnen einer Drehklappe auf der Frontplatte zugdnglich.
+
+Anschluf} fir Prifgerdt: - . .
+Zur Anschaltung des Frequenz-Kontrollgerdtes PQK4 A oder, des Prif-Voltmeters
+PV 10 oder des Empfénger-Prifgerdtes EPG 3.
+
+) Anschluf} fisr HF-Kabel:
+
+Zum AnschluB des zum Antennen-Anpassungs-Gerdt AAG 1 A fohrenden Kabels.
+
+g) Kabelschwanz Nr.3:
+
+Kabel mit achtpoliger Leitungskupplung for Zusammenschaltung des Empfangers
+EBI3H 1 mit dem Empfanger EBI2 und Anschlufh an die Stromversorgung.
+
+~ 28.  Alle weiteren Angaben Gber technische Merkmale und Schaltung des Empfangers
+EBI 3H 1 entsprechen denen des Empfangers EBI3H (siche Ziffer 21 bis 25).
+
+‘Der Stromlaufplan des EBI3H ist aus Anlage?2 zu ersehen.
+
+4 Siehe Fuﬁhofe 2} zy Ziffer 20 c.
+
+20
+c) Empfdnger EBI3 F
+29. Avufbau
+
+Der aufere Aufbau ist aus Abb. 10, der innere Aufbau aus Abb.31 im Abschnittlil,
+Ziffer 101, zu ersehen.
+
+Haltewinkel
+
+Haltewinkel
+
+AnschiuB for HF-Kabel . = e B
+zum AAG 1A > ) Kabelsdiwanz Nr. 3
+Lautstarke-
+AnschluB Eichkorrektur regler
+for Profgerat {C 501 (W 421 Kabelschwanz Nr. 7
+
+Abb. 10: Empfénger EBI3 F
+Frontansicht
+
+30. Betdtigungsgriffe und Anschliisse
+a) Abstimmung:
+
+Mit Fern-Bedien-Gerat FBG2 Einstellung eines der 33 ausgerasteten Empfangs-
+kandle nach einer die Kandle anzeigenden Skala am FBG 2 (siehe Ziffer 43).
+
+b) Lautstarkeregler: ‘
+Einstellung mit grinem Einstellschlissel oder Schraubenzieher auf rote Marke?).
+c) Eichkorrektur: ‘
+
+Einstellung eines Trimmers mit Schraubenzieher nur nach erfolgtem Réhrenwechsel.
+Der Eichtrimmer ist nach Offnen einer Drehklappe auf der Frontplatte zugdnglich.
+
+d) Anschluf3 fir Prif-Gerat:
+
+Fir Anschaltung des Frequenz-Kontrollgerdtes PQK4 A oder des Prif-Voltmeters
+PV 10 oder des Empfanger-Prifgerates EPG 3.
+
+e) Anschluf} fir HF-Kabel:
+
+For Anschlud des zum Antennen-Anpassungs-Gerdat AAG 1 A fihrenden Kabels.
+f) Kabelschwanz Nr. 3:
+
+Kabel mit achtpoliger Leitungskupplung fir Zusammenschaltung des Empféngers
+EBI 3F mit dem Empfanger EBI2 und AnschluB an die Stromversorgung.
+
+g) Kabelschwanz Nr.7:
+For Zusammenschaltung des Empféanger-Fernantriebes mit dem Fern-Bedien-
+
+Gerat FBG 2.
+
+5) Siehe FuBnote 2 zu Ziffer 20 c.
+
+21
+31. Alle weiteren Angaben iber technische Merkmale und Schaltung des Empfc“:ngefs
+
+EBI3 F entsprechen denen des Empféngers EBI3H (siche Ziffer21 bis 25).
+
+Der Stromlaufplan des EBI3F ist aus Anlage 3 zu ersehen.
+
+32. Da die Abstimmung des Empfangers EBI3F fernbedient vorgenommen wird, ist
+
+im Anschlup an Ziffer 24h nachzutragen:
+
+22
+
+a) Die Kanaleinstellung-des Empféngers EBI3 F wird fernbedient.
+
+Zu diesem Zweck wird der. im EBI3F eingebaute Fernantrieb vom Fern-Bedien-
+Gerdt FBG2 aus in Betrieb gesetzt. Die Schaltung und Wirkungsweise des
+
+gesamten Vorganges der Fernabstimmung geht aus der Beschreibung des FBG 2,
+Zifter 43 bis 47, hervor.
+
+b) Wdhrend des Fernabstimmvorganges ist ein Empfang nicht méglich.
+
+Um Mithdren der vom Fernabstimmvorgang erzeugten Stérungen zu verhindern,
+wird der Ausgang des Empfangers EBI3F — solange der Fernantrieb arbeitet —
+kurzgeschlossen, die automatische Lautstérkeregelung unwirksam gemacht und
+die Anodenspannungszufthrung zum Empféanger EBI2 unterbrochen. Zeichnung 11
+
+RelK2
+
+EBI3
+
+EBI2
+
++Anodenspannung
+zumEBt 2
+
+Regelleitung
+
+SpK1 - K3 - —@
+(FuG16)
+" Fern-Antrieb
+-BB +BB
+
+Zeichnung 11:
+
+Fir Empfdnger EBI3 F erweiterter Ubersichtsschaltplan
+(Deckblatt zu Zeichnung 8)
+
+AN
+
+zeigt als Ergdnzung der Zeichnung8 die fiir diesen Schaltvorgang zusdtzlich
+erforderlichen Schaliteile. AuBerdem ist daraus ersichtlich, da® — bei Zusammen-
+schaltung mit FuG 16 — das Relais in gleicher Weise bei Driicken des FzF-Sprech-
+knopfes fir FuG 16 wirkt. Dies ist erforderlich, damit die Glimmlompe im AFN 2
+nicht im Takt der niederfrequenten Modelung des Senders vom FuG 16 aufleuchtet.
+
+Die Zusammenschaltung im Rahmen des Gesamigerdtes ist aus Anlage 12 zu
+ersehen, wahrend Anlage 11 die Schaltung des Relaiskastens zeigt.
+
+Einen Einblick in den Aufbau des Relaiskastens vermitteln die nachsichenden
+Abbildungen, die durch Hinweise erldutert sind.
+an. Die griinen und roten Einstellzahlen auf der rechten Seite der Frontplatte erfillen .
+den gleichen Zweck bei Abstimmung des Funk-Landegerdtes FuBI L.
+
+Nach Lésen von vier Schrauben — je zwei auf der Oberseite und Unterseite des
+Empfangers — kann der Empfdnger aus dem Gehduse gezogen werden. Beim Aus-
+wechseln der Rohren, besonders der Audionrdhre NF2 A, ist auf die Beschriftung neben
+den einzelnen Rohrenplatzen sorgfdltig zu achten. In der Vorschrift fir Rohrenwechsel
+(Ziffer 104) zeigt Abb.32 eine Innenansicht des Empfangers. Die in dieser Abbildung
+for die Rohrenplatze angegebenen Teilzahlen entsprechen den Angaben des Strom-
+laufschaltplanes, Anlage 5.
+
+38. Betatigungsgriffe und Anschlisse
+a} Abstimmung: |
+- Einstellung mit grinem Einstellschlissel.
+
+b) Rickkopplung: ’
+
+~ Einstellung mit griinem Einstellschlssel.
+
+¢} Abstimmtaste: _
+Einstellung mit grinem Einstellschlissel. Nur bei Abshmmung des Empfangers
+EBI 3 nach Ziffer 85, Punkt 1, zu betcmgen
+
+d) Kabelschwanz Nr. 4:
+
+Kabel mit achtpoliger Leitungskupplung zur Zusammenschaltung des Empfdngers
+EBI2 mit dem Empfanger EBI3F oder EBI3G und zum Anschlufs an die Strom-
+versorgung.
+
+e) Kabelschwanz Nr. 5:
+
+Kabel mit achtpoliger Leitungskupplung zur Verbindung des Empfqngerausgongs
+“mit den for Hor- und Sichtanzeige vorgesehenen Einbauteilen.
+
+39. Empfindlichkeit
+
+Sicheres Ansprechen der Glimmlampe bei Uberfliegen eines EZ-Senders in 200m .
+Hohe (Strahlungsleistung des EZ-Senders etwa 5 Watt, Kurs des Flugzeuges innerhalb
+des Leitstrahles).
+
+- 40. Stromquellen und Energ»iebedqrf
+Stromquellen:
+
+Réhrenheizung aus 24-Volt-Bordbatterie
+Anoden- und Hilfsspannungen ‘aus Umformer U8
+
+Energiebedart:
+
+For Rdhrenheizung For Anoden- und . Hilfskreise )
+
+29 210
+0,7 ’ ) max. 0,028
+
+41. Schaltung
+
+Der Empfdanger EBI2 ist ein Einkreis-Empfanger mit funf Rohren. Er hat schaltungs-
+mdBig folgenden Aufbau:
+
+7} Siche FuBnote 1) zu Ziffer 16 b.
+
+25
+1 temperatur-unabhangiges Ruckkopplungs-Audion
+
+1 Niederfrequenz-Verstarker fir: S
+einstufige Verstarkung for die Glimmlampenanzeige der EZ
+zweistufige Verstarkung fir die Sichtanzeige des AFF
+zweistufige Verstarkung fir Horempfang des AFF (vgl. Ziffer 24)
+
+— s NF. Vom Empfangs-
+l AFN 2 |_ Stufe kreis teil fir das AFF
+
+Vom - I— NE- | [ NF Zum Hor--— -
+
+DAG1~>——| Audion Stufe An:(:hluB .
+
+Die grundsdtzliche Arbeitsweise des Empféngers, dessen Ubersichtsschaltplan in
+Zeichnung 15 dargestellt ist — den Stramlaufplan zeigt Anlage 5 —, ist folgende:
+
+a) Die vom Dipol unterhalb des Flugzeugrumpfes aufgenommenen Zeichen der
+EZ-Sender werden in der rickgekoppelten Audionstufe gleichgerichtet.
+
+_ Die hochfrequenten Zeichen der EZ-Sender gelangen tber das abgestimmte Dipol-
+Anpassungs-Gerdt DAG 1 in den Empfanger EBI2 und werden hier durch das
+auf die Frequenz 38,0MHz abgestimmte Audion (é) gleichgerichtet. Zwecks Er-
+
+vom Empfangs-Teil
+fdr das AFF
+
+Zeichnung 15: :
+Ubersichtsschaltplan des Empfangers EBI 2
+
+héhung der Empfindlichkeit ist das Audion induktiv durch Spule {1, Wicklung 1)
+
+‘rickgekoppelt. Die Einstellung der Ruckkopplung erfolgt durch Anoden-Span-
+nungsdnderung am Potentiometer (10). :
+
+b) Fir Hérempfang der Einflugzeichen wird die durch Gleichrichtung in der Audion-
+
+stufe erhaltene Tonfrequenz (700 bzw. 1700Hz) in zwei Stufen des Nieder-
+frequenz-Verstérkers verstdrkt. :
+
+Vam Anodenkreis der Audionstufe wird die Tonfrequenz durch Ubertrager (14)
+der Niederfrequenz-Verstérkerstufe mit Rohre (15) und durch Ubertrager (23)
+der zweiten Niederfrequenz-Verstérkerstufe mit Rohre (36) zugeleitet und an der
+Zweitwicklung des Ausgangs-Ubertragers (40) mit Fernhdrern abgehdrt.
+
+26
+Um den Einbau des Relais {R1) zu zeigen, ist in Abb.13 auch das Abdeckblech
+for die Relaiskammer entfernt. Fir Anschluf der Kabel ist es jedoch nur erforder-
+
+Abdeckblech for ckblech o : .
+Kabelklemmleiste A&ﬁ:]l‘gm‘?’n;’ Kabelklemmleiste - Relgis R T
+Xy
+Kabeleintihrungen
+Abb. 12: Relaiskasten RELK 2 Abb. 13: Relaiskasten RELK 2
+geschlossen offen
+
+lich, das in Abb.12 bezeichnete Abdeckblech — durch vier mit roten Ringen
+gekennzeichnete Schrauben befestigt — abzunehmen.
+
+d) Empfdnger EBI3 G
+33. Aufbau
+
+Der dubere Aufbau entspricht dem des EBI3F. Siehe daher Abb. 10 unter Ziffer 29
+und Abb. 31 im Abschnitt lll unter Ziffer 101.
+
+34. Betdtigungsgriffe und Anschliisse
+a) Abstimmung:
+
+Mit Fern-Bedien-Gerat FBG 6 Einstellung eines der 33 gerasteten Empfangskandle
+nach einer die Kandle anzeigenden Skala am FBG 6 (siehe Ziffer 48).
+
+b) -Lautstdrkeregler:
+Einstellung mit grinem Einstellschlissel oder Schraubenzieher auf rote Marke?).
+
+c} Eichkorrektur:
+Einstellung eines Trimmers mit Schraubenzieher nur nach erfolgtem Réhrenwechsel.
+Der Eichtrimmer ist nach Offnen einer Drehklappe ouf der Frontplatte zugdnglich.
+
+d) Anschluf} fir Prifgerét:
+
+FGr Anschaltung des Frequenz-Kontrollgerates PQK4 A oder des Prif-Voltmeters
+PV 10 oder des Empfanger-Prifgerates EPG 3.
+
+e) Anschluf} fir HF-Kabel:
+Fir Anschiu® des zum Antennen-Anpassungs-Gerdt AAG 1 A fohrenden Kabels.
+
+f) Kabelschwanz Nr. 3: .
+
+Kabel mit achtpoliger Leitungskupplung fir Zusammenschaltung des Empfdangers
+EBI3 G mit dem Empfanger EBI2 und Anschluf an die Stromversorgung.
+
+g) Kabelschwanz Nr.7:
+
+For Zusammenschaltung des Empfanger-Fernantriebes mit dem Fern-Bedien-
+Gerat FBG 6.
+
+%) Siehe FuBnote 2} zu Ziffer 20 c.
+
+23
+35. Alle weiteren Angaben Uber technische Merkmale und Schaltung des Empfdngers
+EBI3 G entsprechen im wesentlichen denen des Empféangers EBI3 H, Ziffer 19 bis 25.
+
+Der Stromlaufplan des EBI3 G ist aus Anlage 4 zu ersehen.
+
+36. Die wesentlichsten schaltungstechnischen Unterschiede gegeniber dem Empfanger
+EBI3F liegen in der Ausfihrung der Schwingstufe.
+
+Fir die Feinabstimmung (Verénderung der Abstimmung um etwa + 15kHz) werden
+im Schwingkreis der Schwingstufe zwei Zusatzkapazitéten fernbedient geschaltet.
+
+Mit dem Schalter am Fern-Bedien-Gerét FBG & werden Relaisstromkreise einge-
+schaltet. In Stellung ,,C* dieses Schalters ist im Schwingkreis der Schwingstufe eine
+Kapazitat durch ein Relais zugeschaltet. In Stellung ,—15kHz"” dieses Schalters wird
+ein zweiter Relaisstromkreis geschlossen und dadurch eine zweite Kapazitat zuge-
+schaltet. In Stellung ,,+ 15kHz" des Schalters am FBG & sind beide Relaisstromkreise
+unterbrochen und dadurch beide Kapazitdten abgeschaltet. Durch Betatigung des
+Feinabstimmschalters am FBG 6 wird der Empfang nicht unterbrochen.
+
+2. Empfanger EBI2
+
+37. Aufbau
+
+Eine Frontansicht des Empfangers EBI2 zeigt Abb. 14, die durch Hinweise erldutert
+ist. Neben einigen Hinweisen in Klammern gesetzte Bezeichnungen entsprechen den
+
+Audionrickkopplung Abstimmtaste
+
+Anschluf} for Kabel /
+zum DAG 1
+
+\ Haltewinkel
+
+/
+
+Audionabstimmung
+
+W Kabelschwanz Nr. 5 Kabelschwanz Nr. 4
+
+Abb. 14: Empfanger EBI2
+Frontansicht
+
+Teilzahlen des Ubersichtsschaltplanes (Zeichnung 15 unter Ziffer 41). Jeder Einstellteil
+ist durch eine Drehklappe abgedeckt, nach deren Offnen die Betdtigung mit Hilfe von
+Einstellschlisseln durchgefthrt wird. Die gelben Zahlen neben den links angeordneten
+Einstellteilen geben die einzuhaltende Reihenfolge bei der Abstimmung des Empfangers
+
+24
+c) Fir Sichtempfang der Einflugzeichen wird die durch die Audionstufe erhaltene
+Tonfrequenz in einer Stufe des Niederfrequenz-Verstdrkers verstdrkt und der
+
+Glimmlampe des Anzeigegerites fiir Funknavigation zwecks Sichtbarmachung der
+Einflugzeichen zugeleitet.
+
+Wie bereits unter b} for Hérempfang angegeben, werden die tonfrequenten
+Zeichen in der Niederfreqenz-Verstarkerstufe mit Rdhre (15) verstarkt und auf die
+
+Wicklung Il des Ubertragers (23) der Glimmlampe im AFN1 bzw. AFN?2 zu-
+gefthrt,
+
+42. Wirkungsweise bei Empfang der Einflugzeichen.
+
+a) Bei richtigem Kurs werden die Einflugzeichen an der Glimmlampe im AFN 2 kennt-
+
+lich gemacht und gleichzeitig mit dem Daverton des richtigen Kurses im Fernhdrer
+der Fliegerkopfhaube wahrgenommen.
+
+Fir die optische Anzeige der EZ erregt die Tonfrequenz der Wicklung |l des Trans-
+formators (23] die Glimmlampe im Anzeigegerat fir Funknavigation. Diese
+Glimmlampe ist mit einer Gleichspannung, die am Potentiometer aus den Wider-
+stdnden (32, 33) — siehe Anlage 5 — in Empfdnger EBI2 abgegriffen wird, so
+weit vorgespannt, daf’ sie bei zusatzlicher Zufihrung einer tonfrequenten Wechsel-
+spannung zindet. Der parallel zur Wicklung Il des Transformators (23) geschaltete
+KurzschluBkreis KS — Kondensatoren (24 und 26), Drossel (27) — verhitet, doB
+die Tonfrequenz der AFF-Modelung (1150 Hz) auf die Glimmlampe einwirken
+kann. Infolgedessen kann die Glimmlampe nur von den tonfrequenten Zeichen
+(700 bzw. 1700 Hz) der EZ-Sender erregt werden. Fir die akustische Anzeige der
+EZ wird die Tonfrequenz der Wicklung | des Transformators (23) in Réhre (36)
+gleichzeitig mit den tonfreqlenten Kurszeichen des AFF verstarkt.
+
+3. Fern-Bedien-Gerdt FBG 2
+
+43. Avufbau
+
+Den duferen Autbau dieses nur fir die Abstimmung des Empféngers EBI 3 F erforder-
+lichen Einbauteiles zeigt Abb. 16.
+
+Nadhlaufanzeige Verriegelungsschraube
+Befestigungsschraube
+far Kappe
+Zeiger for
+Kanalein
+stellung
+
+Verriegelungs-
+
+schraube
+
+Abstimmung Befestigungsschraube
+for Kappe
+
+Abb. 16: Fern-Bedien-Gerdt FBG 2
+AuBenansicht
+
+27
+Das Fern-Bedien-Gerdit ist leicht auswechselbar. Es ist zu diesem Zweck auf einer
+FuBplatte verriegelt, die fest an die Verkabelung des Einbausatzes angeschlossen ist.
+Die Verbindung mit der Verkabelung des Einbausatzes erfolgt Gber Messerkontakte.
+
+Messerkontaktleiste Kappe
+
+Fubplatte k. Abstimmknopf Befestigungsschrauben
+fir Kappe
+
+Abb. 17: Fern-Bedien-Gerat FBG 2
+
+Innenansicht mit Fufiplatte
+
+Aus Abb. 17, die eine Innenansicht des Fern-Bedien-Gerates FBG 2 zeigt, ist dies zu
+ersehen.
+
+44, Betdtigungsgriffe
+a) Abstimmung:
+
+Knopf fir Einstellung eines der 33 Empfangskandle nach einer die Kandle an-
+zeigenden Skala. Fir Zwecke der Eichprifung ist der Kanal 21 rot gekennzeichnet.
+
+Die Kanaleinstellung darf héchstens finfmal zeitlich hintereinander neu vorge-
+nommen werden (Gefahr zu grofder Erwdarmung von Geber und Antriebl).
+
+Weitere Kanaleinstellungen sind erst nach mehreren Minuten Pause zuldssig!
+
+b) Nachlaufanzeige:
+
+Anzeige fir Nachlauf des vom Abstimmantrieb (im Empfénger EBI3F) einge-
+stellten Empfangskanals.
+
+c) Verriegelung fir Aufhdngung:
+
+Betatigung mit Schraubenzieher. Vor dem Abziehen des Fern-Bedien-Gerdtes
+von der FuBplatte missen die beiden rot gekennzeichneten Schrauben auf der
+Oberweite der Kappe durch Linksdrehen geldst werden. Nach dem Aufsetzen
+des FBG 2 auf die FuBplatte sind die Schrauben durch Rechtsdrehen wieder fest-
+zuziehen.
+
+28
+- 45. Energiebedarf
+
+Etwa 1 Amp. bei 28 Volt®) Betriebsspannung. Der Strombedarf fir die gesamte Fern-
+abstimmung — also FBG2 und Antrieb im EBI3F — betragt wdhrend der Dauer des
+Abstimmvorganges 4,3 Amp. (vgl. Ziffer 16b).
+
+46. Schaltung
+
+Das Fern-Bedien-Gerat FBG?2 dient der Fernsteuerung des Abstimmantriebes im
+Empfanger EBI3F. Es besteht im wesentlichen aus einer verstellbaren Kontakteinrich-
+tung, die die Einschaltung des Motors im Empféngerantrieb bewirkt, und einem Schritt-
+schaltwerk, das den Nachlauf des Empfanger-Antriebes auf den gewdhlten Kanal an-
+zeigt. Die vollstandige Schaltung des Fern-Bedien-Gerdtes FBG 2 in Verbindung mit dem
+
+Schaltbild des Antriebes im EBI3F zeigt Zeichnung 18. Das Schaltbild des Antriebes
+allein — ohne Zusammenschaltung mit dem FBG 2 — geht aus Anlage 3 hervor.
+
+47. Wirkungsweise
+
+Fir die Besprechung der Wirkungsweise ist Zeichnung 18 zugrunde gelegt. Sie zeigt
+den Augenblick, in dem am FBG 2 gerade ein Empfangskanal gewdhlt ist und der An-
+trieb im EBI3F die gewinschte Einstellung noch nicht vorgenommen hat.
+
+a) Nach erfolgtem Einschalten der Rohrenheizung des Funk-lLandegerdtes FuBl2 ist
+die Fernbedienung fir die Einstellung des Empfdangers EBI3F betriebsfdhig. Sie
+wird mit dem Knopf am FBG 2 vorgenommen. Es ist hierbei gleichgiliig, in welcher -
+Richtung der Knopf gedreht wird.
+
+Der Knopf am FBG 2 besitzt keinen Anschlag. Das nach beiden Einstellrichtungen
+vorhandene Spiel des Knopfes ist beabsichtigt, um eine einwandfreie Einrastung
+auf den einzelnen Stellungen sicherzustellen.
+
+Die Einstellung eines Empfangskanals wird dadurch eingeleitet, dald mit dem
+Einstellknopf die Plaite mit der Nocke (N2) in die dem gewdhlten Empfangskanal
+zugeordnete Stellung gedreht wird. Hierdurch wird Uber den Rasthebel (H 1) aus-
+gehoben und gleichzeitig der Kontakt (K1) geschlossen. Nocke (N2} gibt gleich-
+zeitig den Hebel (H2) frei, wodurch Kontakt (K2) schliept. Uber (K2) Einschaltung
+der Motorkupplung (Mg 3) (Kupplung von Motor [M1] mit Rast- und Nocken-
+scheibe). Durch Anziehen von (Mg3) gleichzeitig SchlieBen von (K3) und damit
+Einschalten von (Mg4). Durch (Mg4) Ausheben der Raste aus der Rast- und
+Nockenscheibe und SchlieBen von (K4), tber den der Motor (M 1) eingeschaltet
+wird. Antrieb lauft mit Rast- und Nockenscheibe um. Die Nocken auf der Nocken-
+scheibe wirken gleichzeitig for Impulsgabe und Rasten. Durch Ablauf der '
+Nockenscheibe erfolgt Gber (K5) und (Ké) eine Impulsgabe auf das Schrittschalt-
+werk (Mg 5). (Mg 5} dreht die Scheibe mit den Armen (A1, Aé) bis auf Kanal 33.
+In dieser Stellung wird (K é) gedfinet und die Impulsgabe durch (K 5) unterbrochen.
+(Dieser Zeitpunkt ist in Zeichnung 18 fir [Ké] dargestell). Damit ist die Vor-
+synchronstellung erreicht. Der Antrieb im EBI3F lauft jedoch weiter um, bis eine
+Nocke fir Kontakt (K7) diesen schlieBt. Da (K7) parallel zu (K6}, kann der
+Impuls von Nocke 34 Gber (K5) auf (Mg 8] wirken. (Mg &) geht einen Schritt —
+“von Stellung 33 auf Stellung 34 (griner Sekfor] — weiter, wodurch (Ké) wieder
+geschlossen ist. Gleichzeitig wird (K1) gedfinet, da Arm (A1) Gber Zwischenhebel
+(N1} die Halteklinke {H 1) ausgehoben hat. Antrieb im EBI3F und Schrittschalt-
+werk im FBG2 sind damit synchron. Wenn die Nachlaufanzeige auf Stellung 34
+steht, 1Guft der Antrieb im EBI3F weiter um, da (K2) immer noch geschlossen. Yon
+
+8) Das Gerdt ist bei Bordbatteriespannungen zwischen 22 und 29 Volt betriebsféhig.
+
+29
+Nocke (N'1) im Antrieb beginnend, wirken die der gewdhlten Einstellung ent-
+entsprechenden weiteren Impulse Gber (K5) und (Ké) auf (Mg 5). Der Arm (A1,
+A6) wird hierbei durch (Mg 5) gedreht, bis in der gewdhlten Stellung der Hebel
+
+i
+
+FBG 2 Antrieb im EBI 3F
+
+Zeichnung 18:
+Ubersichtsschaltplan fiir Fernabstimmung
+
+(H2) auf die Nocke (N2} auflauft und dadurch (K2) gedfinet wird. Nachein-
+
+ander werden jetzt (Mg3), IMg4) und (M 1) stromlos. Der Rasthebel rastet ein,
+die Kanaleinstellung ist vorgenommen.
+
+b) Zwecks weiterer Erltuterung der Arbeitsweise der Fernabstimmungsvorrichtung
+werden nachstehend drei Mglichkeiten von Einstellungen besprochen.
+
+1. Wahl von Kanal 33, Ausgangsstellung Kanal 1 (gréfte Anzahl der Schali-
+folgen).
+
+Kontakte (K1), (K2} schlieBen, (K6) auch geschlossen, da Ausgangsstellung
+Kanal 1. Motorkupplung (Mg 3} setzt ein usw. (siche Ziffer47a). Der Antrieb
+IGuft und die Impulse der Nocken 1 bis 33 treiben das Schrittschaltwerk (Mg 5)
+einmal herum bis Stellung 33, in der (K64) &ffnet. Der Impuls von Nocke 34
+wirkt Ober Kontakt (K7 auf das Schrittschaltwerk (Mg 5), das eine Stellung
+weiter auf Stellung 34’ (griner Sektor) schaltet. (K1) 6ffnet, (K6) schlieBt
+wieder. Der Antrieb IGuft noch einmal um und gibt die Impulse 1 bis 33 auf
+
+30
+das Schrittschaltwerk (Mg 5), das entsprechend auf Kanal 33 lauft. (K2) offnet
+wieder, die Motorkupplung (Mg 3) hebt aus usw. (siehe Ziffer 47a).
+
+2. Wahl von Kanal1, Ausgangsstellung Kanal 33 (kleinste Anzahl der Schalt-
+folgen).
+(K1) und (K2) schliePen. (Ké) offen — da Ausgangsstellung Kanal 33 —,
+jedoch Uberbrickt durch (K7), der in dieser Stellung geschlossen ist. Motor-
+kupplung (Mg 3) setzt ein usw. Der Antrieb l&uft von Kanal 33 auf Stellung 34
+(griner Sektor). Der Impuls von Kontaktnocke 33 wirkt hierbei Gber (K7)
+auf das Schrittschaltwerk (Mg 5), das auf Stellung 34 (griner Sektor) schaltet.
+(K 1) &ffnet, der Impuls von Nocke 1 schaltet auf Kanal 1, (K2) 6ffnet, (Mg 3)
+hebt aus usw.
+
+3. Antrieb und FBG 2 sind nicht synchron, z.B. FBG2 auf Kanal 16, Antrieb auf
+Kanal 8, gewdahlt wird z. B. Kanal 3.
+
+(K1), (K2) geschlossen, (Ké) ebenfalls geschlossen, da Ausgangsstellung
+beim FBG 2 Kanal 16. Motorkupplung (Mg 3) setzt ein usw. Der Antrieb lauft.
+Die Impulse von Kontaktnocken @ bis 25 wirken auf (Mg5) und drehen auf
+Stellung 33. Jetzt offnet (K6), der Antrieb lauft weiter. Die Impulsgabe ist
+jedoch unterbrochen, bis Kontaktnocke33 — da (K7) in dieser Stellung
+geschlossen — auf (Mg5) einen Impuls gibt. (Mg ) schaltet nunmehr von
+Kanai 33 auf Stellung 34 (griner Sekior), womit FBG2 und Antrieb synchron
+sind. Jetzt offnet (K1), (K6) schlieBt wieder und die Impulse von den Kontakt-
+nocken 1 bis 3 schalten (Mg 5) auf Kanal 3. Die Nocke (N 2) hebt (H2) hoch,
+(K2) offnet, Motorkupplung (Mg 3) hebt aus usw.
+
+c) Lauft die Nachlauvfanzeige fir den vom Abstimmantrieb im EBI3F eingestellten
+Empfangskanal nicht auf die gewdhite Stellung noch oder bleibt sie irgendwo
+stehen, so ist das Fern-Bedien-Gerdt FBG 2 gegen ein anderes auszutauschen.
+
+Néhere Anweisungen hierfir siehe Ziffer 120 und 121.
+
+4, Fern-Bedien-Gerdt FBG 6
+48. Aufbau
+
+Den auPeren Aufbau dieses nur fir die Abstimmung des Empféangers EBI 3G erfor-
+derlichen Einbauteiles zeigt Abb.19. Das Fern-Bedien-Gerdit ist zwecks leichter Aus-
+
+Befestigungsschraube Feinabstimmschalter
+far Kappe Verriegelungsschraube
+
+Zeiger for Nadhlaufanzeige
+Kabeleinstellung
+
+Abstimmung
+
+FuBlplatte mit
+Kabelschwanz
+
+Befestigungsschraube
+fir Kappe
+
+Verriegelungs-
+schraube
+
+Abb. 19: Fern-Bedien-Gerat FBG 6
+AuBenansicht
+
+31
+11.
+
+12
+13.
+14.
+
+15.
+16.
+
+17
+
+18.
+
+19.
+
+20.
+
+Abstimmtaste (gekennzeichnet durch grine und rote Zahlen [1, 11] auf der Front-
+platte des Emptdangers EBI2) nach rechts drehen.
+Die Abstimmtaste springt hiernach etwas heraus.
+
+Am Empfanger EBI3 Empfangskanal 21 einstellen.
+Stellung des Lautstarkereglers markieren.
+
+Lautstarkeregler am EBI 3 so einstellen, dafy das Stérgerdusch nicht zu grof und
+der 1150 Hz-Ton gut horbar ist.
+
+Mit Isolierschraubenzieher Eichtrimmer so verdrehen, dafd der 1150 Hz-Ton die
+grofBte Lautstarke aufweist.
+
+Zur Prifung, ob der 1150Hz-Ton vom Frequenz-Kontrollgerdt PQK4 A erzeugt
+ist, Ein/Aus-Schalter am PQK 4 A auf ,,Aus”. Es darf kein Ton mehr zu héren sein.
+
+Nach beendeter Eichung den Lautst@rkeregler wieder in die vorher markierte
+Stellung drehen.
+
+Abstimmtaste (gekennzeichnet durch grine und rote Zahlen [1, 11] auf der Front-
+platte des Empféngers EBI2) eindricken und nach links drehen.
+
+Gerdat ausschalten:
+
+a) ZFF/LFF-Schalter am SchK 13 (FuG 10) auf , Aus”.
+b) Schalter am Frequenz-Kontrollgerdt PQK 4 A auf ,,Aus”.
+c) Am Selbstschalter fir Rdhrenheizung roten Knopf dricken.
+
+Frequenz-Kontrollgerat PQK 4 A vom Empfénger EBI3 entfernen.
+
+2. Empfdnger EBI2
+
+a) Auswechseln der RGhren
+
+103. Zum Roéhrenwechsel:
+
+1.
+
+2.
+
+62
+
+Rohre 68  Rohre 47  Rohre 36  Rdhre 15  R&hre 6
+
+Abb. 32: Empfdnger EBI2
+Rickansicht ohne Gehduse
+
+Die vier rot gekennzeichneten Schrauben an der Oberseite und Rickseite des
+Empfangers |osen.
+Das Gehduse vom Empfdnger abziehen.
+3. In die Rohrenfassungen neue Rdhren NF2 einsetzen.
+
+In den rechten Réhrensockel (von hinten gesehen) ist eine Rohre NF2A ein-
+zZusetzen.
+
+4. Gehdause auf Empféanger aufschieben und die vier rot gekennzeichneten Schrauben
+wieder anziehen.
+
+b) Absﬁmmung nach erfolgtem R8hrenwechsel
+
+- 104. Nach jedem Wechsel der Rohre NF2 A der Audionstufe mufy der Empfanger
+sorgféltig neu abgestimmt werden. Die Abstimmung ist nach Ziffer 86 durchzufihren.
+
+C. Priifgerite
+
+105. Fﬁr’dos Funk-Landegerdt FuBI2 sind folgende Prifgerdte vorgesehen:
+a) Frequenz-Kontrollgerdt PQK 4 A*) Ln 28 863-1:
+
+Zur Eichprifung des Empfangers EBI3 bzw. Nachelchung ncch erfolgtem Réhren-
+wechsel. S. Anl. 15, . :
+
+" b) Einstellsender PSU O A Ln 27149 bzw. PSUO B Ln 27 146 [D (Luft) T. 4202
+bzw. 4205]: |
+
+Zur Abstimmung der Empfénger EBI3 und EBI2 sowie erstmaligen Abstimmung
+des Antennen-Anpassungs-Gerdtes AAG 1A.
+c) Empfénger-Prifgerét EPG 3 Ln 28 865:
+
+Zur Einstellung der Empﬂndllchken‘ und zur Funktionskontrolle des Empfangers
+EBI 3.
+
+D. Wartung
+
+106. Fur die Iaufende Wartung des Gerdtes sind folgende Punkie besonders zu
+beachten:
+
+1. Nach erfolgtem Réhrenwechsel den guten Sitz der Rdhren prifen.
+
+2. Den Anschlup fur Prifgerat am EBI3 und die Kontakte der achtpoligen Leitungs-
+kupplungen von Zeit zu Zeit reinigen.
+
+3. Sémtliche Kabel und deren Anschlisse an den Einbauteilen, auch wenn keine
+Betriebsstorungen vorliegen, nachprifen. :
+
+4. leitungen, deren lsolation beschadigt bzw. brichig ist, rechtzeitig auswechseln.
+
+5. Gerdt und Einbauteile sauber und trocken halten.
+Trocknen von evil. durch Spritzwasser feucht gewordenen Gerdten in warmen
+Raumen (auf keinen Fall am Ofen). '
+
+Sdubern des Gerdts durch Ausblasen.
+
+18) Siche FuBnote 17) zu Ziffer 102
+
+63
+2. Instandsetzung
+
+107. Kleinere Instandsetzungen sind, soweit sie sich mit den vorhandenen Ersatz-
+teilen und Werkzeugen ausfihren lassen, nur durch Fachpersonal vorzunehmen.
+
+GréBere Instandsetzungen sind nur den dafir vorgesehenen Reparaturstellen zu
+Ubertragen.
+
+108. Irgendwelche Arbeiten am Antrieb des Empfangers EBI3F oder EBI3G und
+dem dazugehérigen Fern-Bedien-Gerdt FBG 2 oder FBG 6 sind grundsatzlich verboten.
+Bei evil. Beanstandungen ist das betreffende Gerdt Ober die zustandigen Luftwaften-
+Dienststellen an die Lieferfirma einzusenden.
+
+3. Umformer
+
+109. Bei Stdrungen, die der Umformer im Betrieb erzeugt und die den Empfang
+beeintréchtigen, ist er zur Prifung auszubauen. Es ist zweckmdbig, diese Prifung auch
+bei stérungsireiem Betrieb jeweils nach etwa 500 Betriebsstunden vorzunehmen. Die
+Laufflachen der Stromwender sollen eine gleichmaBige, meist blaulich gefdarbte Politur
+(Patina genannt] zeigen. Die Kohlebirsten missen nach Anheben der Druckfedern in
+ihren Haltern ganz leicht beweglich sein. Infolge Verschmutzung der Halter kann es
+vorkommen, da® die Kohlebirsten klemmen. Ferner ist darauf zu achten, daf3 die
+Kohlebirsten rechtzeitig ausgewechselt werden. Laft man namlich einen Umformer
+mit zu kurzen oder festsitzenden Kohlebirsten weiterlaufen, so kann infolge un-
+genigenden Kontaktdrucks starke Funkenbildung auftreten. Diese erzeugt zundchst
+Brandstellen auf den Stromwender-Segmenten und fGhrt nach kurzer Zeit zu einer
+Beschadigung der Lauffléche.
+
+Eisenwasserstoff-
+Widerstand (W 2)
+
+Sicherung S 1
+
+Kabelschwanz
+
+Nr. 6
+Stapilisator T "
+
+Abb. 33: Umformer U8
+Innenansicht
+
+110. Fir den Ausbau ist die Bordbatterie durch Auslésen des Selbstschalters abzu-
+schalten und der Umformer von der FuBplatte abzunehmen. Dann sind die Schrauben
+zu |dsen, die durch einen roten Ring gekennzeichnet sind. Diese sind unverlierbar.
+
+64
+Zundchst entferne man die Schuizkappe und das Abdeckblech. Um an sémtliche
+Birstenhalter leicht heranzukommen, ist es hdufig erforderlich, den Umformer ganz
+“auszubauen. Zu diesem Zweck sind die Stromzufihrungen zu l6sen. Endlich schraube
+man den Umformer selbst an den Fien bzw. Gummipuffern los und lege ihn auf eine
+saubere Unterlage. Es ist darauf zu achten, daf die Fligel des Lifters am einen Ende
+des Umformers nicht verbogen werden. ‘
+
+~ 111. Die Reinigung des Umformers mufy erfolgen, wenn ein Stromwender ver-
+schmutzt ist oder Kohlebirsten in ihren Haltern festsitzen. Man kennzeichne die
+Stellung der Kohlebirsten in ihren Haltern und nehme sie heraus, wobei die Halter-
+Druckfinger festzuhalten sind. Hierauf sind die Kohlebirsten mit einem trockenen
+Pinsel zu sdubern. Die Stromwender sind mit einem Lappen zu reinigen, der
+leicht mit reinem Benzin oder Alkohol angefeuchtet ist. Bei geringer Verschmutzung
+genigt schon kraftiges Ausblasen mit Druckluft, jedoch vermeide man die Verwendung
+metallischer Mundsticke, um Beschddigungen zu vermeiden. Beim Wiedereinseizen
+der alten Kohlebirsten achte man darauf, dab sie in ihre frihere Lage kommen damit
+keine neuen Laufflachen entstehen.
+
+112. Zur Pflege der Stromwender sind leichte Brandstellen durch Abpolieren mit
+feinstem Schmirgelleinen (Polierleinen) zu beseitigen. Hierzu ist zweckmdBig ein
+Schmirgelholz zu verwenden, das der Rundung des Stromwenders angepaft ist. Es
+ist streng darauf zu achten, daB sich hierbei kein Schmirgel- und Kupferstaub zwischen
+die einzelnen Segmente der Stromwender setzt. Hierdurch kénnten Kurzschlisse in
+den Lauferwicklungen entstehen. Auferdem kérnten durch Schmirgelkdrner, die
+gelegentlich unter die Birsten gelangen, die Stromwender- und Birstenlauvtfiachen
+verschrammi werden. Aus diesem Grunde ist jedes Uberflussige Abpolieren zu unter-
+lassen. AuPerdem verliert hierbei die Stromwender-Lauffiéche ihre allmdhlich ent-
+stehende harte Politur (Patina), die fiir einen geringen Burstenverschleifs von Wichtig-
+keit ist. Vor dem Abpolieren sind die Kohlebirsten zu entfernen. Nach dem Abpolleren
+sind die Stromwender sorgfaltig zu remlgen (siehe Ziffer 111).
+
+Zeichnung 34:
+Beispiel fir erforderlichen Kohlebﬂrstenwechsel
+
+113. Der Kohlebiirstenwechsel ist so rechtzeitig vorzunehmen, daf die Halter-Druck-
+finger nicht auf dem Halterkasten aufliegen. Kann nicht damit gerechnet werden, daf
+der Umformer in der pdchsten Zeit WIeder nachgesehen wrrd so muh das Auswechseln
+
+5 —T 4058 | i 65
+schon entsprechend friher vorgenommen werden. Es dirfen nur die in der Stiickliste
+aufgefihrten Kohlebirsten-Qualitdten verwendet werden. Es mufd unbedingt darauf
+geachtet werden, dafd die einzelnen Kohlebirsten-Qualitdten nicht miteinander ver-
+tauscht werden. Auch wenn zwei Birsten die gleichen Abmessungen haben, kénnen
+sie sich doch noch durch ihre Zusammensetzung — ,,Qualitdt” — voneinander unter-
+scheiden. Die Ersatz-Kohlebirsten werden mit einer vorgepreften bzw. vorgeschliffenen
+Rundung in der Laufflache geliefert, die anndhernd dem Durchmesser des zugehérigen
+Stromwender-Segmentes entspricht. Ein Einschleifen der eingesetzten Birsten ist daher
+durchaus Uberflissig. Aufderdem kann der beim Einschleifen entstehende Kohle- und
+Schmirgelstaub, sofern er nicht ganz sorgféltig entfernt ist, leicht zu einer Beschéadigung
+der Birsten- und Stromwender-Laufflache fihren (siehe Ziffer 112). Die Zuleitungs-
+litzen der Kohlebursten sind so zu legen, dafd keine KurzschluBgefahr besteht.
+
+114. Der Wiedereinbau erfolgt sinngemé&f in umgekehrter Reihenfolge wie der Aus-
+bau. Vor dem endguliigen Aufsetzen der Schutzkappe prife man, ob
+
+a) die KohlebUrsten wieder eingesetzt sind;
+b} die AnschluBleitungen nicht vertauscht sind;
+
+c) die Sicherung®) eingesetzt und in Ordnung ist; ,
+d) alle Schrauben fest angezogen und mit Lack gesichert sind;
+
+e} kein Staub, Pinselborsten oder dgl. von der Reinigung haften geblieben sind;
+
+f) nicht etwa ein verbogener Fliigel des Lifters beim Drehen des Ankers gegen das.
+Gehduse schlagt. '
+
+Nach “jedem KohlebUrstenwechsel soll der Umformer moglichst einige Stunden
+unbelastet einlaufen.
+
+115. Liegen gréBere Schédden am Umformer vor, wenn z. B. tiefe Rillen oder grofiere
+Brandstellen auf einem Stromwender sichtbar sind oder dieser unrund geworden ist,
+darf die Maschirie nicht mehr eingeschaltet werden, da sie sonst vollig betriebsunféhig
+werden konnte. Stromwenderschdden entstehen im allgemeinen durch zu kurze oder
+festklemmende Kohlebirsten und kénnen durch unsachgeméfes - Abschmirgeln ver-
+schlimmert werden. In solchen Fdallen muB der Stromwender abgedreht werden. Zu
+diesem Zweck ist der Umformer GUber die vorgeschriebenen Luftwaffen-Dienststellen an
+dos Herstellerwerk einzusenden. -
+
+116. For Schmierung konnen -die Kugellager nur vom Herstellerwerk mit- Sonder-
+werkzeugen ausgebaut werden. Das bei der Lieferung eingefilite Fett reicht for 1000
+bis 2000 Betriebsstunden. Nach dieser Zeit ist es zweckméfig, den Umformer zur
+Gesamtiberholung Uber die Luftwaffen-Dienststellen an das Herstellerwerk einzu-
+senden. Dies ist auch erforderlich, wenn eine GbermdfBige, hohe Erwdarmung der Lager
+auftritt. Hierbei kann Fett aus den Lagern treten und zu einer Verschmutzung der Strom-
+wender-Lavffldchen fihren.
+
+Die Kugellager sind mindestens holb]éhrlich mit Benzin auszuwaschen. Aus-
+gewaschene Kugellager sind mit sdurefreiem, kdltebesténdigem Fett (intava 1417)
+zu follen. ‘
+
+19) Beachte Ziffer 73c¢.
+
+66
+4. Ausfahrbarer Antennen-Mast AM 5
+
+117. Fir Reinigung des Motors sind die zwei rot umrandeten Schrauben auf dem
+Motorgehdusedeckel zu l&sen. Durch kurzes Drehen des Deckels in Richtung der
+beiden Schlitze im Deckel kann dieser abgehoben werden. Dadurch werden der
+Kollektor zum Reinigen und der Birstenhalter zum Auswechseln der Schleifkohlen zu-
+ganglich. Die Motorlager werden mit Kalypsol Nr. 142 gefettet.
+
+118. Getriebe und Fihrungsrollen erfordern keine Wor’rung. Sie werden im Liefer-
+werk ausreichend mit kaltebesténdigem Fett versehen. ‘
+
+5. Fern-Bedien-Gerdt FBG 2 und FBG 6
+
+119. Eine Schmierung oder Wartung des Fern-Bedien-Gerdtes ist nicht erforderlich.
+Sollten sich wahrend des Betriebes Stérungen zeigen — z.B. daB die Abstimmanzeige
+nicht auf den gewdhlten Empfangskanal nachléuft —, so ist das Fern-Bedien-Gerét
+gegen ein anderes auszutauschen. Hierzu: '
+
+1. Die beiden rot gekennzeichneten Schrauben auf der Oberseite der Kappe durch
+Linksdrehen 1&sen.
+
+2. FBG von FuBplatte abziehen.
+3. Neues FBG auf FuBiplatte aufseizen.
+
+4. Die beiden rot gekennzeichneten Schrauben auf der Oberseite der Kappe durch
+* Rechtsdrehen festziehen.
+
+120. Irgendwelche Reparaturarbeiten am FBG oder dem zugehérigen Antrieb im
+EBI3, der ebenfalls keiner Wartung oder Schmierung bedarf, dirfen nur durch aus-
+gebildetes Fachpersonal vorgenommen werden. Andernfalls ist das Gerdt tber die
+vorgeschriebenen Luftwaffen-Dienststellen an das Herstellerwerk zuriickzusenden..
+
+E. Hinweise flir Einbau-und Umristung
+
+1. Antennen-Anpassungs-Gerdt AAG 1A
+
+a) Wahl des Einbauvortes
+
+121. Das AAG 1A darf vom Bakenstab héchstens 20 cm entfernt montiert: werden.
+Zuganglichkeit zu allen Kabelanschlissen und zum Abstimmtrimmer ist erforderlich.
+
+122. Die Abstimmung (siehe Ziffer 85} erfolgt einmal auf Kanal 16 bei einer Lange
+des Antennenkabels Ln 28 180 zwischen 3 und 10 m.. Bei Auswechselung des Kabels
+in diesem Bereich ist ein Nachstimmen nicht notwendig. Wird jedoch* der Bakenstab
+gewechselt, so ist unbedingt eine Nachstimmung vorzunehmen.
+
+123. Die Blindkappe am Zielflug-Empféanger-Anschlud darf nur entfernt werden,
+wenn der zugehdrige Empfanger angeschlossen wird.
+
+124. Die Blindkappe am Prifeingang darf nur entfernt werden, wenn die Empfind-
+lichkeit des Empfdngers EBI3 gemessen werden soll.
+
+b) Einbau
+
+125. Bei Umristung des Funk-Lohdegerc’iTes FuBIl auf das Muster FuBl2 kénnen die
+fir das Antennen-Anpassungs-Gerét AAG 1 -~ verwendeten Montageldcher  weiter
+
+67
+benutzt werden. Es ‘ist jedoch eine Zwbischenplo’r’re zu verwenden, deren MaPe aus
+dem Ln-Blatt 28864 oder aus der Lorenz-Zeichnung Sk 1526291 zu ersehen sind. Das
+Erdungsblech EB2 Ln 27 514 kann ebenfalls weiter verwendet werden.
+
+126. Bei Neuriistung wird das Antennen-Anpassungs-Gerdi normalerweise auf die
+Bordwand montiert. Die Mafe fir die Halterung ergeben sich aus dem Ln-Blatt 26 864.
+Es ist auf gute Verbindung mit Masse durch das Erdungsblech EB 3 Ln 27864 zu achten.
+
+2. Empfénger EBI3H
+
+128. Da der Funk-Landeempféanger EBI3H nur von Hand zu bedienen ist, muf der
+Einbauort nach Bedienungsklasse 3, hochstens 4, gewdhlt werden. Dadurch — und
+durch die gegen den Funk-landeempfénger EBI1 vergroferte Bautiefe — ist die
+Méglichkeit einer Umristung beschrankt.
+
+128. Es ist darauf zu achten, dab seitlich genigend Raum bleib’r, um den Schlissel
+
+for Frequenz-Korrektur (siche Abschnitt|, Ziffer20d) an der Seite des Empfangers ein-
+fohren zu koénnen (vgl. das Ln-Blatt 28 861). :
+
+68
+Anlage
+Anlage
+Anlage
+-‘Anlage
+Anlage
+Anloge
+Anlage
+
+Anlage
+Anlage
+Anlage
+
+Anlage
+~ Anlage
+
+Anlage
+Anloge
+
+Anlage
+
+0®
+
+11:
+12:
+
+13:
+
+14:
+
+15:
+
+Anlagenverzeichnis
+
+Stickliste und Stromlaufplan fir Emptéanger EBI3H
+
+Stuckliste und Stromlaufplan fir Empfénger EBI3H 1
+
+Stuckliste und Stromlaufplan for Empfénger EBI3F
+
+Stuckliste und Stromlaufplan fir Empfénger EBI3G
+
+Stuckliste und Stromlaufplan fir Empfénger EBI2
+
+Stiickliste und Stromlaufplan fir Antennen-Anpassungs-Gerat AAGTA
+
+Stromlaufplan fir ausfahrbaren Antennen-Mast AMS mit Bedien-Gerét -
+BG 5 und Bedien-Gerat BG5S A '
+
+Stickliste und Schaltplan fir Dipol-Anpassungs-Gerat DAG 1
+Stickliste und Stromlaufplan fir Umformer U8 '
+
+Leitungsplan for Funk-Landegerat FuBl2 mit Emptdanger EBI3H (bzw.
+EBI 3H 1) in Verbindung mit FuG 10 und PeillGV
+
+Stickliste und Schaltplan fir Relaiskasten RELK2
+Leitungsplan fir Funk-Landegerdt FuBI2 mit Empfdnger EBI@F in Ver-
+
+~ bindung mit FuG 10 und PeillGV
+
+Ubersichtsschaltplan  far Zusommenschol’rung von Empfanger. EBI3 mit
+Empfanger EBI2
+
+Leitungsplan fur Funk-Landegerdt FuBl2 mit Emptanger EBI3G in Ver-
+bindung mit FuG 10 und PeilGV :
+
+Beschreibung und Betriebsvorschrift fir Frequenz- Kontrollgerot PQK4A
+
+69
+Stiickliste fiir Empfinger EBI 3 H
+
+Pos. Benennung
+. Bf1 Bandfilter
+bestehend aus:
+Bf2 | Bandfilter
+bestehend aus
+Bf3 Bandfilter
+' bestehend aus:
+C 4 Kondensator
+C5b Kondensator
+C 6 Kondensator
+c7 Kondensatér
+C 8 Kondensator
+C12 Kondensator
+C13 Kondensator
+C14 Kondensator
+C15 Kondensator
+C16 Kondensator
+€20 | Kondensator
+c21 Kondensator
+C 22 } Kondensator
+C23 ' | Kondensator
+C24 a | Kondensator
+C24b | Kondensator
+C25 Kondensator
+.L7 Spule‘
+
+R6 1—4] Roéhre
+
+ZF-Teil
+
+Zeichnungs-Nr, a
+Stlckliste b
+
+Sk 568 282/1A
+
+N 506 271/41
+Réhrchenkond. C1
+Kopplungskond. C 2
+Réhrchenkond. C 3~
+Spule L1
+
+Spule L2
+
+Sk 558/282/IA
+
+N 506 271/45
+Roéhrchenkond. C9
+Koppl.-Kond. C 10
+Réhrchenkond. C 11
+SpuleL 3
+
+Spule L 4
+
+Sk 558 282/IV A
+
+N 506 271/46
+R&hrchenkond. C 17
+Koppl.-Kond. C 18
+Réhrchenkond. C 19
+Spule L5
+
+Spule L6
+
+KA 10810 HC
+
+KA 10810 HC
+
+KA 10800 HC
+
+KA 10810 HC
+
+KA 10803 HC
+
+KA 10810 HC
+
+KA 10803 HA
+
+KA 10800 HC
+KA—10810 HC
+
+KA 10803 HC
+
+KA 10810 HC
+
+KA 10800 HC
+
+KA 10803 HC
+
+KA 10810 HC
+Hescho KF-Coh
+Hescho RKo 510
+
+Hescho RKo 5181
+
+Sk 1 513 151
+N 506 291/20
+
+Telefunken
+RV 12 P 2000 (NF 6)
+
+Elektrische Werte
+
+20 000 pF
+20 000 pF
+
+| 10000 pF
+
+20 000 pF
+
+50 000 pF
+
+20 000 pF
+
+50 000 pF
+
+10 000 pF
+
+20 000 pF
+
+50 000 pF
+
+20 000 pF
+
+10 000 pF
+50000 pF
+
+20 000 pF
+
+15 pF j:‘O,Q pF
+20 pF £0,2 pF
+100 pF + 10%
+
+Ersatz fir Stiuckliste gleicher Nr. Ausgabe 9
+
+Anlage 1
+
+Pos.
+
+St1
+
+- St2
+
+W1
+w2
+W3
+W4
+
+W5
+
+Weé
+W7
+W8
+
+Wg .
+
+W 10
+W11
+W12
+W13
+W14
+W15
+W16
+W17
+W18
+W 19
+W 20
+
+C26
+
+Cc28
+c29
+C30
+C3H
+c32
+
+C33
+
+C34
+C35
+C36
+
+Benennung
+
+Buchsenleiste
+
+Buchsenleiste
+Widerstand
+Widerstand
+frei
+Widerstand
+frei
+Widerstand
+Widerstand
+frei
+Widerstand
+frei
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+
+Kondensator
+
+\
+
+Drehkondensator }
+
+Kondensator
+
+Trimmer-
+Kondensator
+
+Kondensator
+frei
+
+Kondensator
+
+Zeichnungs-Nr. a
+
+Stickliste
+
+Sk 556 094/26
+Sk 556 094/25
+Siemens Karb. 11b
+Siemens Karb. 11b
+
+Siemens Karb. 11b
+
+Siemens Karb. 11b
+Siemens Karb. 11b
+
+—
+
+Siemens Karb. 11b
+
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 14b
+
+HF-Teil
+
+KA 10803 HC
+
+Sk 586 282
+N 512 431
+
+Hescho K-STs
+
+Hescho
+
+Ko 2509 KA
+
+Hescho Tempa S°
+RKo 510 1ll
+
+KA10800HC
+
+b
+
+EIektrische Werte
+
+7-polig
+2-polig
+5 ke -+ 10%
+1 Me +10%
+
+500 2 + 10%
+
+5 ke +10%
+1TM2+10%
+
+500 2 + 109
+
+500 ij::10%'
+5ke +£109% .
+
+0.8 M2 +109,
+1Me+£10%
+
+500 ke +10%
+5002 +£10% -
+05Me +10%
+5ke £10%
+
+50ke £102 «
+170 @ + 59 2 Watt
+
+50 000 pF
+
+C=5pF+02pF
+C=1-=7pF ‘
+
+C=115pF+5%
+
+10 000 pF
+
+Pos.
+
+ca7
+
+C 38
+C39
+C 40
+C42
+C43
+C44
+
+C 45
+C 46
+€48
+C49
+C50
+
+CcH
+
+cs2.
+
+'C53
+
+Cb4
+Ch5
+L8
+
+L 10
+LN
+L12
+
+L15
+R66
+
+" R67
+RS 8
+
+St3
+St4
+
+6 — T 4058
+
+Benennung
+
+Trimmer-
+Kondensator
+
+Kondensator
+Kondensator
+Kondensator
+Kondensator
+Kondensator
+
+Trimmer-
+Kondensator
+
+Kondensator
+Kondensator
+
+Kondensator
+
+Perlkondensator
+
+Trimmer-
+Kondensator
+
+Kondensatoranordn.
+
+f. Temp. Komp.
+
+Scheibchen-
+Kondensator
+
+Kondensator
+
+Ersatz fur Stickliste gleicher Nummer Ausgabe 9
+
+Kondensator
+Kondensator
+
+Schwingkreis-
+Spule
+
+Schwingkreis-
+Spule
+
+Schwingkreis-
+Spule
+
+Oszillator-
+Spule
+
+Koppelschleife
+Réhre
+
+Réhre
+
+Rohre
+
+Steckerleiste
+
+Steckerleiste
+
+Zeichnungs-Nr. a
+
+Stiickliste
+
+Hescho
+Ko 2509 KA
+
+Hescho K-STr
+
+KA 10800 HC
+
+KA 10800 HC
+Hescho K-STr
+KA 10809 HC
+
+Hescho
+Ko 2509 KA
+
+Hescho K-FCoh
+KA 10800 HC
+KA 10800 HC
+Hescho Stp
+
+Sk 1632 601
+EN 61 BIl. 1
+
+Sk 1513 321
+
+N 511 671
+Hescho K-FCch
+Hescho K-STr
+Hescho K-STs
+
+Hescho FCo
+LS-RKo 1051/1
+
+Hescho K-FCoh
+KA 10800 HC
+
+Sk 559 64211l
+N 507 081/17
+
+Sk 559 642/XX
+N 507 081/19
+
+Sk 559 642/XX
+N 507 081/18
+
+Sk 1513 311
+
+1 N 511681
+
+Sk 1656 930
+
+Telefunken
+
+RV 12 P 2000 (NF 6)
+
+Telefunken
+
+RV 12 P 2000 (NF 6)
+
+Telefunken
+
+RV 12 P 2000 (NF 6) -
+
+Sk 556 124/33
+Sk bb6 124/32
+
+b
+
+Elektrische Werte
+
+C=1=TpF
+
+C=15pF +£0,2 pF
+
+10000 pF
+10000 pF
+
+10pF £0,2 pF
+
+1QOOOpF
+C=1+70pF
+
+50 pF + 10%
+10000 pF
+10 000 pF
+
+1 pF£0,2 pF
+
+Bestellung n. Muster b. Hescho
+
+30 pF \ Toleranz T. K, £10%
+14 pF | (f =£5%)
+
+C=15pF+02pF
+
+2000 pF 4 10%
+
+50 pF £10%
+10 000 pF
+
+2-polig
+7-polig
+
+—'“‘
+Zeichnungs-Nr. a
+
+Pos.
+
+Benennung
+
+Stilckliste
+
+b
+
+Elektrische Werte
+
+.
+
+St5
+W23
+w24
+W 25
+W 26
+W21
+W28
+W29
+W 30
+W 31
+W32
+W 33
+W 34
+W35
+W 36
+
+W 37
+—39
+
+Cb57
+Ccs8
+
+C59
+
+G1
+
+W 41
+
+w42~
+
+W43
+
+Buchsenleiste
+Widerstand
+frei ’
+Widerstand
+frei
+Widerstand
+Widerstand
+liderstand
+Widerstand
+frei
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+Widerstand
+
+frei
+
+Kondensator
+Kondensator
+Kondensator
+
+Lampchen
+
+Widerstand
+
+Potentiometer
+
+Widerstand
+
+Sk 556 124/31
+Siemens Karb. 11b
+
+Siemens Karb. 11b
+
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb: 11b
+
+Siemé’ns Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+Siemens Karb. 11b
+
+Antrieb
+
+KA 10809 HA
+KA 10812 HA
+KA 10809 HA
+
+Fl. 32 777-2
+Osram
+
+Siemens Karb. 11b
+
+Dralowid
+Sk 586 472/8
+
+Siemens Karb. 11b
+
+10-polig
+1TMe +£109%
+
+5002 +10%
+
+5ke £10%
+1Me +10%
+3ke +10%
+30 ke +10%
+
+300 ke £10%
+2 ke £10%
+
+100 ke +10%
+30ke £10%
+30 ke +10%,
+
+C= 10000 pF
+C = 50000 pF
+C= 10000 pF
+24V 2 Watt
+
+R=7ke +10%
+0,1 Me log
+
+R =500 ke +10%
+ZF -Teil
+
+l—-l—l
+| l
+
+T 4458
+Antrieb
+
+o
+C57 €58 C59 7 —A 'br
+f 5
+
+I+A lge
+
+Anlage 1: Stromlaufplan fiir Empfanger EBI 3 H
+Stiickliste fiir Empfanger EBI 3 H 1
+
+ZF -Teil
+
+Anlage 2
+
+Elektr. Lfd. | stiick- Be u . .
+Zgi%?]ré-n Nr. Zatﬁﬁgn und ggpn%ragng Zeichnungs-Nr. Elektrische Werte
+Bf 1 1 | Bandfilter Sk 558 282/IA
+N 506 271/41
+bestehend aus: )
+Rohrchenkond. C1
+Kopplungskond. C 2
+Rohrchenkond. C3
+Spule L1
+Spule L2
+Bf 2 1 | Bandfilter Sk 558 282/I1A
+: N 506 271/45
+bestehend aus:
+Réhrchenkond. C 9
+Kopplungskond. C 10 .
+Réhrchenkond. C 11
+Spule L3
+Spule L 4
+Bf 3 .1 | Bandfilter Sk 558 282/IVA
+N 506 271/46
+bestehend aus: :
+R&hrchenkond. C 17
+Kopplungskond. C 18
+Réhrchenkond. C 19
+SpuleLb :
+Spule L6
+C 4 1 Kondensator KA 10810 HC 20000 pF
+C5 1 Kondensator KA 10810 HC 20 000 pF
+Cc &6 1 Kondensator KA 10800 HC 10 000 pF-
+cC 7 1 | Kondensator KA 10810 HC 20 000 pF
+C 8 1| Kondensator KA 10803 HC 50 000 pF
+C 12 1 | Kondensator KA 10810 HC 20 000 pF
+C13 1. | Kondensator KA 10803 HA 50 000 pF
+C14 1 | Kondensator KA 10800 HC 10 000 pF
+C15 1 | Kondensator KA 10810 HC 20 000 pF
+C16 1 | Kondensator KA 10803 HC 50 000 pF
+C20 1 Kondensator KA 10810 HC 20 000 pF
+c21 1 Kondensator KA 10800 HC 10 000 pF
+c22 1 Kondensator KA 10803 HC 50 000 pF
+ca3 1 Kondensator KA 10810 HC 20 000 pF
+C24a 1 Kondensator Hescho KF-Coh ! 15 pF £ 0,2 pF
+C24b 1 Kondensator Hescho RKo 510 | 20 pF £ 0,2 pF
+C25 1 | Kondensator Hescho K-F Coh 100 pF £10%
+
+8 — T 4058
+
+4% 15
+e ———————————————teier e —————— e — e ——————— e ————————————————
+
+Elektr.
+
+Lfd. | Stiick- Benennung
+
+zgii?\gh Nr. | zahien und Bemerkung Zeichnungs-Nr. ' Elektrische Werte
+L7 1 Spule Sk 1513 151
+N 506 291/20
+RS 1—4 1 | Rehre ' Telefunken RV 12 P 2000
+St1 1 Buchsenleiste . Sk 556 094/26 ' Tpolig |
+St2 1 Buchsenleiste Sk 556 094/25 2polig -
+w1 1 | Widerstand Siemens Karb. 11b 5ke+10%
+W 2 1 Widerétand , ' Siemens Karb. 11b 1Me +£10%
+W 3 frei _
+W 4 1 | Widerstand . Siemens Karb. 11b 5002 +10%
+W s frei '
+W 6 1 | Widerstand ‘ Siemens Karb. 11b 5ke +109%
+W 7 1 | Widerstand ‘ Siemens Karb. 11b 1M +10%
+W 8 frei ’
+W 9 1 Widerstand Siemens Karb. 11b 5002 +109%
+W10 frei | ' ,
+W 11 1 | Widerstand Siemens Karb. 11b 500 ke +10%
+W12 1 | Widerstand ‘ Siemens Karb. 11b 5ke +109%
+W13 1 Widerstand Siemens Karb. 11b 08 MQ +109%
+W 14 1 Widerstand ' Siemens Karb. 11b 1Me +109%
+W 15 1 | Widerstand Siemens Karb. 11b 500 ke £ 10%
+W 16 1 | Widerstand | Siemens Karb. 11b 5002 +£109%
+W17 1 | Widerstand Siemeﬁs Karb. 11b 05Me +10%
+w18 1 | Widerstand | Siemens Karb. 11b 5ke+10%
+W19 1 | Widerstand Siemens Karb. 11b 50 k@ + 10%
+W 20 1 Widerstand . Siemens Karb. 14b 1702 £ 5% 2 Watt
+HF - Teil
+€26 1 | Kondensator KA 10803 HC 50 000 gF
+c28 :
+8 gg } 1 Drehkondensator ﬁk g?g 1%‘11'/”/38
+C 31
+c32 1 | Kondensator ) J Hescﬁo K-STh 5 7pF+02pF
+C33 1 | Trimmer-Kondensator | Hescho C=1—17pF
+Ko 2509 KA
+C34 ' 1 | Kondensator - Hescho Tempa S 115 pF £59%
+
+RKo 510 1l
+RV 12 P 2000
+
+Elektr. 1 | fd, tck- Benennun . .
+JRenn - 0F Stlick- und Igemrt]arkgng Zeichnungs-Nr. Elektrische Werte
+C35 frei
+C36 1 Kondensator KA 10800 HC 10 000 pF
+C37 1 | Trimmer- “Hescho C=1—7pF
+Kondensator Ko 2509 KA
+C38 1 Kondensator Hescho K-STh 20 pF % 0,2 pF
+C39 1 | Kondensator KA 10800 HC 10 000 pF
+C40 1 | Kondensator KA 10800 HC - 10000 pF
+C42 1 | Kondensator Hescho K-STh 4 X 20 20 pF £ 0,2 pF
+C 43 1 Kondensator KA 10809 HC 10000 pF
+C44 1 | Trimmer- Hescho KO 2509 KA "C=1~7pF
+Kondensator
+C 45 1 Kondensator Hescho K-FCoh 50 pF £ 10%
+C 46 1 | Kondensator KA 10800 HC 10000 pF
+C 48 1 Kondensator KA 10800 HC 10000 pF
+C 49 1 | Perlkondensator Hescho Stp 1 pF +0,2 pF
+C 50 1 Trimmer- Sk 1532 601
+Kondensator N 513811
+C51 1 Kondensatoranordnung | Sk 1513 321 Bestellung nach Muster
+flr Temp. Komp. N 514 421 bei Hescho
+' 7
+75 956
+C 52 je 1 | Kondensator: Hescho K-STh g 10 % oF 40,2 pF
+5 10,5
+» 9 N
+- C83 1 Kondensator Hescho F-Co 2000 pF +10%
+LS-RKo 1051/1
+C54 1 | Kondensator Hescho K-FCoh 50 pF +£10%
+C 55 1 Kondensator KA 10800 HC 10 000 pF
+L 8 1 | Schwingkreisspule Sk 559 642/11l
+N 507 081/23
+L 10 1 Schwingkreisspule Sk 559 642/XX
+N 507 081/24
+L1 1 | Schwingkreisspule Sk 559 642/XX
+: N 507 081/25
+L12 1 | Oszillatorspule Sk 1513 311
+N 511 681
+L13 1" | Parallelspule Sk 1546 531
+L15 1 | Koppelschleife Sk 1656 930
+R& 6 1 ] Rohre Telefunken .
+_ o RV 12 P 2000
+R6 7 1 Réhre Telefunken
+RV 12 P 2000
+Ro 8 1 Réhre Telefunken.
+-
+
+de:rggn | Iﬂ;crj f’;ﬁfekn un%eggnm%lﬂagng Zeichnungs-Nr. Elektrische Werte
+[EEACNACATIN RN RSN N E— N ———
+St3 1 | Steckerleiste Sk 556 124/33 2polig
+sta 1| Steckerleiste Sk 556 124/32 7polig
+Stb 1 Buchsenleiste Sk 556 124/31 10polig
+W23 1 | Widerstand Siemens Karb. 11b 1M +10%
+W 24 frei '
+wos | 1 | Widerstand Siemens Karb. 11b 500 @ £ 10%
+W 26 frei
+W 27 1 | Widerstand Siemens Karb. 11b 5 ke + 10%
+W 28 1 Widerstand Siemens Karb. 11b 1Me +109%
+W 29 1 | Widerstand Siemens Karb. 11b 3ke £10%
+W 30 1 | Widerstand Siemens Karb. 11b 30 ke +£109%
+wat | frei
+W 32 1 | Widerstand Siemens Karb. 11b 300 ke £10%
+W33 . 1 | Widerstand Siemens Karb. 11b 2ke £10%
+W 34 1 | Widerstand Siemens Karb. 11b 100 ke £10%"
+W 35 ‘ 1 | Widerstand Siemens Karb. 11b 30ke £10%
+W 36 1 | Widerstand Siemens Karb. 11b 30ke £10%
+w37 frei
+Antrieb
+Cc 57 1 Kondensator KA 10809 HA 10 000 pF
+C58 1 Kondensator KA 10812 HA 50 000 pF
+C50 1 | Kondensator KA 10809 HA 10000 pF
+G1 Beleuchtungslampe Fl. 32 777-2 Osram 24V 2 Watt
+W4 -1 | Widerstand Siemens Karb. 11b 7ke £10%
+W 42 1 Potentiometer Dralowid 0,1 Me log.
+Sk 586 472/8
+W43 1 | Widerstand Siemens Karb. 11b 500 ke +109%
+9 — T 4058
+* Antrieb
+
+Anlage 2: Stromlaufplan fir Empfanger EBI 3 H1

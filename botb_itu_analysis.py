@@ -147,6 +147,57 @@ N_FLOOR_dBW = N_THERMAL_dBW + max(RX_NF_dB, FA_dB)
 
 
 # ================================================================
+#  USABILITY THRESHOLDS
+# ================================================================
+#
+# Two physically distinct thresholds apply to the Lorenz-style
+# audible equisignal system:
+#
+#   RF_DETECT_dB  -- bare RF detection (audible hiss vs. signal at
+#                    the detector output).  This is the traditional
+#                    receiver-sensitivity criterion: signal >= ~10 dB
+#                    above the galactic/thermal noise floor in the
+#                    IF bandwidth.  Corresponds to a trained operator
+#                    just being able to tell a tone is present over
+#                    the hiss of an isolated receiver on a bench.
+#
+#   AF_AUDIBLE_dB -- operational audibility of the 1150 Hz keying tone
+#                    AT THE AIRCREW'S EARDRUM over the cockpit acoustic
+#                    noise floor, through the headphones.
+#
+# Budget for AF_AUDIBLE (see sources/README_primary_sources_digest.md):
+#
+#   Wellington IA Pegasus W/T position, 2600 rpm cruise
+#   (He 111 proxy, ARC R&M 2296 Table 3):
+#     600-1200 Hz octave band ....................... 104 dB SPL
+#     octave -> critical band at 1150 Hz (-6 dB) .....  98 dB SPL
+#     LKp W100 headset passive attenuation ...........  -5 dB
+#     Cockpit noise leaking past headset ..............  93 dB SPL
+#     Required tone-over-masker margin (Fletcher) ....  +10 dB
+#     Required 1150 Hz tone SPL at eardrum ............ 103 dB SPL
+#
+#   1940s 2 kOhm Dfh.b magnetic earphone at ~2 mW
+#   produces ~100-110 dB SPL at the eardrum at max drive.
+#   The receiver must therefore run its AF stage at
+#   near-maximum, which in a non-AGC 1940s AM detector
+#   requires RF input roughly +20-30 dB above the bare
+#   detection threshold.
+#
+#   Luftwaffe Nutzbereich chart (Bundesarchiv-MA RL 19-6/40,
+#   ref. 230Q7, 1939) defines the usable region explicitly
+#   as "based on beacon signals audibility" -- i.e. this
+#   operational bound, NOT a uV RF threshold.
+#
+# We therefore use +30 dB above the galactic noise floor as the
+# minimum operational threshold.  This is our primary usability
+# criterion.  The +10 dB detection floor is retained as a secondary
+# reference line on the graphs for comparison with the older
+# analysis.
+RF_DETECT_dB = 10.0
+AF_AUDIBLE_dB = 30.0
+
+
+# ================================================================
 #  ITU-R P.526-16 SMOOTH EARTH DIFFRACTION
 # ================================================================
 #
@@ -455,6 +506,8 @@ def print_results(results):
     print(f"  TX power: {P_TX:.0f} W ({10*np.log10(P_TX):.1f} dBW)")
     print(f"  TX gain: {G_DIR_dB:.1f} dBi (aperture {L_H}m x {H_V}m)")
     print(f"  Equisignal crossover: {CROSSOVER_dB:.0f} dB (5 deg squint, ~500 yd)")
+    print(f"  RF detection floor:  +{RF_DETECT_dB:.0f} dB (receiver hiss)")
+    print(f"  Audibility threshold: +{AF_AUDIBLE_dB:.0f} dB (cockpit acoustic, primary)")
     print(SEP)
 
     # Group by type
@@ -480,7 +533,14 @@ def print_results(results):
 
         for r in group:
             d_km = r["distance_m"] / 1000.0
-            status = "USABLE" if r["globe_SNR_eq"] >= 10 else "MARGINAL" if r["globe_SNR_eq"] >= 0 else "DEAD"
+            if r["globe_SNR_eq"] >= AF_AUDIBLE_dB:
+                status = "USABLE"
+            elif r["globe_SNR_eq"] >= RF_DETECT_dB:
+                status = "MARGINAL"
+            elif r["globe_SNR_eq"] >= 0:
+                status = "INAUDIBLE"
+            else:
+                status = "DEAD"
 
             name = f"{r['tx_station'][:8]}>{r['target'][:12]}"
             print(f"  {name:<22} {d_km:>6.0f} {r['d_los_km']:>6.0f} "
@@ -493,18 +553,27 @@ def print_results(results):
     print("  SUMMARY")
     print(f"  {'=' * 86}")
 
-    usable   = [r for r in results if r["globe_SNR_eq"] >= 10]
-    marginal = [r for r in results if 0 <= r["globe_SNR_eq"] < 10]
-    dead     = [r for r in results if r["globe_SNR_eq"] < 0]
+    usable    = [r for r in results if r["globe_SNR_eq"] >= AF_AUDIBLE_dB]
+    marginal  = [r for r in results if RF_DETECT_dB <= r["globe_SNR_eq"] < AF_AUDIBLE_dB]
+    inaudible = [r for r in results if 0 <= r["globe_SNR_eq"] < RF_DETECT_dB]
+    dead      = [r for r in results if r["globe_SNR_eq"] < 0]
 
-    print(f"\n  Globe equisignal USABLE (>= 10 dB):  {len(usable)} paths")
+    print(f"\n  Globe equisignal USABLE (>= {AF_AUDIBLE_dB:.0f} dB):  {len(usable)} paths")
     for r in usable:
         print(f"    {r['tx_station']} > {r['target']}: "
               f"{r['distance_m']/1000:.0f} km, "
               f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
 
-    print(f"\n  Globe equisignal MARGINAL (0-10 dB): {len(marginal)} paths")
+    print(f"\n  Globe equisignal MARGINAL ({RF_DETECT_dB:.0f}-{AF_AUDIBLE_dB:.0f} dB): "
+          f"{len(marginal)} paths")
     for r in marginal:
+        print(f"    {r['tx_station']} > {r['target']}: "
+              f"{r['distance_m']/1000:.0f} km, "
+              f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
+
+    print(f"\n  Globe equisignal INAUDIBLE (0-{RF_DETECT_dB:.0f} dB): "
+          f"{len(inaudible)} paths")
+    for r in inaudible:
         print(f"    {r['tx_station']} > {r['target']}: "
               f"{r['distance_m']/1000:.0f} km, "
               f"globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
@@ -521,10 +590,12 @@ def print_results(results):
         print(f"\n  TELEFUNKEN RANGE ANALYSIS (4000m altitude, ITU height gain)")
         print(f"  Y_rx at 4000m = {tf_paths[0]['itu_Y2']:.2f}, "
               f"ITU G(Y_rx) = {tf_paths[0]['itu_G_Y2_dB']:.1f} dB")
-        tf_dead = [r for r in tf_paths if r["globe_SNR_eq"] < 10]
-        tf_ok   = [r for r in tf_paths if r["globe_SNR_eq"] >= 10]
-        print(f"  Globe can reach equisignal at: {len(tf_ok)}/{len(tf_paths)} configs")
-        print(f"  Globe FAILS equisignal at:     {len(tf_dead)}/{len(tf_paths)} configs")
+        tf_dead = [r for r in tf_paths if r["globe_SNR_eq"] < AF_AUDIBLE_dB]
+        tf_ok   = [r for r in tf_paths if r["globe_SNR_eq"] >= AF_AUDIBLE_dB]
+        print(f"  Globe reaches audibility threshold ({AF_AUDIBLE_dB:.0f} dB) at: "
+              f"{len(tf_ok)}/{len(tf_paths)} configs")
+        print(f"  Globe FAILS audibility threshold at:                      "
+              f"{len(tf_dead)}/{len(tf_paths)} configs")
 
 
 # ================================================================
@@ -538,8 +609,9 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
     Each graph shows:
       - Flat model SNR (green line)
       - Globe model SNR with ITU P.526 (red line)
-      - Noise floor (yellow dashed)
-      - Detection threshold (orange dotted)
+      - Noise floor (white solid, thin)
+      - RF detection floor +10 dB (orange dotted, faint, secondary)
+      - Audibility threshold +30 dB (red dashed, bold, primary)
       - The actual path distance marked
     """
     if outdir is None:
@@ -609,9 +681,16 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
         # Noise floor (0 dB SNR): white solid, thin
         ax.axhline(y=0, color='white', linewidth=1.0, linestyle='-',
                    label='Noise floor', zorder=5)
-        # Detection threshold (10 dB): orange dashed
-        ax.axhline(y=10, color='#FF9800', linewidth=1.5, linestyle='--',
-                   label='Detection threshold (10 dB)', zorder=5)
+        # RF detection floor (10 dB): faint orange dotted -- secondary reference
+        ax.axhline(y=RF_DETECT_dB, color='#FF9800', linewidth=1.0,
+                   linestyle=':', alpha=0.6,
+                   label=f'RF detection floor ({RF_DETECT_dB:.0f} dB)',
+                   zorder=5)
+        # AF audibility threshold (30 dB): primary operational threshold
+        ax.axhline(y=AF_AUDIBLE_dB, color='#FF3B00', linewidth=2.0,
+                   linestyle='--',
+                   label=f'Audibility threshold ({AF_AUDIBLE_dB:.0f} dB)',
+                   zorder=5)
 
         # Mark actual path distance (target) - in front of signal curves
         ax.axvline(x=d_actual, color='#90C4E0', linewidth=2, linestyle='-',
@@ -624,8 +703,8 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
                    linestyle=(0, (9, 4)), alpha=0.9, zorder=1,
                    label=f'Radio Horizon: {d_los:.0f} km')
 
-        # Shade below noise (faint yellow)
-        ax.axhspan(-300, 0, alpha=0.06, color='#FFD54F', zorder=0)
+        # Shade below audibility threshold (faint red)
+        ax.axhspan(-300, AF_AUDIBLE_dB, alpha=0.05, color='#FF3B00', zorder=0)
 
         # Labels
         title = f"{r['tx_station']} > {r['target']}"
@@ -722,9 +801,16 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
         # Noise floor (0 dB SNR): white solid, thin
         ax.axhline(y=0, color='white', linewidth=1.0, linestyle='-',
                    label='Noise floor', zorder=5)
-        # Detection threshold (10 dB): orange dashed
-        ax.axhline(y=10, color='#FF9800', linewidth=1.5, linestyle='--',
-                   label='Detection threshold (10 dB)', zorder=5)
+        # RF detection floor (10 dB): faint orange dotted -- secondary reference
+        ax.axhline(y=RF_DETECT_dB, color='#FF9800', linewidth=1.0,
+                   linestyle=':', alpha=0.6,
+                   label=f'RF detection floor ({RF_DETECT_dB:.0f} dB)',
+                   zorder=5)
+        # AF audibility threshold (30 dB): primary operational threshold
+        ax.axhline(y=AF_AUDIBLE_dB, color='#FF3B00', linewidth=2.0,
+                   linestyle='--',
+                   label=f'Audibility threshold ({AF_AUDIBLE_dB:.0f} dB)',
+                   zorder=5)
 
         # Mark actual path distance (target) - in front of signal curves
         ax.axvline(x=d_actual, color='#90C4E0', linewidth=2, linestyle='-',
@@ -737,8 +823,8 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
                    linestyle=(0, (9, 4)), alpha=0.9, zorder=1,
                    label=f'Radio Horizon: {d_los:.0f} km')
 
-        # Shade below noise
-        ax.axhspan(-300, 0, alpha=0.06, color='#FFD54F', zorder=0)
+        # Shade below audibility threshold (faint red)
+        ax.axhspan(-300, AF_AUDIBLE_dB, alpha=0.05, color='#FF3B00', zorder=0)
 
         # Labels
         title = f"{r['tx_station']} > {r['target']}"
@@ -951,11 +1037,17 @@ def generate_master_comparison(results, outdir=None):
     bars_globe = ax.bar(x + w/2, globe_eq_vals, w, color='#FF1493',
                         alpha=0.85, label='Globe equisignal SNR (ITU P.526)')
 
-    # Noise floor and detection threshold
+    # Noise floor and thresholds
     ax.axhline(y=0, color='#FFD54F', linewidth=2, linestyle='--',
                label='Noise floor', zorder=5)
-    ax.axhline(y=10, color='#FF9800', linewidth=1.5, linestyle=':',
-               label='Detection threshold (10 dB)', zorder=5)
+    ax.axhline(y=RF_DETECT_dB, color='#FF9800', linewidth=1.0,
+               linestyle=':', alpha=0.6,
+               label=f'RF detection floor ({RF_DETECT_dB:.0f} dB)',
+               zorder=5)
+    ax.axhline(y=AF_AUDIBLE_dB, color='#FF3B00', linewidth=2.0,
+               linestyle='--',
+               label=f'Audibility threshold ({AF_AUDIBLE_dB:.0f} dB)',
+               zorder=5)
 
     # Value labels
     for bar, val in zip(bars_globe, globe_eq_vals):
