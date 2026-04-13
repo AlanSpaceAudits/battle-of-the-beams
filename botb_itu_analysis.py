@@ -599,7 +599,7 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
       - Flat model SNR (green line)
       - Globe model SNR with ITU P.526 (red line)
       - Noise floor (white solid, thin)
-      - Detection floor +10 dB (orange dashed, bold)
+      - Detection floor +10 dB (faint yellow dashed)
       - The actual path distance marked
     """
     if outdir is None:
@@ -669,9 +669,9 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
         # Noise floor (0 dB SNR): white solid, thin
         ax.axhline(y=0, color='white', linewidth=1.0, linestyle='-',
                    label='Noise floor', zorder=5)
-        # Detection floor (10 dB): bold orange dashed
-        ax.axhline(y=DETECT_dB, color='#FF3B00', linewidth=2.0,
-                   linestyle='--',
+        # Detection floor (10 dB): faint yellow dashed
+        ax.axhline(y=DETECT_dB, color='#FFEB3B', linewidth=1.4,
+                   linestyle='--', alpha=0.75,
                    label=f'Detection floor ({DETECT_dB:.0f} dB above noise)',
                    zorder=5)
 
@@ -784,9 +784,9 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
         # Noise floor (0 dB SNR): white solid, thin
         ax.axhline(y=0, color='white', linewidth=1.0, linestyle='-',
                    label='Noise floor', zorder=5)
-        # Detection floor (10 dB): bold orange dashed
-        ax.axhline(y=DETECT_dB, color='#FF3B00', linewidth=2.0,
-                   linestyle='--',
+        # Detection floor (10 dB): faint yellow dashed
+        ax.axhline(y=DETECT_dB, color='#FFEB3B', linewidth=1.4,
+                   linestyle='--', alpha=0.75,
                    label=f'Detection floor ({DETECT_dB:.0f} dB above noise)',
                    zorder=5)
 
@@ -1018,8 +1018,8 @@ def generate_master_comparison(results, outdir=None):
     # Noise floor and thresholds
     ax.axhline(y=0, color='#FFD54F', linewidth=2, linestyle='--',
                label='Noise floor', zorder=5)
-    ax.axhline(y=DETECT_dB, color='#FF3B00', linewidth=2.0,
-               linestyle='--',
+    ax.axhline(y=DETECT_dB, color='#FFEB3B', linewidth=1.4,
+               linestyle='--', alpha=0.75,
                label=f'Detection floor ({DETECT_dB:.0f} dB above noise)',
                zorder=5)
 
