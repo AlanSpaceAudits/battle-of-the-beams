@@ -29,3 +29,11 @@ shatz_validation_comparison.png
 bargraph_flat_vs_globe.png
 bargraph_kleve_spalding.png
 bargraph_stollberg_beeston.png
+
+# P.526 vs P.368 GRWAVE comparison graphs (regenerated locally, vault copy
+# is the canonical one consumed by the prezzie and null hypothesis docs)
+p526_vs_p368_*.png
+
+# Vendored clone of space-physics/grwave (separate upstream repo, not
+# part of the BotB source tree)
+grwave/
