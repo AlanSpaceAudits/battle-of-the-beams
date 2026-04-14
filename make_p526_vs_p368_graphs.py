@@ -285,9 +285,16 @@ def plot_station_sweep(station_name, tx_m, rx_m, ground_name, freq_mhz,
         lbl = "Target distance" if i == 0 else None
         ax.axvline(x=t_d, color=COL_TARGET, linewidth=1.3, linestyle=":",
                    alpha=0.7, zorder=2, label=lbl)
+        # Target-name text is painted bright white at zorder=10 so it
+        # sits above every other artist including the faint yellow shaded
+        # below-noise region (zorder=0), the signal curves, the horizon
+        # markers, and the detection-floor line. Pure white plus explicit
+        # alpha=1.0 keeps the labels high-contrast against the dark bg.
         ax.text(t_d - x_offset * t_xoff_mult, anchor_y, text,
                 rotation=90, rotation_mode="anchor",
-                ha="center", va="bottom", fontsize=8, color=COL_TARGET)
+                ha="center", va="bottom", fontsize=8,
+                color="white", alpha=1.0, zorder=10,
+                fontweight="bold")
 
     # Radio horizon marker
     d_los = line_of_sight(tx_m, rx_m) / 1000.0
