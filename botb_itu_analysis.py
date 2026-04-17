@@ -105,8 +105,16 @@ CROSSOVER_dB = -19.0
 # Receiver noise figure (dB). 1940s vacuum tube receiver.
 RX_NF_dB = 10.0
 
-# Detection bandwidth (Hz). Matched to Lorenz dot-dash keying.
-RX_BW_Hz = 3000.0
+# Detection bandwidth (Hz). Matched-filter bandwidth for the Knickebein
+# MCW / A2 emission: a 31.5 MHz carrier amplitude-modulated with a
+# 1,150 Hz audio tone, keyed on/off at a few Hz to produce the Lorenz
+# dot-dash pattern. Signal bandwidth is dominated by the audio tone
+# and its keying sidebands, not by AM-voice bandwidth. 500 Hz gives a
+# comfortable narrow-CW passband that fully admits the signal while
+# rejecting the wideband noise that a 3 kHz AM-voice filter would let
+# in. See Amendment E of the null doc for the noise-floor derivation
+# and the bandwidth-choice reasoning.
+RX_BW_Hz = 500.0
 
 # System reference temperature (K). IEEE/ITU standard.
 T_SYS = 290.0
@@ -205,6 +213,85 @@ AF_AUDIBLE_dB = DETECT_dB
 # Source: ITU-R P.526-16 (2025), Section 3.1.1.2, Eq. 13-18.
 # ================================================================
 
+# ----------------------------------------------------------------
+#  Ground-type registry used by β / K computation below
+# ----------------------------------------------------------------
+
+# (sigma S/m, eps_r) pairs keyed by ground name.  These match the
+# constants used by the grwave driver in make_p526_vs_p368_graphs.py
+# so that the ITU P.526 §3 and the P.368 GRWAVE runs share a common
+# electrical model of the ground.
+GROUND_PARAMS = {
+    "land": (5e-3, 15.0),   # average land, ITU-R P.527 class 3 (typical)
+    "sea":  (5.0,  70.0),   # seawater, warm/typical North Sea values
+    "wet":  (2e-2, 30.0),   # wet soil (rarely used)
+    "dry":  (1e-3,  4.0),   # dry soil (rarely used)
+}
+
+# Effective-Earth-radius factor for 4/3 standard atmosphere.  Appears in
+# ITU-R P.526 Eq. 16a as "k", the multiplier on the true Earth radius.
+K_RADIUS_DEFAULT = 4.0 / 3.0
+
+
+def p526_K_from_Eq16a(sigma, freq_Hz, k_radius=K_RADIUS_DEFAULT):
+    """
+    ITU-R P.526-16 Eq. 16a simplified K (disregards ε).
+
+        K² ≈ 6.89·σ / (k^(2/3)·f^(5/3))
+
+    where σ is in S/m, f in MHz, and k is the effective-Earth-radius
+    multiplier.  Returns K (not K²).  This is the K used by Eq. 16 β
+    and by the Eq. 18 G(Y) lower-bound clamp.
+    """
+    f_MHz = freq_Hz / 1e6
+    K2 = 6.89 * sigma / (k_radius**(2.0/3.0) * f_MHz**(5.0/3.0))
+    return np.sqrt(K2)
+
+
+def p526_beta(sigma, freq_Hz, polarization="vertical", ground="land",
+              k_radius=K_RADIUS_DEFAULT):
+    """
+    ITU-R P.526-16 Eq. 16 β parameter.
+
+    ITU-R P.526-16 §3.1.1.2 rule (verbatim from the Recommendation):
+      - Horizontal polarisation at all frequencies: β = 1.
+      - Vertical polarisation above 20 MHz over land: β = 1.
+      - Vertical polarisation above 300 MHz over sea: β = 1.
+      - Otherwise (vertical pol below those cuts): β must be computed
+        from K via Eq. 16.
+
+    Eq. 16:
+        β = (1 + 1.6·K² + 0.67·K⁴) / (1 + 4.5·K² + 1.53·K⁴)
+
+    Returns the tuple (β, K) so downstream code can also apply the
+    Eq. 18 G(Y) floor at 2 + 20·log10(K).  If β=1 because of the
+    frequency rule, K is returned as 0.0 (no clamp applied).
+
+    Parameters
+    ----------
+    sigma        : ground conductivity (S/m)
+    freq_Hz      : frequency (Hz)
+    polarization : "vertical" (default for ground-wave) or "horizontal"
+    ground       : "land" or "sea" — selects the 20/300 MHz cut
+    k_radius     : effective-Earth-radius factor (default 4/3)
+    """
+    f_MHz = freq_Hz / 1e6
+    # Horizontal polarisation: β = 1 at all frequencies
+    if polarization == "horizontal":
+        return 1.0, 0.0
+    # Vertical polarisation: frequency cut depends on ground type
+    cut_MHz = 20.0 if ground == "land" else 300.0
+    if f_MHz > cut_MHz:
+        return 1.0, 0.0
+    # Otherwise compute via Eq. 16 + 16a
+    K = p526_K_from_Eq16a(sigma, freq_Hz, k_radius=k_radius)
+    K2 = K * K
+    K4 = K2 * K2
+    numerator   = 1.0 + 1.6 * K2 + 0.67 * K4
+    denominator = 1.0 + 4.5 * K2 + 1.53 * K4
+    return numerator / denominator, K
+
+
 def itu_normalised_distance(d, lam, a_e=R_EFF, beta=1.0):
     """
     ITU-R P.526 normalised path length X.
@@ -214,8 +301,8 @@ def itu_normalised_distance(d, lam, a_e=R_EFF, beta=1.0):
     d     : great-circle distance (m)
     lam   : wavelength (m)
     a_e   : effective Earth radius (m)
-    beta  : terrain/polarisation parameter (1.0 for horiz pol or
-            vert pol above 20 MHz over land, per ITU-R P.526 Eq. 14)
+    beta  : terrain/polarisation parameter (Eq. 16; 1.0 when the ITU
+            frequency-cut rule says so, otherwise from p526_beta())
 
     Source: ITU-R P.526-16, Eq. 14.
     """
@@ -253,65 +340,102 @@ def itu_distance_term(X):
         return -20.0 * np.log10(max(X, 1e-10)) - 5.6488 * X**1.425
 
 
-def itu_height_gain(Y, beta=1.0):
+def itu_height_gain(Y, beta=1.0, K=None):
     """
     ITU-R P.526 height gain G(Y) in dB.
 
     B = beta * Y
-    For B >  2:  G = 17.6*(B-1.1)^0.5 - 5*log10(B-1.1) - 8
-    For B <= 2:  G = 20*log10(B + 0.1*B^3)
+    For B >  2:  G = 17.6*(B-1.1)^0.5 - 5*log10(B-1.1) - 8     (Eq. 18)
+    For B <= 2:  G = 20*log10(B + 0.1*B^3)                     (Eq. 18a)
 
-    Source: ITU-R P.526-16, Eq. 17-18.
+    Eq. 18 lower bound (from ITU-R P.526-16 §3.1.1.2, page 10):
+        "If G(Y) < 2 + 20·log10(K), set G(Y) to the value 2 + 20·log10(K)."
+    This clamp is applied when K is provided and K > 0.  For β=1 cases
+    (horizontal pol, or vert pol above the frequency cut) the clamp does
+    not apply and K should be passed as None or 0.
+
+    Source: ITU-R P.526-16, Eq. 18.
     """
     B = beta * Y
     if B > 2.0:
-        return 17.6 * np.sqrt(B - 1.1) - 5.0 * np.log10(B - 1.1) - 8.0
+        G = 17.6 * np.sqrt(B - 1.1) - 5.0 * np.log10(B - 1.1) - 8.0
     else:
         # Guard against B=0 (antenna on surface)
         B_eff = max(B, 1e-10)
-        return 20.0 * np.log10(B_eff + 0.1 * B_eff**3)
+        G = 20.0 * np.log10(B_eff + 0.1 * B_eff**3)
+
+    # Apply Eq. 18 lower-bound clamp when K is provided (vert pol below
+    # the frequency cut).  For K <= 0 or K None the clamp is skipped.
+    if K is not None and K > 0.0:
+        G_floor = 2.0 + 20.0 * np.log10(K)
+        if G < G_floor:
+            G = G_floor
+    return G
 
 
-def itu_diffraction_loss(d, h_tx, h_rx, freq=FREQ_DEFAULT, a_e=R_EFF):
+def itu_diffraction_loss(d, h_tx, h_rx, freq=FREQ_DEFAULT, a_e=R_EFF,
+                          ground="land", polarization="vertical"):
     """
     Total smooth Earth diffraction loss using ITU-R P.526-16.
 
     Returns the diffraction loss in dB (positive = signal weaker
     than free space).  Combines the distance term F(X) and height
-    gains G(Y1), G(Y2).
+    gains G(Y1), G(Y2) per Eq. 13-18.
 
     Parameters
     ----------
-    d     : great-circle distance (m)
-    h_tx  : transmitter height above surface (m)
-    h_rx  : receiver height above surface (m)
-    freq  : frequency (Hz)
-    a_e   : effective Earth radius (m)
+    d           : great-circle distance (m)
+    h_tx        : transmitter height above surface (m)
+    h_rx        : receiver height above surface (m)
+    freq        : frequency (Hz)
+    a_e         : effective Earth radius (m)
+    ground      : "land" or "sea" (default "land"). Selects the
+                  conductivity and the ITU 20/300 MHz β cut. For
+                  pure overland paths use "land"; for overwater paths
+                  (Stollberg, Greny, Telefunken) use "sea".
+    polarization: "vertical" (default; Knickebein is vertical) or
+                  "horizontal"
+
+    β (Eq. 16) and K (Eq. 16a) are computed automatically per the
+    ITU rule: if horizontal pol, or vert pol above 20 MHz over land,
+    or vert pol above 300 MHz over sea, β=1 and the G(Y) clamp is
+    not applied. Otherwise β is calculated from K and the Eq. 18
+    G(Y) lower bound 2 + 20·log10(K) is enforced.
 
     Returns
     -------
     dict with:
         loss_dB   : total diffraction loss (dB, positive)
         F_X_dB    : distance term F(X) (dB, negative)
-        G_Y1_dB   : TX height gain (dB, positive)
-        G_Y2_dB   : RX height gain (dB, positive)
+        G_Y1_dB   : TX height gain (dB, can be negative or positive)
+        G_Y2_dB   : RX height gain (dB, can be negative or positive)
         X         : normalised distance
         Y1        : normalised TX height
         Y2        : normalised RX height
+        beta      : the β used (1.0 or from Eq. 16)
+        K         : the K used for the clamp (0.0 when β=1)
     """
     lam = C / freq
-    X  = itu_normalised_distance(d, lam, a_e)
-    Y1 = itu_normalised_height(h_tx, lam, a_e)
-    Y2 = itu_normalised_height(h_rx, lam, a_e)
+
+    # β and K per ITU-R P.526-16 Eq. 16 + 16a.  For land at ≥31.5 MHz
+    # vert pol this gives β=1 (above the 20 MHz cut).  For sea at
+    # 31.5 MHz vert pol this gives β≈0.81 and K≈0.30 (below 300 MHz).
+    sigma = GROUND_PARAMS[ground][0]
+    beta, K = p526_beta(sigma, freq,
+                        polarization=polarization, ground=ground)
+    K_clamp = K if K > 0.0 else None
+
+    X  = itu_normalised_distance(d, lam, a_e, beta=beta)
+    Y1 = itu_normalised_height(h_tx, lam, a_e, beta=beta)
+    Y2 = itu_normalised_height(h_rx, lam, a_e, beta=beta)
 
     F_X  = itu_distance_term(X)
-    G_Y1 = itu_height_gain(Y1)
-    G_Y2 = itu_height_gain(Y2)
+    G_Y1 = itu_height_gain(Y1, beta=beta, K=K_clamp)
+    G_Y2 = itu_height_gain(Y2, beta=beta, K=K_clamp)
 
     # E/E0 (dB) = F(X) + G(Y1) + G(Y2)
     # F(X) is large negative (signal decays with distance)
-    # G(Y) is positive (height helps)
-    # If the total is negative, there is net diffraction loss.
+    # G(Y) can be positive or negative
     total_dB = F_X + G_Y1 + G_Y2
 
     # Loss is the negative of total (positive = signal weaker)
@@ -337,7 +461,159 @@ def itu_diffraction_loss(d, h_tx, h_rx, freq=FREQ_DEFAULT, a_e=R_EFF):
         G_Y1_dB=G_Y1,
         G_Y2_dB=G_Y2,
         X=X, Y1=Y1, Y2=Y2,
+        beta=beta, K=K,
     )
+
+
+# ================================================================
+#  SOMMERFELD-NORTON PLANE-EARTH GROUND WAVE
+# ================================================================
+#
+# Plane finitely-conducting earth ground-wave field strength per
+# ITU Handbook on Ground Wave Propagation (2014 edition), Part 1
+# §3.2.1, equations (3), (5), (6), (7), (8).  Three-term coherent
+# sum of direct ray, Fresnel-reflected ray, and surface-wave
+# (Norton 1937 attenuation function F).
+#
+# This is the rigorous flat-Earth solution.  For elevated VHF
+# geometries the surface-wave F term is negligible and the result
+# collapses to a coherent two-ray model, producing Fresnel-zone
+# multipath lobes at short range that fade into the Friis envelope
+# past about 300 km.  See /tmp/sommerfeld_norton_check.py for the
+# original derivation and a standalone sweep verification.
+#
+# We include this in the BotB analysis because P.368-10 NOTE 1
+# explicitly references it as the rigorous flat-Earth method, and
+# because it sits between Friis flat-Earth (single ray) and
+# P.526/P.368 globe-diffraction (residue series) in the hierarchy
+# of propagation models.
+# ================================================================
+
+ETA0 = 119.9169832 * np.pi    # intrinsic impedance of free space (Ω)
+
+
+def _sn_dipole_moment_for_power(P_W, freq=FREQ_DEFAULT):
+    """
+    Short vertical Hertzian dipole: P = (η₀/(12π))·(k·I·dl)².
+    Solve for the dipole moment I·dl (A·m) that radiates P_W watts.
+    """
+    k = 2.0 * np.pi * freq / C
+    return np.sqrt(12.0 * np.pi * P_W / ETA0) / k
+
+
+def sommerfeld_norton_Ez(d_m, h_tx_m, h_rx_m, freq, sigma, eps_r,
+                         I_dl):
+    """
+    Vertical-component E field at range d_m over a lossy plane Earth,
+    for a short vertical current element at (0, h_tx_m) radiating to
+    an observer at (d_m, h_rx_m).
+
+    Parameters
+    ----------
+    d_m    : horizontal range in metres
+    h_tx_m : TX height in metres
+    h_rx_m : RX height in metres
+    freq   : Hz
+    sigma  : ground conductivity (S/m)
+    eps_r  : ground relative permittivity
+    I_dl   : dipole moment of a short vertical current element (A·m)
+
+    Returns
+    -------
+    complex E_z in V/m.  Take abs() for magnitude.
+
+    Source: ITU Handbook on Ground Wave Propagation (2014), Part 1
+    §3.2.1, Eq. 3 (three-term vertical component) + 5-8 (attenuation
+    function and numerical distance).  Theory: Sommerfeld (1909) +
+    Norton (1936, 1937, 1941).
+    """
+    from scipy.special import wofz
+
+    lam = C / freq
+    k   = 2.0 * np.pi / lam
+    f_MHz = freq / 1e6
+
+    # Ground electrical parameter x = σ/(ω·ε₀)    (Handbook Eq. 8)
+    x = 1.8e4 * sigma / f_MHz
+
+    # u² = 2/(ε_r − jx)    (Handbook Eq. 7)
+    u2 = 2.0 / (eps_r - 1j * x)
+    u4 = u2 * u2
+
+    # Geometry: direct ray r1 and image-reflected ray r2.
+    dh1 = h_rx_m - h_tx_m
+    dh2 = h_rx_m + h_tx_m
+    r1  = np.sqrt(d_m ** 2 + dh1 ** 2)
+    r2  = np.sqrt(d_m ** 2 + dh2 ** 2)
+    sin_psi1 = dh1 / r1
+    cos_psi1 = d_m / r1
+    sin_psi2 = dh2 / r2
+    cos_psi2 = d_m / r2
+    _ = sin_psi1   # explicit: used implicitly via cos² in Eq. 3
+
+    # Fresnel reflection coefficient for vertical polarisation
+    n2 = eps_r - 1j * x
+    root = np.sqrt(n2 - cos_psi2 ** 2)
+    Rv   = (n2 * sin_psi2 - root) / (n2 * sin_psi2 + root)
+
+    # Numerical distance w    (Handbook Eq. 6)
+    w = (-1j * 2.0 * k * r2 * u2 * (1.0 - u2 * cos_psi2 ** 2)) / (1.0 - Rv)
+
+    # Attenuation function F (Handbook Eq. 5). For |w|>10 the
+    # exp(-w)·erfc(...) form overflows; use the large-argument
+    # asymptotic series instead.
+    if np.abs(w) > 10.0:
+        F = (-1.0 / (2.0 * w)
+             - 3.0 / (2.0 * w) ** 2
+             - 15.0 / (2.0 * w) ** 3
+             - 105.0 / (2.0 * w) ** 4)
+    else:
+        sqrt_w = np.sqrt(w)
+        # wofz(z) = exp(-z²)·erfc(-jz), so exp(-w)·erfc(-j√w) = wofz(√w).
+        F = 1.0 - 1j * np.sqrt(np.pi * w) * wofz(sqrt_w)
+
+    direct    = cos_psi1 ** 2 * np.exp(-1j * k * r1) / r1
+    reflected = cos_psi2 ** 2 * Rv * np.exp(-1j * k * r2) / r2
+    surface   = ((1.0 - Rv) * (1.0 - u2 + u4 * cos_psi2 ** 2)
+                 * F * np.exp(-1j * k * r2) / r2)
+
+    Ez = 1j * 30.0 * k * I_dl * (direct + reflected + surface)
+    return Ez
+
+
+def sommerfeld_norton_snr_peak(d_km, h_tx_m, h_rx_m, ground="sea",
+                                 freq=FREQ_DEFAULT, rx_gain_dBi=3.0):
+    """
+    Sommerfeld-Norton plane-Earth peak SNR above the BotB noise floor.
+
+    Computes |E_z| from the rigorous flat-Earth three-term formula,
+    applies the Knickebein 26 dBi directional TX gain as a field-
+    strength boost on top of the short-dipole baseline, and converts
+    to P_rx at an isotropic-equivalent receiver with the given
+    rx_gain_dBi.
+
+    The short-dipole directivity D = 1.5 (≈1.76 dBi); the
+    directional-array gain enters as sqrt(G_dir_linear / 1.5) on the
+    field-strength side.  This gives the same EIRP-equivalent as the
+    Knickebein 3 kW / 26 dBi Wellenspiegel array in broadside.
+    """
+    I_dl = _sn_dipole_moment_for_power(P_TX, freq=freq)
+    sigma, eps_r = GROUND_PARAMS[ground]
+    Ez = sommerfeld_norton_Ez(d_km * 1000.0, h_tx_m, h_rx_m,
+                               freq, sigma, eps_r, I_dl)
+    SHORT_DIP_D = 1.5
+    extra_gain_lin = (10 ** (G_DIR_dB / 10.0)) / SHORT_DIP_D
+    E_boosted = np.abs(Ez) * np.sqrt(extra_gain_lin)
+    # Convert |E| (V/m) to P_rx via isotropic effective aperture:
+    # P_rx = (|E|²/η₀)·(λ²/(4π))·G_rx_lin
+    lam = C / freq
+    G_rx_lin = 10 ** (rx_gain_dBi / 10.0)
+    A_eff = (lam ** 2 / (4.0 * np.pi)) * G_rx_lin
+    P_rx_W = (E_boosted ** 2 / ETA0) * A_eff
+    if P_rx_W <= 0:
+        return -np.inf
+    P_rx_dBW = 10.0 * np.log10(P_rx_W)
+    return P_rx_dBW - N_FLOOR_dBW
 
 
 # ================================================================
@@ -413,6 +689,12 @@ def load_paths(csv_path=None, csv_name="knickebein_paths.csv"):
             (row for row in f if not row.startswith("#")),
         )
         for row in reader:
+            # ground_type is optional for backwards compat.  If missing
+            # or blank it defaults to "land", which keeps β=1 at VHF
+            # (ITU P.526-16 Eq. 16 allows β=1 for vert pol above 20 MHz
+            # over land).  Overwater paths must set ground_type = "sea".
+            g_raw = row.get("ground_type", "") or ""
+            ground_type = g_raw.strip().lower() or "land"
             paths.append({
                 "path_id":    row["path_id"].strip(),
                 "type":       row["type"].strip(),
@@ -424,6 +706,7 @@ def load_paths(csv_path=None, csv_name="knickebein_paths.csv"):
                 "rx_gain_dbi": float(row["rx_gain_dbi"]),
                 "distance_m": float(row["distance_m"]),
                 "source":     row["source"].strip(),
+                "ground_type": ground_type,
             })
     return paths
 
@@ -452,13 +735,15 @@ def analyse_all_paths(csv_name="knickebein_paths.csv"):
         h_rx    = p["rx_alt_m"]
         freq    = p["freq_mhz"] * 1e6
         rx_gain = p["rx_gain_dbi"]
+        ground  = p.get("ground_type", "land")
 
         # Line of sight
         d_los = line_of_sight(h_tx, h_rx)
         d_shadow = max(0, d - d_los)
 
-        # ITU diffraction (globe model)
-        itu = itu_diffraction_loss(d, h_tx, h_rx, freq)
+        # ITU diffraction (globe model) — β and Eq. 18 clamp picked up
+        # automatically from the ground type (land/sea).
+        itu = itu_diffraction_loss(d, h_tx, h_rx, freq, ground=ground)
 
         # Link budgets
         flat  = link_budget(d, 0.0, freq, rx_gain)
@@ -619,6 +904,7 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
         h_rx = r["rx_alt_m"]
         freq = r["freq_mhz"] * 1e6
         rx_gain = r["rx_gain_dbi"]
+        ground = r.get("ground_type", "land")
 
         # Compute SNR curves from 50 km to max(d+200, 900) km
         # For long paths (>=1000 km), extend d_max further so the
@@ -637,7 +923,7 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
 
         for dk in distances_km:
             dm = dk * 1000.0
-            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq)
+            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq, ground=ground)
             f = link_budget(dm, 0.0, freq, rx_gain)
             g = link_budget(dm, itu_r["loss_dB"], freq, rx_gain)
             flat_snr.append(f["SNR_dB"])
@@ -743,6 +1029,7 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
         h_rx = r["rx_alt_m"]
         freq = r["freq_mhz"] * 1e6
         rx_gain = r["rx_gain_dbi"]
+        ground = r.get("ground_type", "land")
 
         # For long paths (>=1000 km), extend d_max further so the
         # legend in upper right has room away from the intersection
@@ -760,7 +1047,7 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
 
         for dk in distances_km:
             dm = dk * 1000.0
-            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq)
+            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq, ground=ground)
             f = link_budget(dm, 0.0, freq, rx_gain)
             g = link_budget(dm, itu_r["loss_dB"], freq, rx_gain)
             flat_snr.append(f["SNR_dB"])
@@ -864,6 +1151,7 @@ def generate_per_path_graphs_watts(results, outdir=None):
         h_rx = r["rx_alt_m"]
         freq = r["freq_mhz"] * 1e6
         rx_gain = r["rx_gain_dbi"]
+        ground = r.get("ground_type", "land")
 
         # For long paths (>=1000 km), extend d_max further so the
         # legend in upper right has room away from the intersection
@@ -882,7 +1170,7 @@ def generate_per_path_graphs_watts(results, outdir=None):
 
         for dk in distances_km:
             dm = dk * 1000.0
-            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq)
+            itu_r = itu_diffraction_loss(dm, h_tx, h_rx, freq, ground=ground)
             f = link_budget(dm, 0.0, freq, rx_gain)
             g = link_budget(dm, itu_r["loss_dB"], freq, rx_gain)
             flat_watts.append(10.0 ** (f["P_rx_dBW"] / 10.0))

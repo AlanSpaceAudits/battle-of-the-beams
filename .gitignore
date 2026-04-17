@@ -1,39 +1,26 @@
 *.pyc
 __pycache__/
 
-# Generated per-path graphs are not tracked except for the Telefunken series.
-# run_all_systems.py regenerates all of them locally; only the Telefunken ones
-# are committed because those are the figures used in the prezzie/null doc.
+# X-Gerät / Y-Gerät per-path bar charts live in their XGerat/graphs and
+# YGerat/graphs directories and are regenerable from the CSVs + library.
+# Only the CSVs are tracked; PNGs stay local.
+XGerat/graphs/
+YGerat/graphs/
+
+# Legacy flat-layout artefacts that should not come back if someone
+# accidentally re-runs an old script.
 kb_bauer_max.png
 kb_bh_*.png
 kb_gr_*.png
 kb_kl_*.png
 kb_st_*.png
-kbeq_bauer_max.png
-kbeq_bh_*.png
-kbeq_gr_*.png
-kbeq_kl_*.png
-kbeq_st_*.png
-xg_*.png
-xgeq_*.png
-yg_*.png
-ygeq_*.png
-
-# Station maps, master comparisons, legacy graphs
+kb_tf_*.png
+kbeq_*.png
 map_*.png
 botb_snr_*.png
 itu_master_comparison.png
 shatz_validation_comparison.png
-
-# Non-Telefunken bar graphs
-bargraph_flat_vs_globe.png
-bargraph_kleve_spalding.png
-bargraph_stollberg_beeston.png
-
-# P.526 vs P.368 GRWAVE comparison graphs (regenerated locally, vault copy
-# is the canonical one consumed by the prezzie and null hypothesis docs)
-p526_vs_p368_*.png
-
-# Vendored clone of space-physics/grwave (separate upstream repo, not
-# part of the BotB source tree)
-grwave/
+telefunken_4000m_*.txt
+botb_analysis_output.txt
+itu_analysis_output.txt
+equisignal_*.txt

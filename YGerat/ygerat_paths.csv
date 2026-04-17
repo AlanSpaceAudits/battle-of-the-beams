@@ -1,0 +1,76 @@
+# Y-Gerät (Wotan II, "Benito") station-to-target path dataset
+# =================================================================
+# Y-Gerät was a ranging system using a ground transponder interrogation
+# with aircraft retransmission. Distance measured by phase comparison
+# of modulation tones (300 Hz coarse, 3 kHz or 7.5 kHz fine).
+#
+# Station coordinates: Jones (2009) Ch. 21 "Wotan's Other Eye" pp.172-178
+#                      + Price (2017) p.49 + Bauer (2004) pp.12-16
+# Elevations: DEM verified + ~20m antenna/bunker for large stations
+#
+# Cassel (Mont Cassel, Nord, France): 50.8006 N, 2.4883 E, 176m summit
+#   + 20m mast = 196m effective
+# Beaumont-Hague (Hague peninsula): 49.6733 N, -1.8525 W, 182m plateau
+#   + 15m antenna = 197m effective (same site as Knickebein K09,
+#   christianch.ch Kink leg article confirms terrain and coordinates)
+# Poix (Poix-en-Picardie airfield): 49.8103 N, 1.9769 E, ~106m
+#   + 20m mast = 126m effective
+#
+# Frequencies: 42.1-47.9 MHz band (Taylor 2020)
+#   Cassel downlink: 42.5 MHz, aircraft uplink: 46.9 MHz (Jones p.175)
+#   Using 45.0 MHz nominal for both directions
+# Modulation: 180 directional signals/min, ratio 8:8:1 (Bauer p.15)
+# Ranging: 300 Hz coarse (500 km), 3 kHz fine (50 km), 7.5 kHz (20 km)
+#
+# Airborne transponder: FuG 17 E (42.1-47.9 MHz, 8 W)
+#   NOT FuG 28a as sometimes claimed (per Bauer p.14)
+#
+# Bombing altitude: 6000m standard
+# Receiver: Siemens/Graetz e-Messgerät ground console
+#
+# Sources: Jones pp.172-178; Price pp.47-50; Bauer pp.12-16;
+#          Taylor (2020) "Battling the Beams" RadCom pp.82-84
+# =================================================================
+#
+path_id,type,target,tx_station,tx_lat,tx_lon,tx_alt_m,rx_lat,rx_lon,rx_alt_m,freq_mhz,rx_gain_dbi,distance_m,source,ground_type
+# =================================================================
+# LIVERPOOL/BIRKENHEAD 3 May 1941 (key raid - 3 Heinkels shot down,
+# Y-Gerät captured for analysis, Benjamin jammer developed)
+# =================================================================
+YG_LIV_CASSEL,operational,Liverpool/Birkenhead (3 May 1941),Cassel (Wotan II),50.8006,2.4883,196,53.4084,-2.9916,6000,45.0,3,473236,Price p.49; Taylor p.84,sea
+YG_LIV_HAGUE,operational,Liverpool/Birkenhead,Beaumont-Hague (Wotan II),49.6733,-1.8525,197,53.4084,-2.9916,6000,45.0,3,422714,Price p.49; Jones p.174,sea
+YG_LIV_POIX,operational,Liverpool/Birkenhead,Poix (III/KG 26 base),49.8103,1.9769,126,53.4084,-2.9916,6000,45.0,3,526800,Price p.49,sea
+# =================================================================
+# BOVINGTON CAMP DORSET - "Target No. 1 for Y"
+# First confirmed operational target, Enigma decrypt 6 Oct 1940
+# Coordinates: 50 41' 49.2" N, 2 14' 21.2" W (Jones p.173)
+# =================================================================
+YG_BOV_HAGUE,operational,Bovington Camp (Target No. 1),Beaumont-Hague,49.6733,-1.8525,197,50.6970,-2.2392,6000,45.0,3,117112,Jones p.173 (Enigma 6 Oct 1940),sea
+YG_BOV_CASSEL,operational,Bovington Camp,Cassel (Wotan II),50.8006,2.4883,196,50.6970,-2.2392,6000,45.0,3,332748,Jones p.173,sea
+# =================================================================
+# PORTLAND (first Y-beam raid, September 1940)
+# =================================================================
+YG_PORT_HAGUE,operational,Portland (Sep 1940 first raid),Beaumont-Hague,49.6733,-1.8525,197,50.5440,-2.4418,6000,45.0,3,106000,Bauer p.15,sea
+YG_PORT_CASSEL,operational,Portland,Cassel (Wotan II),50.8006,2.4883,196,50.5440,-2.4418,6000,45.0,3,348530,Bauer p.15,sea
+# =================================================================
+# LONDON - primary target for Y-beam III/KG 26 operations
+# =================================================================
+YG_LON_CASSEL,operational,London (Benito raids),Cassel (Wotan II),50.8006,2.4883,196,51.5074,-0.1278,6000,45.0,3,198651,Price p.49,sea
+YG_LON_HAGUE,operational,London,Beaumont-Hague,49.6733,-1.8525,197,51.5074,-0.1278,6000,45.0,3,237505,Price p.49,sea
+YG_LON_POIX,operational,London,Poix (III/KG 26 base),49.8103,1.9769,126,51.5074,-0.1278,6000,45.0,3,240025,Price p.49,sea
+# =================================================================
+# BIRMINGHAM - Y-beam raids during Blitz
+# =================================================================
+YG_BIR_CASSEL,operational,Birmingham (Y-beam raids),Cassel (Wotan II),50.8006,2.4883,196,52.4862,-1.8904,6000,45.0,3,355463,Jones p.176,sea
+YG_BIR_HAGUE,operational,Birmingham,Beaumont-Hague,49.6733,-1.8525,197,52.4862,-1.8904,6000,45.0,3,312791,Jones p.176,sea
+YG_BIR_POIX,operational,Birmingham,Poix,49.8103,1.9769,126,52.4862,-1.8904,6000,45.0,3,401512,Jones p.176,sea
+# =================================================================
+# DERBY - attempted target for Y-beam
+# =================================================================
+YG_DER_CASSEL,operational,Derby (Y-beam),Cassel (Wotan II),50.8006,2.4883,196,52.9220,-1.4750,6000,45.0,3,360066,Jones p.167,sea
+YG_DER_HAGUE,operational,Derby,Beaumont-Hague,49.6733,-1.8525,197,52.9220,-1.4750,6000,45.0,3,362190,Jones p.167,sea
+# =================================================================
+# MANCHESTER area
+# =================================================================
+YG_MAN_CASSEL,operational,Manchester,Cassel (Wotan II),50.8006,2.4883,196,53.4808,-2.2426,6000,45.0,3,439205,Jones p.174,sea
+YG_MAN_HAGUE,operational,Manchester,Beaumont-Hague,49.6733,-1.8525,197,53.4808,-2.2426,6000,45.0,3,424230,Jones p.174,sea
