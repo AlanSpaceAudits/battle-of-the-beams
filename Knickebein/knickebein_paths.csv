@@ -22,33 +22,38 @@ path_id,type,target,tx_station,tx_lat,tx_lon,tx_alt_m,rx_lat,rx_lon,rx_alt_m,fre
 # β=1 for land (above the 20 MHz cut) and β≈0.81 for sea (below
 # the 300 MHz cut). It matches the same ground electrical parameters
 # that make_p526_vs_p368_graphs.py feeds to the GRWAVE driver.
-KL_DERBY,operational,Derby (Rolls-Royce),Kleve (Kn-4),51.7886,6.1031,111,52.9220,-1.4750,6000,31.5,3,529000,Jones p.182; Price p.38,land
-ST_DERBY,operational,Derby (Rolls-Royce),Stollberg (Kn-2),54.6436,8.9447,72,52.9220,-1.4750,6000,31.5,3,711000,Jones p.182; Price p.38,sea
-KL_BIRMINGHAM,operational,Birmingham,Kleve (Kn-4),51.7886,6.1031,111,52.4862,-1.8904,6000,31.5,3,550000,Price p.38 caption,land
-ST_BIRMINGHAM,operational,Birmingham,Stollberg (Kn-2),54.6436,8.9447,72,52.4862,-1.8904,6000,31.5,3,754000,Price p.38 caption,sea
-GR_LONDON,operational,London,Greny (Kn-7),49.9467,1.2900,162,51.5074,-0.1278,6000,31.5,3,201000,Price p.37,sea
-BH_LONDON,operational,London,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.5074,-0.1278,6000,31.5,3,237000,Price p.37,sea
-BH_CARDIFF,operational,Cardiff,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.4816,-3.1791,6000,31.5,3,222000,Price p.38 caption,sea
-BH_PLYMOUTH,operational,Plymouth,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,50.3755,-4.1427,6000,31.5,3,181000,Price p.38 caption,sea
-ST_LIVERPOOL,operational,Liverpool,Stollberg (Kn-2),54.6436,8.9447,72,53.4084,-2.9916,6000,31.5,3,791000,Price p.35 (likely),sea
+KL_DERBY,operational,Derby (Rolls-Royce),Kleve (Kn-4),51.7886,6.1031,111,52.9220,-1.4750,6000,31.5,0,529000,Jones p.182; Price p.38,land
+ST_DERBY,operational,Derby (Rolls-Royce),Stollberg (Kn-2),54.6436,8.9447,72,52.9220,-1.4750,6000,31.5,0,711000,Jones p.182; Price p.38,sea
+KL_BIRMINGHAM,operational,Birmingham,Kleve (Kn-4),51.7886,6.1031,111,52.4862,-1.8904,6000,31.5,0,550000,Price p.38 caption,land
+ST_BIRMINGHAM,operational,Birmingham,Stollberg (Kn-2),54.6436,8.9447,72,52.4862,-1.8904,6000,31.5,0,754000,Price p.38 caption,sea
+GR_LONDON,operational,London,Greny (Kn-7),49.9467,1.2900,162,51.5074,-0.1278,6000,31.5,0,201000,Price p.37,sea
+BH_LONDON,operational,London,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.5074,-0.1278,6000,31.5,0,237000,Price p.37,sea
+BH_CARDIFF,operational,Cardiff,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,51.4816,-3.1791,6000,31.5,0,222000,Price p.38 caption,sea
+BH_PLYMOUTH,operational,Plymouth,Beaumont-Hague (Kn-9),49.6733,-1.8525,197,50.3755,-4.1427,6000,31.5,0,181000,Price p.38 caption,sea
+ST_LIVERPOOL,operational,Liverpool,Stollberg (Kn-2),54.6436,8.9447,72,53.4084,-2.9916,6000,31.5,0,791000,Price p.35 (likely),sea
 # ================================================================
 # BEAM MEASUREMENT / DETECTION EVENTS
 # ================================================================
-KL_SPALDING,measurement,Spalding,Kleve (Kn-4),51.7886,6.1031,111,52.7870,-0.1530,6000,31.5,3,439000,Jones p.181 (Bufton 21 Jun 1940),land
-ST_BEESTON,measurement,Beeston,Stollberg (Kn-2),54.6436,8.9447,72,52.9270,-1.2150,6000,30.0,3,694000,Jones p.181 (Bufton 21 Jun 1940),sea
-KL_RETFORD,intercept,Retford,Kleve (Kn-4),51.7886,6.1031,111,53.4000,-1.0000,6000,31.5,3,512000,Jones p.163 (Enigma 5 Jun 1940),land
+KL_SPALDING,measurement,Spalding,Kleve (Kn-4),51.7886,6.1031,111,52.7870,-0.1530,6000,31.5,0,439000,Jones p.181 (Bufton 21 Jun 1940),land
+ST_BEESTON,measurement,Beeston,Stollberg (Kn-2),54.6436,8.9447,72,52.9270,-1.2150,6000,30.0,0,694000,Jones p.181 (Bufton 21 Jun 1940),sea
+KL_RETFORD,intercept,Retford,Kleve (Kn-4),51.7886,6.1031,111,53.4000,-1.0000,6000,31.5,0,512000,Jones p.163 (Enigma 5 Jun 1940),land
 # ================================================================
 # TELEFUNKEN TEST RANGES (Sep 1939, 4000m alt, over sea)
-# TX from Kleve or Stollberg (the only stations built by Sep 1939)
-# Using Stollberg specs (73m) as the likely test station (North Sea)
+# TX from Stollberg Kn-2 (operational by Sep 1939, on the North Sea coast)
+# Targets placed along the true great-circle track from Stollberg on a
+# westward bearing (~272°), so coordinates drift slightly south as
+# distance grows (natural great-circle curvature from 54.6° N).
+# Haversine from Stollberg to each target matches the nominal range
+# column within ~0.2 %.  Revised 2026-04-19 after matching the ITU
+# calculator's Haversine column to the sheet dropdown coordinates.
 # ================================================================
-TF_400,telefunken,400km (FuBl1 rod),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,3.1,4000,31.5,0,400000,Telefunken Sep 1939,sea
-TF_500,telefunken,500km (FuBl1 wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,1.8,4000,31.5,0,500000,Telefunken Sep 1939,sea
-TF_700,telefunken,700km (regen rod),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-1.2,4000,31.5,3,700000,Telefunken Sep 1939,sea
-TF_800,telefunken,800km (regen wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-2.6,4000,31.5,5,800000,Telefunken Sep 1939,sea
-TF_1000,telefunken,1000km (special xdip),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-5.5,4000,31.5,10,1000000,Telefunken Sep 1939,sea
-TF_1000B,telefunken,1000km (special wire),Stollberg (Kn-2),54.6436,8.9447,72,54.6436,-5.5,4000,31.5,15,1000000,Telefunken Sep 1939,sea
+TF_400,telefunken,400km (FuBl1 rod),Stollberg (Kn-2),54.6436,8.9447,72,54.58988,2.51862,4000,31.5,0,400000,Telefunken Sep 1939,sea
+TF_500,telefunken,500km (FuBl1 wire),Stollberg (Kn-2),54.6436,8.9447,72,54.51462,1.11256,4000,31.5,0,500000,Telefunken Sep 1939,sea
+TF_700,telefunken,700km (regen rod),Stollberg (Kn-2),54.6436,8.9447,72,54.34229,-1.93256,4000,31.5,3,700000,Telefunken Sep 1939,sea
+TF_800,telefunken,800km (regen wire),Stollberg (Kn-2),54.6436,8.9447,72,54.21146,-3.49930,4000,31.5,5,800000,Telefunken Sep 1939,sea
+TF_1000,telefunken,1000km (special xdip),Stollberg (Kn-2),54.6436,8.9447,72,53.93189,-6.44609,4000,31.5,10,1000000,Telefunken Sep 1939,sea
+TF_1000B,telefunken,1000km (special wire),Stollberg (Kn-2),54.6436,8.9447,72,53.93189,-6.44609,4000,31.5,15,1000000,Telefunken Sep 1939,sea
 # ================================================================
 # BAUER MAX RATED RANGE (6500m altitude)
 # ================================================================
-BAUER_MAX,telefunken,500km max rated,Kleve (Kn-4),51.7886,6.1031,111,52.0,0.0,6500,31.5,3,500000,Bauer (2004) p.12,land
+BAUER_MAX,telefunken,500km max rated,Kleve (Kn-4),51.7886,6.1031,111,52.0,0.0,6500,31.5,0,500000,Bauer (2004) p.12,land

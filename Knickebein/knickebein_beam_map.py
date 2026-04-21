@@ -146,8 +146,10 @@ def draw_countries(ax, lon_min, lon_max, lat_min, lat_max,
 
 
 # ---------------------------------------------------------------- beam draw
-def draw_beam(ax, tx, rx, status, label_extra=""):
-    end_c, end_d, end_s = beam_geometry(tx, rx, DRAW_HALF, EXTEND)
+def draw_beam(ax, tx, rx, status, label_extra="", extend=None):
+    if extend is None:
+        extend = EXTEND
+    end_c, end_d, end_s = beam_geometry(tx, rx, DRAW_HALF, extend)
 
     if status == "operational":
         dot_c, dash_c, eq_c = "#C040E0", "#3070E0", "#FFE640"
@@ -343,9 +345,98 @@ beams_to_draw = [
     (STOLLBERG, DERBY, "phantom"),       # passes through BEESTON
 ]
 
+
+# ---- SN / Fock strength wedges along the Kleve→Derby centreline -------
+# Green = Sommerfeld-Norton flat-Earth (stays USABLE the whole way).
+# Pink  = P.526 Fock globe diffraction: solid until the equisignal
+#         crosses the noise floor, hatched from that crossover onward
+#         (UNUSABLE). Ported from the Telefunken variant; scales linearly
+#         along the Kleve beam (no VISUAL_FRACS piecewise).
+def _fock_eq_vrx_uv(d_km, tx_m, rx_m, ground):
+    snr_peak = p526_snr_peak(d_km, tx_m=tx_m, rx_m=rx_m, ground_name=ground)
+    return NOISE_UV * 10 ** ((snr_peak + CROSSOVER_dB) / 20.0)
+
+
+def _find_fock_crossover_km(tx_m, rx_m, ground, d_lo=100, d_hi=1200, step=2):
+    for d in range(d_lo, d_hi + 1, step):
+        if _fock_eq_vrx_uv(d, tx_m, rx_m, ground) < NOISE_UV:
+            return d
+    return d_hi
+
+
+def draw_fe_ge_wedges(ax, tx, rx, distance_km, beam_end_km, crossover_km,
+                       half_deg=0.9):
+    """Green SN + pink Fock wedges hugging the yellow equisignal centreline.
+    Green extends to beam_end_km; pink goes solid to crossover_km and
+    hatched from there to beam_end_km."""
+    txu, txv = to_uv(*tx)
+    rxu, rxv = to_uv(*rx)
+    du, dv = rxu - txu, rxv - txv
+    length_full = math.hypot(du, dv)      # projected length of TX→RX (= distance_km)
+    angle_c = math.atan2(dv, du)
+    h_rad = math.radians(half_deg)
+
+    def edge_pt(d_km, sign):
+        L = length_full * (d_km / distance_km)
+        a = angle_c + sign * h_rad
+        return from_uv(txu + L * math.cos(a), txv + L * math.sin(a))
+
+    def los_pt(d_km):
+        frac = d_km / distance_km
+        return from_uv(txu + frac * du, txv + frac * dv)
+
+    # Green FE wedge: TX → edge at beam_end (dot side) → LoS at beam_end → TX
+    g_edge = edge_pt(beam_end_km, -1)
+    g_tip = los_pt(beam_end_km)
+    ax.fill([tx[1], g_edge[1], g_tip[1]],
+            [tx[0], g_edge[0], g_tip[0]],
+            facecolor="#00E676", alpha=0.55,
+            edgecolor="#00E676", linewidth=0.6, zorder=3.4)
+
+    # Pink Fock solid wedge: TX → edge at crossover (dash side) → LoS at crossover → TX
+    co = min(crossover_km, beam_end_km)
+    p_edge_x = edge_pt(co, +1)
+    p_tip_x = los_pt(co)
+    ax.fill([tx[1], p_edge_x[1], p_tip_x[1]],
+            [tx[0], p_edge_x[0], p_tip_x[0]],
+            facecolor="#FF3399", alpha=0.55,
+            edgecolor="#FF3399", linewidth=0.6, zorder=3.4)
+
+    # Pink Fock hatched trapezoid: crossover → beam end (UNUSABLE past here)
+    if co < beam_end_km:
+        p_edge_end = edge_pt(beam_end_km, +1)
+        p_tip_end = los_pt(beam_end_km)
+        ax.add_patch(MplPolygon(
+            [(p_tip_x[1], p_tip_x[0]),
+             (p_edge_x[1], p_edge_x[0]),
+             (p_edge_end[1], p_edge_end[0]),
+             (p_tip_end[1], p_tip_end[0])],
+            closed=True, facecolor="none", edgecolor="#FF3399",
+            linewidth=0.5, hatch="///", alpha=0.55, zorder=3.4))
+
+
+KLEVE_FOCK_CROSSOVER_KM = _find_fock_crossover_km(111, 6000, "land")
+STOLL_FOCK_CROSSOVER_KM = _find_fock_crossover_km(72, 6000, "sea")
+
+# Both yellow beams span 1000 km physical so the reader can compare
+# Kleve vs Stollberg reach at a glance. Per-beam extend = 1000 / TX→Derby km.
+BEAM_VISUAL_KM = 1000
+
 plane_done = False
 for tx, rx, status in beams_to_draw:
-    end_c = draw_beam(ax, tx, rx, status)
+    distance_km = gc_distance_km(tx, rx)
+    beam_extend = BEAM_VISUAL_KM / distance_km
+    end_c = draw_beam(ax, tx, rx, status, extend=beam_extend)
+    # Wedges run along the equisignal centreline to the beam tip (1000 km).
+    # Kleve uses 111 m / land; Stollberg uses 72 m / sea.
+    if tx is KLEVE and status == "operational":
+        draw_fe_ge_wedges(ax, tx, rx, distance_km,
+                          beam_end_km=BEAM_VISUAL_KM,
+                          crossover_km=KLEVE_FOCK_CROSSOVER_KM)
+    elif tx is STOLLBERG:
+        draw_fe_ge_wedges(ax, tx, rx, distance_km,
+                          beam_end_km=BEAM_VISUAL_KM,
+                          crossover_km=STOLL_FOCK_CROSSOVER_KM)
     if not plane_done and tx is KLEVE:
         # fly the equisignal over the North Sea, between Kleve and the
         # English coast -- well clear of the Derby/Spalding label cluster.
@@ -432,39 +523,32 @@ ax.set_title("Knickebein 31.5 MHz \u2014 Kleve & Stollberg beams crossing over D
              "He 111 H-3 riding the Kleve\u2192Derby equisignal (via Spalding)",
              fontsize=12.5, fontweight="bold", color="white", pad=14)
 
-# --- Top section: two side-by-side columns ---------------------------
+# --- Top section ------------------------------------------------------
 knickebein_section = [
     ("Knickebein 31.5 MHz, 3 kW", "#FFFFFF", True),
     ("  DOT  (purple)",           "#C040E0", False),
     ("  DASH (blue)",             "#3070E0", False),
     ("  EQUI (yellow)",           "#FFE640", False),
 ]
-beams_section = [
-    ("Equisignal Beam Dist to Target (km)",                             "#FFFFFF", True),
-    (f"  Kleve     \u2192 Spalding {D_KLEVE_SPALDING:>4.0f} km",        "#FFE640", False),
-    (f"  Kleve     \u2192 Derby    {D_KLEVE_DERBY:>4.0f} km",           "#FFE640", False),
-    (f"  Stollberg \u2192 Beeston  {D_STOLLBERG_BEESTON:>4.0f} km",     "#A89020", False),
-    (f"  Stollberg \u2192 Derby    {D_STOLLBERG_DERBY:>4.0f} km",       "#A89020", False),
-]
 # --- Bottom section: full-width Signal Strength ---------------------
+# Target distances live inside the inset bar-chart labels (e.g.
+# "Kleve→Spalding 440 km"), so the standalone "Equisignal Beam Dist to
+# Target" block is redundant and has been removed for the compact layout.
 signal_section = [
     ("Equisignal Strength in \u00b5V", "#FFFFFF", True),
-    ("  \u25A0  Friis / SN FE", "#3CD46A",
-     f"\u2500  noise floor  {NOISE_UV:.2f} \u00b5V", "#FFFFFF"),
-    ("  \u25A0  P.526 Fock (globe)", "#FF3399",
-     "\u254C  RX sensitivity  1 \u00b5V", "#FFFFFF"),
+    ("  \u25A0  Sommerfeld-Norton FE", "#3CD46A", False),
+    ("  \u25A0  P.526 Fock (globe)", "#FF3399", False),
+    (f"  \u2500  noise floor  {NOISE_UV:.2f} \u00b5V", "#FFFFFF", False),
 ]
 
-legend_x       = 0.012
-right_col_x    = 0.175   # x where the right top-column starts (Beams shown)
+legend_x       = 0.012   # top-left corner of the map
 line_h         = 0.024
 blank_h        = line_h * 0.40
-legend_w       = 0.390   # full width of the legend block (axes fraction)
-COL2_OFFSET    = 0.175   # 2-column offset inside Signal Strength rows
+legend_w       = 0.150
 LEG_FONTSIZE   = 9.5
 
 # Heights (in axes fraction)
-top_section_rows  = max(len(knickebein_section), len(beams_section))
+top_section_rows  = len(knickebein_section)
 top_section_h     = top_section_rows * line_h
 sig_section_h     = len(signal_section) * line_h
 legend_block_h    = top_section_h + blank_h + sig_section_h + 0.020
@@ -486,27 +570,15 @@ def _draw_row(x, y, text, color, bold):
             family="monospace", va="top", ha="left", zorder=25)
 
 
-# --- top-left: Knickebein column ---
+# --- top: Knickebein column ---
 y0 = legend_top_y - 0.010
 for i, (text, color, bold) in enumerate(knickebein_section):
     _draw_row(legend_x, y0 - i * line_h, text, color, bold)
 
-# --- top-right: Beams shown column ---
-y0 = legend_top_y - 0.010
-for i, (text, color, bold) in enumerate(beams_section):
-    _draw_row(right_col_x, y0 - i * line_h, text, color, bold)
-
-# --- bottom: Signal Strength (with internal 2-column row support) ---
+# --- bottom: Signal Strength ---
 y0 = legend_top_y - top_section_h - blank_h - 0.010
-for i, entry in enumerate(signal_section):
-    y = y0 - i * line_h
-    if len(entry) == 3:
-        text, color, bold = entry
-        _draw_row(legend_x, y, text, color, bold)
-    else:
-        lt, lc, rt, rc = entry
-        _draw_row(legend_x, y, lt, lc, False)
-        _draw_row(legend_x + COL2_OFFSET, y, rt, rc, False)
+for i, (text, color, bold) in enumerate(signal_section):
+    _draw_row(legend_x, y0 - i * line_h, text, color, bold)
 
 # ---------------------------------------------------------------- inset
 # Mini horizontal bar chart of predicted field strength at each target.
@@ -517,21 +589,26 @@ for i, entry in enumerate(signal_section):
 # line at the +0 dB receiver noise floor (0.195 μV into 50 Ω).
 inset = ax.inset_axes([0.012, 0.025, 0.358, 0.270])
 inset.set_xscale("log")
-inset.set_xlim(0.02, 3e5)
+# Match the Telefunken variant's x-range so the UNUSABLE text at the
+# left edge sits inside the chart box (wider log spans visually compress
+# the 0.02..0.1 μV band off-screen).
+inset.set_xlim(0.02, 3e3)
 inset.set_facecolor("#0a0e1c")
 for s in inset.spines.values():
     s.set_edgecolor("#3a4258")
 
-n = len(PREDICTIONS)
+# Order by descending distance so the hardest path (weakest signal) sits
+# at the top of the chart, matching the Telefunken variant's layout.
+PREDICTIONS_SORTED = sorted(PREDICTIONS, key=lambda p: p["d"], reverse=True)
+
+n = len(PREDICTIONS_SORTED)
 bar_h = 0.20
 group_h = 0.72
 y_centres = []
-for i, p in enumerate(PREDICTIONS):
+for i, p in enumerate(PREDICTIONS_SORTED):
     y0 = (n - 1 - i) * group_h
     # Path label lives INSIDE the chart, just above this group's green bar.
-    # Colour mirrors the main legend: Kleve paths yellow, Stollberg amber,
-    # so the bar-chart tags conceptually link to the "Equisignal Beam
-    # Dist to Target" section.
+    # Colour encodes the TX: Kleve paths bright yellow, Stollberg amber.
     label_color = "#FFE640" if p["name"].startswith("Kleve") else "#A89020"
     inset.text(0.025, y0 + bar_h/2 + 0.04 + 0.20,
                f"{p['name']}  {p['d']:.0f} km",
@@ -539,7 +616,7 @@ for i, p in enumerate(PREDICTIONS):
                fontweight="bold", zorder=30)
     inset.barh(y0 + bar_h/2 + 0.04, p["sn"],   height=bar_h,
                color="#3CD46A", edgecolor="#3CD46A", alpha=0.85,
-               label="Friis / SN flat-Earth" if i == 0 else None)
+               label="Sommerfeld-Norton FE" if i == 0 else None)
     inset.barh(y0 - bar_h/2 - 0.04, p["fock"], height=bar_h,
                color="#FF3399", edgecolor="#FF3399", alpha=0.85,
                label="P.526 Fock (globe)" if i == 0 else None)
@@ -548,12 +625,17 @@ for i, p in enumerate(PREDICTIONS):
         sn_lbl = f"{p['sn']:,.0f} \u00b5V"
     else:
         sn_lbl = f"{p['sn']:.0f} \u00b5V"
+    # Decimal notation so sub-μV values read as 0.020 / 0.012 rather than
+    # scientific notation.
     if p["fock"] >= 10:
         fk_lbl = f"{p['fock']:.1f} \u00b5V"
     elif p["fock"] >= 1:
         fk_lbl = f"{p['fock']:.2f} \u00b5V"
+    elif p["fock"] > 0:
+        _places = max(3, -int(math.floor(math.log10(p["fock"]))) + 1)
+        fk_lbl = f"{p['fock']:.{_places}f} \u00b5V"
     else:
-        fk_lbl = f"{p['fock']:.3f} \u00b5V"
+        fk_lbl = "0 \u00b5V"
     # Green-bar value: inside the bar, right-aligned near the tip, white.
     inset.text(p["sn"] * 0.96, y0 + bar_h/2 + 0.04, sn_lbl,
                fontsize=8.0, color="#FFFFFF", va="center", ha="right",
@@ -565,33 +647,38 @@ for i, p in enumerate(PREDICTIONS):
                    fontsize=8.0, color="#FFFFFF", va="center", ha="right",
                    fontweight="bold")
     else:
-        # Marginal/Unusable bars are too short to fit the value inside.
-        # Anchor the value at a single fixed x for both so they line up
-        # vertically (matches the Unusable position).
         inset.text(0.366, y0 - bar_h/2 - 0.04, fk_lbl,
                    fontsize=8.0, color="#FFFFFF", va="center", ha="left",
                    fontweight="bold")
     # Green bar is always USABLE (SN flat-Earth always clears the noise
     # floor at these distances / powers).
-    inset.text(0.028, y0 + bar_h/2 + 0.04, "USABLE",
-               fontsize=8.0, color="#FFFFFF", va="center", ha="left",
+    inset.text(0.040, y0 + bar_h/2 + 0.04, "USABLE",
+               fontsize=7.0, color="#FFFFFF", va="center", ha="center",
                fontweight="bold")
-    # Pink bar gets its own USABLE / Marginal / Unusable based on the
-    # Fock-diffraction prediction.
-    fock_status = ("USABLE" if p["fock"] >= 1.0 else
-                   "Marginal" if p["fock"] >= NOISE_UV else
-                   "Unusable")
-    inset.text(0.028, y0 - bar_h/2 - 0.04, fock_status,
-               fontsize=8.0, color="#FFFFFF", va="center", ha="left",
-               fontweight="bold")
+    # Pink bar: binary USABLE / UNUSABLE relative to the noise floor
+    # (matches the Telefunken variant; drops the separate Marginal tier).
+    fock_status = "USABLE" if p["fock"] >= NOISE_UV else "UNUSABLE"
+    if fock_status == "UNUSABLE":
+        inset.barh(y0 - bar_h/2 - 0.04, NOISE_UV, height=bar_h,
+                   facecolor="none", edgecolor="#FF3399",
+                   linewidth=0.3, hatch="///", alpha=0.45, zorder=2)
+    # Hatched extension: from where the solid (or UNUSABLE-hatched) pink
+    # visually terminates out to where the green FE bar ends. Makes the
+    # Fock-vs-SN signal gap read at a glance.
+    pink_end = p["fock"] if fock_status == "USABLE" else NOISE_UV
+    if p["sn"] > pink_end:
+        inset.barh(y0 - bar_h/2 - 0.04, p["sn"] - pink_end, height=bar_h,
+                   left=pink_end, facecolor="none", edgecolor="#FF3399",
+                   linewidth=0.3, hatch="///", alpha=0.45, zorder=2)
+    inset.text(0.040, y0 - bar_h/2 - 0.04, fock_status,
+               fontsize=7.0, color="#FFFFFF", va="center", ha="center",
+               fontweight="bold", zorder=5)
 
 inset.set_yticks([])  # labels now live inside the chart above each group
 inset.set_ylim(-0.36, (n - 1) * group_h + 0.45)
 
-# noise-floor and detectability guide lines (legend explains colours)
+# noise-floor guide line (legend explains colours)
 inset.axvline(NOISE_UV, color="#FFFFFF", linewidth=1.0, alpha=0.85, zorder=4)
-inset.axvline(1.0, color="#FFFFFF", linewidth=0.9,
-              alpha=0.65, linestyle=(0, (4, 3)), zorder=4)
 
 inset.tick_params(axis="x", labelsize=7.5, colors="#D6D6E0", pad=1)
 inset.tick_params(axis="y", colors="#D6D6E0", length=0, pad=2)
@@ -603,6 +690,6 @@ inset.tick_params(axis="y", colors="#D6D6E0", length=0, pad=2)
 # inside the plot area so it doesn't force matplotlib to rescale.
 
 plt.tight_layout()
-plt.savefig(os.path.join(_HERE, "graphs", "knickebein_beam_map.png"), dpi=140,
+plt.savefig(os.path.join(_HERE, "graphs", "ITU_Calc_knickebein_beam_map.png"), dpi=140,
             bbox_inches="tight", facecolor=fig.get_facecolor())
-print("Saved knickebein_beam_map.png")
+print("Saved ITU_Calc_knickebein_beam_map.png")

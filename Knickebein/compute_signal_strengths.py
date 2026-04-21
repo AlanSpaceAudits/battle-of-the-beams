@@ -80,14 +80,35 @@ PATHS = [
     ("Stollberg→Birmingham", 754,  72, 6000, "sea"),
     ("Stollberg→Liverpool",  791,  72, 6000, "sea"),
 
-    # Telefunken July 1939 over-sea range tests
-    # (TX 72 m Stollberg-class, RX 4000 m test aircraft, seawater)
+    # Telefunken July 1939 range tests — labelled as "Kl → TF" on the
+    # beam-map inset because we only need ONE solid comparison: if Kleve
+    # can't reach these distances, Stollberg (which has a shorter TX, 72 m
+    # vs 111 m) cannot either.
+    #
+    # IMPORTANT: the "TF X km" label names the Telefunken-test range from
+    # STOLLBERG (since the 1939 tests were flown from Stollberg westward).
+    # Kleve's Haversine distance to that same target point is SHORTER
+    # because Kleve sits SW of Stollberg.  The d_km column below is the
+    # actual Kleve→target great-circle distance that matches the
+    # ITU_Calculator sheet's `P2` cell for each target — it is NOT the
+    # nominal TF test range.  Numbers match the spreadsheet dropdown to
+    # within 1 km.
+    #
+    # TX 111 m = Kleve terrain + 28 m Trenkle antenna frame
+    # ground="sea" because the historical test flights ran over the North
+    # Sea / Irish Sea, even though the Kleve TX is based on land.
     # Source: BArch RL 19-6/40 ref. 230Q8 App. 2
-    ("TF_400km",             400,  72, 4000, "sea"),
-    ("TF_500km",             500,  72, 4000, "sea"),
-    ("TF_700km",             700,  72, 4000, "sea"),
-    ("TF_800km",             800,  72, 4000, "sea"),
-    ("TF_1000km",           1000,  72, 4000, "sea"),
+    ("TF_400km",             392, 111, 4000, "sea"),
+    ("TF_500km",             450, 111, 4000, "sea"),
+    ("TF_700km",             607, 111, 4000, "sea"),
+    ("TF_800km",             696, 111, 4000, "sea"),
+    ("TF_1000km",            874, 111, 4000, "sea"),
+    # Stollberg-side distances for same Telefunken targets (ST→target GC km)
+    ("TF_ST_400km",          414, 111, 4000, "sea"),
+    ("TF_ST_500km",          505, 111, 4000, "sea"),
+    ("TF_ST_700km",          703, 111, 4000, "sea"),
+    ("TF_ST_800km",          805, 111, 4000, "sea"),
+    ("TF_ST_1000km",        1000, 111, 4000, "sea"),
 ]
 
 
@@ -126,10 +147,7 @@ def compute_all():
         # ---- Sommerfeld-Norton flat-Earth ----
         sn_peak_snr = sommerfeld_norton_snr_peak(
             d_km, tx_m, rx_m, ground=ground,
-            freq=FREQ_HZ, rx_gain_dBi=RX_GAIN_DBI + 3.0)
-        # Note: sn_snr_peak in make_p526_vs_p368_graphs.py uses
-        # rx_gain_dBi=3.0 as its default. We match that here so
-        # the SN values are consistent with the 4-bar chart.
+            freq=FREQ_HZ, rx_gain_dBi=RX_GAIN_DBI)
         sn_eq_snr = sn_peak_snr + CROSSOVER_dB
 
         # ---- ITU-R P.526-16 Fock globe ----

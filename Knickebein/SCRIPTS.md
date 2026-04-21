@@ -39,9 +39,10 @@ The two beam-map scripts need `/tmp/countries.geojson` (not tracked here; pulled
 | `RX_GAIN_DBI` | 0.0 (or 3.0 in SN path) | Isotropic baseline |
 | `RX_BW_Hz` | 500 | MCW / A2 matched-filter bandwidth. See correction #1 below. |
 | `N_FLOOR_dBW` | -159.0 (derived) | Galactic + thermal per ITU-R P.372, with the 500 Hz BW |
-| `CROSSOVER_dB` | -19.0 | Equisignal crossover loss at 5 deg squint |
+| `CROSSOVER_dB` | -19.87 (derived) | Equisignal crossover loss at 5 deg squint; `20·log10|sinc(L·sin(5°)/λ)|` |
 | `SNR_TO_DBUV` | -22.0 (derived) | = N_FLOOR_dBW + 137, converts SNR dB to μV at 50 ohm |
 | `V_NOISE_UV` | 0.0795 | Noise floor in μV at 50 ohm |
+| `EQUISIGNAL_HALF_ANGLE_DEG` | 0.0277 (derived) | 1 dB pilot A/N threshold on sinc-slope at 5° squint — full corridor ≈ 0.055° |
 
 ## Corrections applied April 2026
 
@@ -75,7 +76,11 @@ The Friis / Sommerfeld-Norton / Fock functions return the **peak** (on-boresight
 - Kleve beam and the green/pink FE-vs-Ge strength wedges stay fixed (they represent Kleve's geometry, not Stollberg's).
 - GIF output (`knickebein_beam_map_telefunken_cycle*.gif`) is built separately via ffmpeg — see README for the command.
 
-### 6. Visual-position interpolation on the Kleve LoS
+### 6a. Equisignal corridor width — first-principles library function
+
+`botb_itu_analysis.py` now exposes `equisignal_corridor_width_m(distance_m)` and the helpers `sinc_pattern_slope_dB_per_rad()` / `equisignal_half_angle_rad()`. These replace the previous hardcoded `THETA_EQ_DEG = 0.066°` in `compute_equisignal_widths.py` with a derivation from the same sinc aperture pattern that gives `CROSSOVER_dB`, combined with a 1 dB pilot A/N discrimination threshold (NATO AGARDograph 300 Vol. 10 §6.2). At 439 km (Bufton Spalding, 21 Jun 1940) the library predicts ≈ 424 m / 464 yd — 8 % under Bufton's visual estimate of 400-500 yd, inside measurement tolerance. The Python and spreadsheet now agree on the full width at every path. `CROSSOVER_dB` is derived the same way and evaluates to -19.87 dB (was previously rounded to -19 in-line).
+
+### 6b. Visual-position interpolation on the Kleve LoS
 
 `_kleve_visual_frac()` (inside the telefunken map) does piecewise-linear interpolation between the fiducial `VISUAL_FRACS` marker positions. Raw `d_km / VISUAL_BEAM_SPAN_KM` under-placed the Fock crossover (~600 km real) before the 500 km marker. Interpolation puts it visually between the 500 and 700 markers, which is where an observer expects 600 km to land.
 

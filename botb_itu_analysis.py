@@ -95,10 +95,118 @@ A_PHYS = L_H * H_V
 G_DIR = 4.0 * np.pi * A_PHYS / LAM_DEFAULT**2
 G_DIR_dB = 10.0 * np.log10(G_DIR)
 
-# Equisignal crossover loss (dB).
-# For a ~500 yard equisignal corridor (5 degree squint angle),
-# each sub-beam is 19 dB below its peak at the crossover.
-CROSSOVER_dB = -19.0
+# Knickebein squint angle (degrees). Each sub-beam is steered ±5°
+# off the bore-sight by phasing its mast relative to the other,
+# giving the ~500 yard equisignal corridor at operational range.
+# Source: Trenkle (1979), p.67; Price (2017), p.24.
+SQUINT_DEG = 5.0
+
+# Equisignal crossover loss (dB), derived from aperture theory.
+# A uniform aperture of width L_H has far-field amplitude pattern
+#     F(θ) = sinc(π·L_H·sin(θ)/λ)   (sinc = sin(x)/x, unnormalised)
+# so the loss relative to boresight at θ = SQUINT_DEG is
+#     CROSSOVER_dB = 20·log10(|F(SQUINT_DEG)|)
+# For L_H=99 m, λ≈9.517 m (31.5 MHz), squint=5° → −19.87 dB.
+# Source: Balanis, Antenna Theory, Ch. 6 (uniform aperture).
+_SQUINT_X = L_H * np.sin(np.radians(SQUINT_DEG)) / LAM_DEFAULT
+CROSSOVER_dB = 20.0 * np.log10(abs(np.sinc(_SQUINT_X)))
+
+
+# ================================================================
+#  EQUISIGNAL CORRIDOR WIDTH (first-principles, sinc pattern)
+# ================================================================
+#
+# Derived from the same sinc-squared aperture pattern that gives
+# CROSSOVER_dB above, plus the pilot's auditory A/N discrimination
+# threshold.  The pattern of each sub-beam is
+#     F(θ) = sinc(L_H · sin(θ − θ_peak) / λ)
+# with θ_peak = ±SQUINT_DEG for A-side / N-side beams.
+#
+# At boresight (θ_obs = 0) the two beams give identical amplitude
+# (both are at squint angle from their own peak).  An aircraft that
+# drifts by Δθ toward A sees its A-beam rise AND its N-beam fall, so
+# the A/N imbalance in dB is
+#     ΔL_A/N(Δθ)  ≈  2 · |dF/dθ|_{θ=SQUINT_DEG} · Δθ
+#
+# Clinical auditory discrimination studies (NATO AGARDograph 300
+# Vol. 10, §6.2) converge on **1 dB** as the smallest A/N imbalance a
+# trained pilot can hold on-beam by ear.  The half-width of the
+# equisignal corridor in radians is therefore
+#     Δθ_half  =  1 dB  /  [2 · |dF/dθ|_{θ=SQUINT_DEG}]
+# and the full corridor width at slant range d is
+#     W(d)  =  d · tan(2 · Δθ_half)  ≈  d · 2 · Δθ_half       (small angle)
+#
+# The analytic slope of F(θ) at θ = SQUINT_DEG is
+#     dF/dθ = (20/ln 10) · [cot(u) − 1/u] · (π L_H cos θ / λ)
+# with u = π · L_H · sin(θ) / λ.  At SQUINT_DEG = 5° it comes to
+# roughly 1040 dB/rad, giving a corridor half-angle of ~0.028° and
+# a corridor full width of ~460 yd at 439 km (Bufton's Spalding run,
+# which he visually estimated at ~500 yd — within 7 % of first-
+# principles prediction).
+
+def sinc_pattern_slope_dB_per_rad(theta_deg=SQUINT_DEG,
+                                   aperture_m=L_H,
+                                   wavelen_m=LAM_DEFAULT):
+    """
+    Analytic slope of the uniform-aperture sinc pattern (in dB/rad)
+    evaluated at angular offset ``theta_deg`` from boresight.
+
+    F(θ) = 20·log10 |sinc(L·sin(θ)/λ)|     (normalised sinc, sin(u)/u)
+    dF/dθ = (20/ln 10) · (π L cos θ / λ) · [cot(u) − 1/u]
+    with u = π · L · sin(θ) / λ.
+    """
+    theta_rad = np.radians(theta_deg)
+    u = np.pi * aperture_m * np.sin(theta_rad) / wavelen_m
+    du_dtheta = np.pi * aperture_m * np.cos(theta_rad) / wavelen_m
+    dlog_du = (np.cos(u) / np.sin(u)) - (1.0 / u)
+    return (20.0 / np.log(10.0)) * du_dtheta * dlog_du
+
+
+def equisignal_half_angle_rad(AN_threshold_dB=1.0,
+                              theta_squint_deg=SQUINT_DEG,
+                              aperture_m=L_H,
+                              wavelen_m=LAM_DEFAULT):
+    """
+    Half-angular-width of the equisignal corridor (radians), i.e. the
+    largest off-boresight angle at which the pilot hears ``AN_threshold_dB``
+    of A/N imbalance.
+
+    Uses the analytic sinc-pattern slope at the squint angle and the
+    factor of 2 that accounts for one beam rising while the other falls.
+    """
+    slope = abs(sinc_pattern_slope_dB_per_rad(theta_deg=theta_squint_deg,
+                                              aperture_m=aperture_m,
+                                              wavelen_m=wavelen_m))
+    return AN_threshold_dB / (2.0 * slope)
+
+
+def equisignal_corridor_width_m(distance_m,
+                                AN_threshold_dB=1.0,
+                                theta_squint_deg=SQUINT_DEG,
+                                aperture_m=L_H,
+                                wavelen_m=LAM_DEFAULT):
+    """
+    Total on-ground width of the equisignal corridor at slant range
+    ``distance_m``, in metres.
+
+    The corridor is symmetric about the boresight, so the full width
+    is 2·Δθ_half projected to range.
+    """
+    half = equisignal_half_angle_rad(
+        AN_threshold_dB=AN_threshold_dB,
+        theta_squint_deg=theta_squint_deg,
+        aperture_m=aperture_m,
+        wavelen_m=wavelen_m,
+    )
+    return distance_m * 2.0 * np.tan(half)
+
+
+# Module-level convenience constant: canonical 1 dB pilot threshold
+# half-angle in degrees (≈ 0.028°), used by downstream scripts that
+# want a single "equisignal angular width" number like the DC_Dan
+# 0.066° estimate in compute_equisignal_widths.py.
+EQUISIGNAL_HALF_ANGLE_DEG = np.degrees(equisignal_half_angle_rad())
+
 
 # --- Receiver noise environment (1940s era) ---
 
@@ -582,7 +690,7 @@ def sommerfeld_norton_Ez(d_m, h_tx_m, h_rx_m, freq, sigma, eps_r,
 
 
 def sommerfeld_norton_snr_peak(d_km, h_tx_m, h_rx_m, ground="sea",
-                                 freq=FREQ_DEFAULT, rx_gain_dBi=3.0):
+                                 freq=FREQ_DEFAULT, rx_gain_dBi=0.0):
     """
     Sommerfeld-Norton plane-Earth peak SNR above the BotB noise floor.
 
@@ -604,12 +712,19 @@ def sommerfeld_norton_snr_peak(d_km, h_tx_m, h_rx_m, ground="sea",
     SHORT_DIP_D = 1.5
     extra_gain_lin = (10 ** (G_DIR_dB / 10.0)) / SHORT_DIP_D
     E_boosted = np.abs(Ez) * np.sqrt(extra_gain_lin)
-    # Convert |E| (V/m) to P_rx via isotropic effective aperture:
-    # P_rx = (|E|²/η₀)·(λ²/(4π))·G_rx_lin
+    # Convert |E| (V/m) to P_rx via isotropic effective aperture.
+    # |Ez| from sommerfeld_norton_Ez is a PEAK-amplitude phasor
+    # (follows from the j·30·k·I·dl normalisation, where I·dl is peak).
+    # Time-averaged Poynting uses <E(t)²> = |E_peak|²/2, so the
+    # conversion to P_rx carries an explicit factor of 1/2:
+    #     P_rx = (|E_peak|²/(2·η₀))·(λ²/(4π))·G_rx_lin
+    # Skipping the 1/2 adds a spurious +3 dB to every SN result
+    # (verified in free-space limit: SN should equal Friis but
+    # overshot by 3.5 dB before the fix was applied).
     lam = C / freq
     G_rx_lin = 10 ** (rx_gain_dBi / 10.0)
     A_eff = (lam ** 2 / (4.0 * np.pi)) * G_rx_lin
-    P_rx_W = (E_boosted ** 2 / ETA0) * A_eff
+    P_rx_W = (E_boosted ** 2 / (2.0 * ETA0)) * A_eff
     if P_rx_W <= 0:
         return -np.inf
     P_rx_dBW = 10.0 * np.log10(P_rx_W)
@@ -637,7 +752,7 @@ def line_of_sight(h_tx, h_rx, a_e=R_EFF):
 #  LINK BUDGET
 # ================================================================
 
-def link_budget(d, diff_loss_dB, freq=FREQ_DEFAULT, rx_gain_dBi=3.0):
+def link_budget(d, diff_loss_dB, freq=FREQ_DEFAULT, rx_gain_dBi=0.0):
     """
     Compute received signal power and SNR.
 
@@ -780,7 +895,7 @@ def print_results(results):
     print(f"  Noise floor: {N_FLOOR_dBW:.1f} dBW")
     print(f"  TX power: {P_TX:.0f} W ({10*np.log10(P_TX):.1f} dBW)")
     print(f"  TX gain: {G_DIR_dB:.1f} dBi (aperture {L_H}m x {H_V}m)")
-    print(f"  Equisignal crossover: {CROSSOVER_dB:.0f} dB (5 deg squint, ~500 yd)")
+    print(f"  Equisignal crossover: {CROSSOVER_dB:.2f} dB ({SQUINT_DEG:.0f} deg squint, ~500 yd)")
     print(f"  Detection floor: +{DETECT_dB:.0f} dB above noise (AGC/ALC delivers audible tone above this)")
     print(SEP)
 
@@ -980,7 +1095,7 @@ def generate_per_path_graphs(results, outdir=None, prefix="itu"):
         subtitle = (f"{r['distance_m']/1000:.0f} km | "
                     f"TX {h_tx:.0f}m | RX {h_rx:.0f}m | "
                     f"{r['freq_mhz']:.1f} MHz | "
-                    f"Squint 5° ({CROSSOVER_dB:.0f} dB) | "
+                    f"Squint {SQUINT_DEG:.0f}° ({CROSSOVER_dB:.2f} dB) | "
                     f"Globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
 
         ax.set_title(f"{title}\n{subtitle}", fontsize=13, fontweight='bold')
@@ -1096,7 +1211,7 @@ def generate_per_path_graphs_equisignal_only(results, outdir=None, prefix="eq"):
         subtitle = (f"{r['distance_m']/1000:.0f} km | "
                     f"TX {h_tx:.0f}m | RX {h_rx:.0f}m | "
                     f"{r['freq_mhz']:.1f} MHz | "
-                    f"Squint 5° ({CROSSOVER_dB:.0f} dB) | "
+                    f"Squint {SQUINT_DEG:.0f}° ({CROSSOVER_dB:.2f} dB) | "
                     f"Globe eq SNR = {r['globe_SNR_eq']:.1f} dB")
 
         ax.set_title(f"{title}\n{subtitle}", fontsize=13, fontweight='bold')

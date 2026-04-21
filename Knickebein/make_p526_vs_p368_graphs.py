@@ -108,7 +108,7 @@ GROUND = {
 # ================================================================
 
 def sn_snr_peak(d_km, tx_m, rx_m, ground_name="land",
-                freq_mhz=FREQ_MHz, rx_gain_dBi=3.0):
+                freq_mhz=FREQ_MHz, rx_gain_dBi=0.0):
     """Sommerfeld-Norton plane-earth peak SNR. Wrapper around the
     library function for consistency with the p526/p368 helpers."""
     return sommerfeld_norton_snr_peak(
@@ -231,9 +231,19 @@ def save(fig, fname):
 
 def plot_station_sweep(station_name, tx_m, rx_m, ground_name, freq_mhz,
                        d_max_km, targets, fname, title_suffix="",
-                       y_mode="snr", receiver="s27"):
+                       y_mode="snr", receiver="s27",
+                       models=("friis", "sn", "p526", "p368"),
+                       variant=None):
     """Distance sweep graph comparing peak SNR/V_rx for the Friis flat,
     ITU P.526 Fock, and ITU P.368 GRWAVE models.
+
+    models: iterable of model keys to plot. Default is all four. Pass
+        ("sn", "p368") to get the SN vs GRWAVE two-line comparison used
+        for the ITU_Calc series.
+    variant: if "itu_calc", SN uses the ITU_Calc green (#00E676) and
+        GRWAVE uses the ITU_Calc magenta (#FF1493), matching the
+        bar/sweep graphs in ITU_Certified_Graphs.md. Otherwise the
+        existing colors are kept.
 
     y_mode:
         "snr" (default): peak SNR above receiver noise floor in dB.
@@ -245,6 +255,10 @@ def plot_station_sweep(station_name, tx_m, rx_m, ground_name, freq_mhz,
                  (D.(Luft) T.4058 §21).
     """
     plt.style.use("dark_background")
+
+    models = set(models)
+    col_sn_local = "#00E676" if variant == "itu_calc" else COL_SN
+    col_gr_local = "#FF1493" if variant == "itu_calc" else COL_P368
 
     # Distance sweep
     d_min = 50
@@ -348,18 +362,23 @@ def plot_station_sweep(station_name, tx_m, rx_m, ground_name, freq_mhz,
     if use_log:
         ax.set_yscale("log")
 
-    ax.plot(d_km_fine, friis_plot, color=COL_FRIIS, linewidth=2.5,
-            linestyle="-",
-            label="Friis flat-Earth",
-            zorder=4)
-    ax.plot(d_km_fine, sn_plot, color=COL_SN, linewidth=2.5,
-            linestyle="-",
-            label="Sommerfeld-Norton FE",
-            zorder=5)
-    ax.plot(d_km_fine, p526_plot, color=COL_P526, linewidth=2.5,
-            label="P.526 Fock (globe)", zorder=4)
-    ax.plot(d_grw, snr_grw_plot, color=COL_P368, linewidth=2.5, linestyle="-",
-            label="P.368 GRWAVE (globe)", zorder=4)
+    if "friis" in models:
+        ax.plot(d_km_fine, friis_plot, color=COL_FRIIS, linewidth=2.5,
+                linestyle="-",
+                label="Friis flat-Earth",
+                zorder=4)
+    if "sn" in models:
+        ax.plot(d_km_fine, sn_plot, color=col_sn_local, linewidth=2.5,
+                linestyle="-",
+                label="Sommerfeld-Norton FE",
+                zorder=5)
+    if "p526" in models:
+        ax.plot(d_km_fine, p526_plot, color=COL_P526, linewidth=2.5,
+                label="P.526 Fock (globe)", zorder=4)
+    if "p368" in models:
+        ax.plot(d_grw, snr_grw_plot, color=col_gr_local, linewidth=2.5,
+                linestyle="-",
+                label="P.368 GRWAVE (globe)", zorder=4)
 
     # Noise + receiver reference lines (truncated labels)
     if y_mode == "uv":
@@ -554,8 +573,12 @@ def plot_station_sweep(station_name, tx_m, rx_m, ground_name, freq_mhz,
     ax.set_xlabel("Distance (km)", fontsize=11, color="white")
     ax.set_ylabel(y_label, fontsize=11, color="white")
 
-    title_line1 = (f"{station_name}: Friis + Sommerfeld-Norton FE "
-                   f"vs P.526 Fock vs P.368 GRWAVE")
+    if variant == "itu_calc" and models == {"sn", "p368"}:
+        title_line1 = (f"{station_name}: Sommerfeld-Norton FE "
+                       f"vs P.368 GRWAVE")
+    else:
+        title_line1 = (f"{station_name}: Friis + Sommerfeld-Norton FE "
+                       f"vs P.526 Fock vs P.368 GRWAVE")
     title_line2 = (f"TX {tx_m} m  |  RX {rx_m:,} m  |  "
                    f"{freq_mhz:.1f} MHz, 3 kW, 26 dBi  |  "
                    f"{GROUND[ground_name]['label']}{title_suffix}")
@@ -689,7 +712,9 @@ def plot_master_bargraph(fname, y_mode="snr", receiver="s27",
         y_label = "Equisignal SNR above receiver noise floor (dB, 5° squint)"
         y_lim = None
         use_log = False
-        floor_label_noise = "Noise floor"
+        noise_uv_equiv = 10.0 ** ((N_FLOOR_dBW + 137.0) / 20.0)
+        floor_label_noise = (
+            f"Noise floor (0 dB ≈ {noise_uv_equiv:.3f} μV @ 50 Ω)")
         ref_color = None
         title_axis_note = "equisignal SNR above receiver noise floor in dB"
 
@@ -851,6 +876,178 @@ def plot_master_bargraph(fname, y_mode="snr", receiver="s27",
 
 
 # ================================================================
+#  ITU_Calc 2-model bar chart: Sommerfeld-Norton FE vs GRWAVE only
+# ================================================================
+
+def plot_master_bargraph_itu_calc(fname, y_mode="snr", receiver="primary"):
+    """ITU_Calc variant: 2-bar side-by-side chart showing only
+    Sommerfeld-Norton FE (green) and ITU-R P.368 GRWAVE (magenta),
+    to match the green/magenta convention used elsewhere in the
+    ITU_Certified_Graphs series.
+
+    All physics constants (FREQ_MHz, TX_POWER_W, G_DIR_dB, CROSSOVER_dB,
+    N_FLOOR_dBW, ground σ/ε, vert pol) reuse the library values so the
+    numbers are identical to the 4-bar plot_master_bargraph() output on
+    the SN and P.368 columns.
+    """
+    plt.style.use("dark_background")
+
+    COL_SN_IC = "#00E676"
+    COL_GR_IC = "#FF1493"
+
+    all_paths = KN_PATHS + TF_PATHS
+
+    labels = []
+    sn_snr = []
+    p368_snr = []
+
+    for name, d_km, tx, rx, note, pt in all_paths:
+        labels.append(name)
+        sn_snr.append(sn_snr_peak(d_km, tx, rx, ground_name=pt))
+        p368_snr.append(p368_snr_peak(d_km, tx, rx, pt))
+
+    sn_snr = np.array(sn_snr) + CROSSOVER_dB
+    p368_snr = np.array(p368_snr) + CROSSOVER_dB
+
+    if y_mode == "uv":
+        SNR_TO_DBUV = N_FLOOR_dBW + 137.0
+        sn_vals = 10 ** ((sn_snr + SNR_TO_DBUV) / 20.0)
+        p368_vals = 10 ** ((p368_snr + SNR_TO_DBUV) / 20.0)
+        noise_floor_y = 10 ** ((0.0 + SNR_TO_DBUV) / 20.0)
+        rx_ref_y = 2.0 if receiver == "fubl2" else None
+        rx_ref_label = ("FuBl 2 (2 μV, Dan's estimate)"
+                        if receiver == "fubl2" else None)
+        ref_color = COL_FUBL2 if receiver == "fubl2" else None
+        y_lim = (1e-6, 1e6)
+        y_label = ("Equisignal voltage at receiver input "
+                   "(μV into 50 Ω, 5° squint)")
+        use_log = True
+        floor_label_noise = f"Noise floor ({noise_floor_y:.3f} μV @ 50 Ω)"
+    else:
+        sn_vals = sn_snr
+        p368_vals = p368_snr
+        noise_floor_y = 0.0
+        rx_ref_y = None
+        rx_ref_label = None
+        ref_color = None
+        y_lim = None
+        y_label = "Equisignal SNR above receiver noise floor (dB, 5° squint)"
+        use_log = False
+        noise_uv_equiv = 10.0 ** ((N_FLOOR_dBW + 137.0) / 20.0)
+        floor_label_noise = (
+            f"Noise floor (0 dB ≈ {noise_uv_equiv:.3f} μV @ 50 Ω)")
+
+    fig, ax = plt.subplots(figsize=(18, 8), facecolor=BG_COLOR)
+    ax.set_facecolor(BG_COLOR)
+    if use_log:
+        ax.set_yscale("log")
+
+    x = np.arange(len(labels))
+    w = 0.38
+    bar_bottom = y_lim[0] if use_log else 0.0
+
+    bars_sn = ax.bar(x - 0.5 * w, sn_vals, w,
+                     bottom=bar_bottom if use_log else 0,
+                     color=COL_SN_IC, alpha=0.9,
+                     label="Sommerfeld-Norton FE",
+                     edgecolor="white", linewidth=0.5, zorder=3)
+    bars_gr = ax.bar(x + 0.5 * w, p368_vals, w,
+                     bottom=bar_bottom if use_log else 0,
+                     color=COL_GR_IC, alpha=0.9,
+                     label="ITU-R P.368 GRWAVE (ground wave, globe)",
+                     edgecolor="white", linewidth=0.5, zorder=3)
+
+    noise_line = ax.axhline(y=noise_floor_y, color=COL_NOISE, linewidth=1.2,
+                            linestyle="-", label=floor_label_noise, zorder=2)
+    rx_line = None
+    if rx_ref_y is not None:
+        rx_line = ax.axhline(y=rx_ref_y, color=ref_color, linewidth=1.4,
+                             linestyle="--", alpha=0.85, zorder=2,
+                             label=rx_ref_label)
+
+    for bars, vals in [(bars_sn, sn_vals), (bars_gr, p368_vals)]:
+        for bar, val in zip(bars, vals):
+            if use_log:
+                y_pos = val * 1.2
+                if y_pos < y_lim[0]:
+                    y_pos = y_lim[0] * 1.5
+                if val >= 10:
+                    txt = f"{val:.0f}"
+                elif val >= 1:
+                    txt = f"{val:.1f}"
+                else:
+                    txt = f"{val:.1e}"
+                ax.text(bar.get_x() + bar.get_width() / 2, y_pos,
+                        txt, ha="center", va="bottom", fontsize=6,
+                        fontweight="bold", color="white", rotation=90)
+            else:
+                y_off = 3 if val >= noise_floor_y else -3
+                va = "bottom" if val >= noise_floor_y else "top"
+                ax.text(bar.get_x() + bar.get_width() / 2, val + y_off,
+                        f"{val:+.0f}", ha="center", va=va, fontsize=7,
+                        fontweight="bold", color="white")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=9,
+                       color="white")
+    ax.set_ylabel(y_label, fontsize=12, color="white")
+    if y_lim:
+        ax.set_ylim(*y_lim)
+
+    if y_mode == "uv":
+        title_short = (
+            "Battle of the Beams: Sommerfeld-Norton FE vs ITU-R P.368 GRWAVE\n"
+            "31.5 MHz, 3 kW, 26 dBi TX — equisignal V_rx at 50 Ω "
+            "(5° squint, log scale)"
+        )
+    else:
+        title_short = (
+            "Battle of the Beams: Sommerfeld-Norton FE vs ITU-R P.368 GRWAVE\n"
+            "31.5 MHz, 3 kW, 26 dBi TX — equisignal SNR above receiver noise "
+            "(5° squint)"
+        )
+    ax.set_title(title_short, fontsize=13, fontweight="bold",
+                 color="white", pad=20)
+    ax.grid(axis="y", alpha=0.2, color="gray", zorder=0, which="both")
+    ax.tick_params(colors="white")
+
+    if y_mode == "uv":
+        def fmt_uv(val, pos):
+            if val >= 1:
+                return f"{val:g} μV"
+            elif val >= 0.001:
+                return f"{val:g} μV"
+            else:
+                return f"{val:.0e} μV"
+        ax.yaxis.set_major_formatter(mticker.FuncFormatter(fmt_uv))
+
+    # Two-column legend: FE side on the left, GE side on the right.
+    col1_handles = [noise_line, bars_sn]
+    col1_labels = [floor_label_noise, bars_sn.get_label()]
+    col2_handles = [bars_gr]
+    col2_labels = [bars_gr.get_label()]
+    if rx_line is not None:
+        col2_handles.insert(0, rx_line)
+        col2_labels.insert(0, rx_ref_label)
+    # Pad shorter column with blanks so ncol=2 layout stays aligned.
+    blank = Patch(visible=False)
+    while len(col2_handles) < len(col1_handles):
+        col2_handles.append(blank)
+        col2_labels.append("")
+    while len(col1_handles) < len(col2_handles):
+        col1_handles.append(blank)
+        col1_labels.append("")
+    ax.legend(col1_handles + col2_handles,
+              col1_labels + col2_labels,
+              loc="upper right", fontsize=10, framealpha=0.55,
+              facecolor=BG_COLOR, edgecolor="#444444", labelcolor="white",
+              ncol=2)
+
+    fig.tight_layout()
+    save(fig, fname)
+
+
+# ================================================================
 #  MAIN
 # ================================================================
 
@@ -1002,6 +1199,70 @@ def main():
     print("\n[13/13] FuBl 2 master bar chart (μV axis, Dan comparison)")
     plot_master_bargraph("p526_vs_p368_fubl2_master_bargraph.png",
                          y_mode="uv", receiver="fubl2")
+
+    # ------------------------------------------------------------
+    #  ITU_Calc_ SN vs GRWAVE variants. Only the Sommerfeld-Norton FE
+    #  (green) and ITU-R P.368 GRWAVE (magenta) curves are drawn so the
+    #  graphs in the GRWAVE_P368_BotB.md walkthrough match the green /
+    #  magenta convention used in ITU_Certified_Graphs.md. Same physics
+    #  constants, same ground parameters, same distance sweeps.
+    # ------------------------------------------------------------
+    itu_models = ("sn", "p368")
+
+    print("\n[ITU_Calc/1] Kleve sweep dB (SN vs GRWAVE)")
+    plot_station_sweep("Kleve → Midlands", 111, 6000, "land",
+                       FREQ_MHz, 900, kleve_targets,
+                       "ITU_Calc_sn_vs_grwave_kleve.png",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/2] Stollberg sweep dB (SN vs GRWAVE)")
+    plot_station_sweep("Stollberg → Midlands", 72, 6000, "sea",
+                       FREQ_MHz, 1000, stoll_targets,
+                       "ITU_Calc_sn_vs_grwave_stollberg.png",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/3] Telefunken sweep dB (SN vs GRWAVE)")
+    plot_station_sweep("Telefunken July 1939 over-sea tests", 72, 4000,
+                       "sea", FREQ_MHz, 1200, tf_targets,
+                       "ITU_Calc_sn_vs_grwave_telefunken.png",
+                       title_suffix="  (BArch RL 19-6/40 ref. 230Q8 App. 2)",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/4] Master bar chart dB (SN vs GRWAVE)")
+    plot_master_bargraph_itu_calc(
+        "ITU_Calc_sn_vs_grwave_master_bargraph.png")
+
+    print("\n[ITU_Calc/5] Kleve sweep μV (SN vs GRWAVE)")
+    plot_station_sweep("Kleve → Midlands", 111, 6000, "land",
+                       FREQ_MHz, 900, kleve_targets,
+                       "ITU_Calc_sn_vs_grwave_uv_kleve.png",
+                       y_mode="uv", receiver="primary",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/6] Stollberg sweep μV (SN vs GRWAVE)")
+    plot_station_sweep("Stollberg → Midlands", 72, 6000, "sea",
+                       FREQ_MHz, 1000, stoll_targets,
+                       "ITU_Calc_sn_vs_grwave_uv_stollberg.png",
+                       y_mode="uv", receiver="primary",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/7] Telefunken sweep μV (SN vs GRWAVE)")
+    plot_station_sweep("Telefunken July 1939 over-sea tests", 72, 4000,
+                       "sea", FREQ_MHz, 1200, tf_targets,
+                       "ITU_Calc_sn_vs_grwave_uv_telefunken.png",
+                       title_suffix="  (BArch RL 19-6/40 ref. 230Q8 App. 2)",
+                       y_mode="uv", receiver="primary",
+                       models=itu_models, variant="itu_calc")
+
+    print("\n[ITU_Calc/8] Master bar chart μV (SN vs GRWAVE)")
+    plot_master_bargraph_itu_calc(
+        "ITU_Calc_sn_vs_grwave_uv_master_bargraph.png",
+        y_mode="uv", receiver="primary")
+
+    print("\n[ITU_Calc/9] FuBl 2 master bar chart μV (SN vs GRWAVE, Dan)")
+    plot_master_bargraph_itu_calc(
+        "ITU_Calc_sn_vs_grwave_fubl2_master_bargraph.png",
+        y_mode="uv", receiver="fubl2")
 
     print("\nDone.")
 

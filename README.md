@@ -78,7 +78,8 @@ See `Knickebein/SCRIPTS.md` for details and the 1 s / full-res variants.
 | `RX_BW_Hz` | 500 | MCW / ITU A2 matched-filter bandwidth |
 | `N_FLOOR_dBW` | −159.0 | galactic + thermal, ITU-R P.372 Eq. 14 `Fa = 52 − 23·log₁₀(f_MHz)` at 500 Hz BW |
 | `V_NOISE_UV` | 0.0795 | noise floor in μV at 50 Ω |
-| `CROSSOVER_dB` | −19.0 | equisignal crossover loss at 5° squint |
+| `CROSSOVER_dB` | −19.87 (derived) | equisignal crossover loss at 5° squint; `20·log₁₀|sinc(L·sin 5°/λ)|` |
+| `EQUISIGNAL_HALF_ANGLE_DEG` | 0.0277 (derived) | 1 dB pilot A/N threshold half-angle on the sinc pattern slope at 5° squint |
 | `DETECT_dB` | +10.0 | bare RF detection threshold above noise floor |
 
 **Effective Earth radius:** 8,495 km (k = 4/3, ITU-R P.453 standard atmosphere).

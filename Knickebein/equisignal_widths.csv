@@ -1,0 +1,28 @@
+"# Equisignal corridor: θ_eq = 0.05534381475768522°, W = d · tan(θ_eq)"
+# Derivation: 5° squint + 99 × 29 m aperture at 31.5 MHz
+# Cross-check: Bufton 500 yd at 439 km = 90% of prediction
+path_id,target,tx_station,distance_km,corridor_width_m,corridor_width_yd
+KL_DERBY,Derby (Rolls-Royce),Kleve (Kn-4),529.0,511.0,558.8
+ST_DERBY,Derby (Rolls-Royce),Stollberg (Kn-2),711.0,686.8,751.1
+KL_BIRMINGHAM,Birmingham,Kleve (Kn-4),550.0,531.3,581.0
+ST_BIRMINGHAM,Birmingham,Stollberg (Kn-2),754.0,728.3,796.5
+GR_LONDON,London,Greny (Kn-7),201.0,194.2,212.3
+BH_LONDON,London,Beaumont-Hague (Kn-9),237.0,228.9,250.4
+BH_CARDIFF,Cardiff,Beaumont-Hague (Kn-9),222.0,214.4,234.5
+BH_PLYMOUTH,Plymouth,Beaumont-Hague (Kn-9),181.0,174.8,191.2
+ST_LIVERPOOL,Liverpool,Stollberg (Kn-2),791.0,764.1,835.6
+KL_SPALDING,Spalding,Kleve (Kn-4),439.0,424.0,463.7
+ST_BEESTON,Beeston,Stollberg (Kn-2),694.0,670.4,733.1
+KL_RETFORD,Retford,Kleve (Kn-4),512.0,494.6,540.9
+TF_400,400km (FuBl1 rod),Stollberg (Kn-2),400.0,386.4,422.5
+TF_500,500km (FuBl1 wire),Stollberg (Kn-2),500.0,483.0,528.2
+TF_700,700km (regen rod),Stollberg (Kn-2),700.0,676.2,739.4
+TF_800,800km (regen wire),Stollberg (Kn-2),800.0,772.7,845.1
+TF_1000,1000km (special xdip),Stollberg (Kn-2),1000.0,965.9,1056.4
+TF_1000B,1000km (special wire),Stollberg (Kn-2),1000.0,965.9,1056.4
+BAUER_MAX,500km max rated,Kleve (Kn-4),500.0,483.0,528.2
+
+# Two-beam fix area (Kleve × Stollberg parallelogram)
+target,d_kleve_km,w_kleve_m,d_stollberg_km,w_stollberg_m,crossing_angle_deg,fix_area_m2,fix_area_acres
+Derby (Rolls-Royce),529.0,511.0,711.0,686.8,30.53,690867.4,170.72
+Birmingham,550.0,531.3,754.0,728.3,27.77,830514.4,205.22
