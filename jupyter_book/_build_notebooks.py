@@ -266,16 +266,16 @@ Knickebein at 31.5 MHz vertical pol falls into the rule where:
   $G(Y)$ via Eq. 18.
 """))
 
-    cells.append(new_code_cell("""beta, K_floor = c.p526_beta_and_K(ground, s['pol'], f_MHz, c.K_REFRAC)
+    cells.append(new_code_cell(r"""beta, K_floor = c.p526_beta_and_K(ground, s['pol'], f_MHz, c.K_REFRAC)
 sigma = c.GROUND[ground]['sigma']
 K2 = 6.89*sigma / (c.K_REFRAC**(2/3) * f_MHz**(5/3))
 K  = math.sqrt(K2)
 beta_eq16 = (1 + 1.6*K2 + 0.67*K2**2) / (1 + 4.5*K2 + 1.53*K2**2)
-display(Markdown(f'''
+display(Markdown(rf'''
 - ground = **{ground}**, sigma = {sigma} S/m
 - $K^2$ = {K2:.4g}, $K$ = {K:.4f}
-- $\\beta$ from Eq. 16 = {beta_eq16:.4f}
-- $\\beta$ final = **{beta:.4f}** (over-ride to 1 above frequency cut)
+- $\beta$ from Eq. 16 = {beta_eq16:.4f}
+- $\beta$ final = **{beta:.4f}** (over-ride to 1 above frequency cut)
 - $K$ used in $G(Y)$ floor = {K_floor:.4f}
 '''))
 """))
