@@ -1,5 +1,9 @@
 *.pyc
 __pycache__/
+.ipynb_checkpoints/
+
+# graphify generated knowledge graph artefacts (regenerable via `graphify update .`)
+graphify-out/
 
 # X-Gerät / Y-Gerät per-path bar charts live in their XGerat/graphs and
 # YGerat/graphs directories and are regenerable from the CSVs + library.

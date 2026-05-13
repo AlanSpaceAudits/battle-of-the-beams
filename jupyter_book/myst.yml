@@ -1,0 +1,26 @@
+# Jupyter Book v2 project file
+version: 1
+project:
+  title: "Battle of the Beams — ITU Calc Walkthrough"
+  description: |
+    Step-by-step walkthrough of the math behind
+    ITU_CERTIFIED_Battle_of_the_Beams_Calc2_v9_1_1.xlsx.
+    Computes received signal strength for Kleve and Stollberg
+    Knickebein transmitters under two propagation models:
+    ITU-R P.526-16 Fock smooth-Earth diffraction (globe) and
+    Sommerfeld-Norton three-term ground wave (flat earth).
+  authors:
+    - name: Aether Cosmology Research Group
+  license: CC-BY-4.0
+  toc:
+    - file: README.md
+    - file: 000_Constants.ipynb
+    - file: 001_Fock_GE_KL.ipynb
+    - file: 002_Fock_GE_ST.ipynb
+    - file: 003_Sommerfeld_FE_KL.ipynb
+    - file: 004_Sommerfeld_FE_ST.ipynb
+site:
+  template: book-theme
+  options:
+    favicon: aether_cosmology_logo.png
+    logo: aether_cosmology_logo.png
