@@ -193,18 +193,20 @@ cells.append(code(r"""def fe_signal_uV(station_name, target_name, W_m, H_m):
     res = c.sommerfeld_FE(d_m, s['h_tx_m'], t['rx_alt_m'],
                           f_MHz, 'sea', s['Ptx_W'], G_lin)
     v_uV = c.voltage_50ohm_uV(res['P_rx_dBW'])
-    return d_m/1000, v_uV
+    return d_m/1000, v_uV, res['P_rx_dBW']
 
 fe_rows = []
 for station in ['Kleve','Stollberg']:
     for tname in TF_NAMES:
-        d_km, v_uV = fe_signal_uV(station, tname, W_sub, H_sub)
+        d_km, v_uV, P_rx_dBW = fe_signal_uV(station, tname, W_sub, H_sub)
         ratio = v_uV / N_uV
+        snr_dB = P_rx_dBW - N_dBW
         fe_rows.append([station, tname, round(d_km,1),
-                        f"{v_uV:.4g}", f"{ratio:.4g}",
+                        f"{v_uV:.4g}", f"{ratio:.4g}", f"{snr_dB:+.1f}",
                         'ABOVE NOISE' if v_uV > N_uV else 'BELOW NOISE'])
 fe_df = pd.DataFrame(fe_rows, columns=['Station','Target','d (km)',
-                                        'V_rx (μV)', 'V_rx / V_noise', 'Verdict'])
+                                        'V_rx (μV)', 'V_rx / V_noise',
+                                        'SNR (dB)', 'Verdict'])
 fe_df
 """))
 
@@ -241,18 +243,20 @@ cells.append(code(r"""def ge_signal_uV(station_name, target_name, W_m, H_m):
                                  f_MHz, 'sea', s['pol'])
     P_rx_dBW = P_tx + G_dBi - FSPL - L_fock
     v_uV = c.voltage_50ohm_uV(P_rx_dBW)
-    return d_m/1000, v_uV
+    return d_m/1000, v_uV, P_rx_dBW
 
 ge_rows = []
 for station in ['Kleve','Stollberg']:
     for tname in TF_NAMES:
-        d_km, v_uV = ge_signal_uV(station, tname, W_sub, H_sub)
+        d_km, v_uV, P_rx_dBW = ge_signal_uV(station, tname, W_sub, H_sub)
         ratio = v_uV / N_uV
+        snr_dB = P_rx_dBW - N_dBW
         ge_rows.append([station, tname, round(d_km,1),
-                        f"{v_uV:.4g}", f"{ratio:.4g}",
+                        f"{v_uV:.4g}", f"{ratio:.4g}", f"{snr_dB:+.1f}",
                         'ABOVE NOISE' if v_uV > N_uV else 'BELOW NOISE'])
 ge_df = pd.DataFrame(ge_rows, columns=['Station','Target','d (km)',
-                                        'V_rx (μV)', 'V_rx / V_noise', 'Verdict'])
+                                        'V_rx (μV)', 'V_rx / V_noise',
+                                        'SNR (dB)', 'Verdict'])
 ge_df
 """))
 
@@ -265,14 +269,18 @@ Detection rule: peak receiver voltage > noise floor (0.0795 μV at 31.5 MHz, 500
 cells.append(code(r"""master = []
 for station in ['Kleve','Stollberg']:
     for tname in TF_NAMES:
-        d_km, v_fe = fe_signal_uV(station, tname, W_sub, H_sub)
-        d_km, v_ge = ge_signal_uV(station, tname, W_sub, H_sub)
+        d_km, v_fe, P_fe_dBW = fe_signal_uV(station, tname, W_sub, H_sub)
+        d_km, v_ge, P_ge_dBW = ge_signal_uV(station, tname, W_sub, H_sub)
+        snr_fe = P_fe_dBW - N_dBW
+        snr_ge = P_ge_dBW - N_dBW
         master.append([station, tname, round(d_km,1),
-                       f"{v_fe:.4g}", 'ABOVE NOISE' if v_fe > N_uV else 'BELOW NOISE',
-                       f"{v_ge:.4g}", 'ABOVE NOISE' if v_ge > N_uV else 'BELOW NOISE'])
+                       f"{v_fe:.4g}", f"{snr_fe:+.1f}",
+                       'ABOVE NOISE' if v_fe > N_uV else 'BELOW NOISE',
+                       f"{v_ge:.4g}", f"{snr_ge:+.1f}",
+                       'ABOVE NOISE' if v_ge > N_uV else 'BELOW NOISE'])
 master_df = pd.DataFrame(master, columns=['Station','Target','d (km)',
-                                           'FE V_rx (μV)','FE Verdict',
-                                           'GE V_rx (μV)','GE Verdict'])
+                                           'FE V_rx (μV)','FE SNR (dB)','FE Verdict',
+                                           'GE V_rx (μV)','GE SNR (dB)','GE Verdict'])
 master_df
 """))
 
@@ -287,9 +295,9 @@ def f_to_v(name, idx):
     for station in ['Kleve','Stollberg']:
         for tname in TF_NAMES:
             if name=='fe':
-                _, v = fe_signal_uV(station, tname, W_sub, H_sub)
+                _, v, _ = fe_signal_uV(station, tname, W_sub, H_sub)
             else:
-                _, v = ge_signal_uV(station, tname, W_sub, H_sub)
+                _, v, _ = ge_signal_uV(station, tname, W_sub, H_sub)
             out.append(v)
     return out
 
