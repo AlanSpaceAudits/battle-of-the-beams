@@ -320,18 +320,30 @@ cells.append(code(r"""def link_budget_original(station_name, target_name):
                 V_ge_eq  =c.voltage_50ohm_uV(P_rx_ge_eq))
 """))
 
-cells.append(md(r"""### 9.1 Operational Midlands targets"""))
+cells.append(md(r"""### 9.1 Operational Midlands targets
+
+SNR is computed in dB as
+
+$$\mathrm{SNR}_{\rm eq}\,[\mathrm{dB}] = P_{\rm rx,eq}\,[\mathrm{dBW}] - N\,[\mathrm{dBW}]
+   = 20\log_{10}\!\left(\frac{V_{\rm rx,eq}}{V_{\rm noise}}\right)$$
+
+A pilot can ride the equisignal corridor when SNR is roughly **+10 dB or better** at the receiver. Below that the dot/dash audibility breaks down even if the carrier nominally exceeds noise. ABOVE/BELOW columns are the strict "above the noise floor" verdict for reference."""))
 
 cells.append(code(r"""OP_TARGETS = ['Spalding','Beeston','Derby','Birmingham','Retford','London']
 op_rows = []
 for station in ['Kleve','Stollberg']:
     for tname in OP_TARGETS:
         r = link_budget_original(station, tname)
+        snr_fe = r['P_rx_fe_eq'] - N_dBW
+        snr_ge = r['P_rx_ge_eq'] - N_dBW
         op_rows.append([station, tname, round(r['d_km'],1), r['ground'],
-                        f"{r['V_fe_eq']:.4g}", 'ABOVE' if r['V_fe_eq']>N_uV else 'BELOW',
-                        f"{r['V_ge_eq']:.4g}", 'ABOVE' if r['V_ge_eq']>N_uV else 'BELOW'])
+                        f"{r['V_fe_eq']:.4g}", f"{snr_fe:+.1f}",
+                        'ABOVE' if r['V_fe_eq']>N_uV else 'BELOW',
+                        f"{r['V_ge_eq']:.4g}", f"{snr_ge:+.1f}",
+                        'ABOVE' if r['V_ge_eq']>N_uV else 'BELOW'])
 pd.DataFrame(op_rows, columns=['Station','Target','d (km)','Ground',
-                                'FE V_eq (μV)','FE','GE V_eq (μV)','GE'])
+                                'FE V_eq (μV)','FE SNR (dB)','FE',
+                                'GE V_eq (μV)','GE SNR (dB)','GE'])
 """))
 
 cells.append(md(r"""### 9.2 Telefunken July 1939 sea-test distances
@@ -343,11 +355,16 @@ tf_rows = []
 for station in ['Kleve','Stollberg']:
     for tname in TF_TARGETS:
         r = link_budget_original(station, tname)
+        snr_fe = r['P_rx_fe_eq'] - N_dBW
+        snr_ge = r['P_rx_ge_eq'] - N_dBW
         tf_rows.append([station, tname, round(r['d_km'],1),
-                        f"{r['V_fe_eq']:.4g}", 'ABOVE' if r['V_fe_eq']>N_uV else 'BELOW',
-                        f"{r['V_ge_eq']:.4g}", 'ABOVE' if r['V_ge_eq']>N_uV else 'BELOW'])
+                        f"{r['V_fe_eq']:.4g}", f"{snr_fe:+.1f}",
+                        'ABOVE' if r['V_fe_eq']>N_uV else 'BELOW',
+                        f"{r['V_ge_eq']:.4g}", f"{snr_ge:+.1f}",
+                        'ABOVE' if r['V_ge_eq']>N_uV else 'BELOW'])
 pd.DataFrame(tf_rows, columns=['Station','Target','d (km)',
-                                'FE V_eq (μV)','FE','GE V_eq (μV)','GE'])
+                                'FE V_eq (μV)','FE SNR (dB)','FE',
+                                'GE V_eq (μV)','GE SNR (dB)','GE'])
 """))
 
 # ----------------------------------------------------------------------
