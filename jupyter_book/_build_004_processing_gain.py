@@ -1,8 +1,8 @@
 """Build 004_Processing_Gain_Ceiling.ipynb.
 
 Tests Bullnyte's "a CW tone can be copied below the noise floor"
-argument by converting it into its exact engineering form -- matched-
-filter processing gain -- and showing the gain has a hard ceiling set
+argument by converting it into its exact engineering form, matched-
+filter processing gain, and showing the gain has a hard ceiling set
 by the matched-filter theorem. Computes the coherent integration time
 the operator would need to drag each Stollberg -> Telefunken path up
 to 0 dB SNR, and compares that against what a beam-flying bomber can
@@ -33,7 +33,7 @@ cells.append(md(r"""# Processing-Gain Ceiling: Can a CW Tone Be Copied Below the
 
 The objection raised against the null-hypothesis verdict is that "below the noise floor = imperceptible" is too strict a rule. The argument: a keyed CW / MCW tone (Knickebein's audio note) stays distinguishable from static even when the SNR looks negative, so a trained operator could still copy it past the point where the link budget says the signal is gone.
 
-That objection is **partially correct and fully quantifiable**. CW copy below a wideband noise floor is real. It is not mysterious, it is not anecdotal, and it is not unbounded. It has an exact engineering name -- **matched-filter processing gain** -- and a hard ceiling set by a theorem.
+That objection is **partially correct and fully quantifiable**. CW copy below a wideband noise floor is real. It is not mysterious, it is not anecdotal, and it is not unbounded. It has an exact engineering name, **matched-filter processing gain**, and a hard ceiling set by a theorem.
 
 This notebook:
 
@@ -44,7 +44,7 @@ This notebook:
 
 ## The short version
 
-Processing gain is real but capped. Even granting the **theoretical maximum** coherent matched filter, the 800 km and 1000 km Telefunken paths stay below the noise floor on the globe. The 700 km path sits on the boundary. The documented Telefunken July 1939 result -- usable audibility out to 1000 km -- cannot be reconstructed on a globe by any amount of CW processing gain.
+Processing gain is real but capped. Even granting the **theoretical maximum** coherent matched filter, the 800 km and 1000 km Telefunken paths stay below the noise floor on the globe. The 700 km path sits on the boundary. The documented Telefunken July 1939 result, usable audibility out to 1000 km, cannot be reconstructed on a globe by any amount of CW processing gain.
 """))
 
 # ----------------------------------------------------------------------
@@ -60,7 +60,7 @@ plt.rcParams['axes.grid']      = True
 plt.rcParams['grid.alpha']     = 0.3
 
 f_MHz   = 31.5
-B_ref   = c.RX_BW_HZ          # 500 Hz -- the bandwidth our SNR figures are quoted in
+B_ref   = c.RX_BW_HZ          # 500 Hz, the bandwidth our SNR figures are quoted in
 v_air   = 100.0               # m/s, He-111 cruise approx 360 km/h
 N_dBW   = c.noise_floor_dBW(f_MHz)
 print(f"reference bandwidth B_ref = {B_ref:.0f} Hz")
@@ -73,7 +73,7 @@ cells.append(md(r"""## 2. Processing gain and the matched-filter theorem
 
 ### The noise floor is bandwidth-dependent
 
-There is no single "noise floor." Noise power is $N = k_B T B F$ -- it scales with the bandwidth $B$ you measure it in. An SNR figure means nothing until the bandwidth is stated. "Signal below the noise floor" is only a sentence once you say *which* floor.
+There is no single "noise floor." Noise power is $N = k_B T B F$, so it scales with the bandwidth $B$ you measure it in. An SNR figure means nothing until the bandwidth is stated. "Signal below the noise floor" is only a sentence once you say *which* floor.
 
 Every SNR number in the BotB notebooks is quoted in **$B_{\rm ref}$ = 500 Hz**, an already-narrow MCW filter.
 
@@ -91,7 +91,7 @@ This is what "copying CW below the noise floor" actually is. The operator's ear 
 
 ### The theorem that caps it
 
-The matched filter is the **optimal** detector (Neyman-Pearson; North 1943). No receiver, no ear, no trained brain can extract more SNR from a known signal in white noise than the matched filter. So $G_{\rm proc} = 10\log_{10}(2\tau B_{\rm ref})$ is not an estimate -- it is a **hard upper bound**.
+The matched filter is the **optimal** detector (Neyman-Pearson; North 1943). No receiver, no ear, no trained brain can extract more SNR from a known signal in white noise than the matched filter. So $G_{\rm proc} = 10\log_{10}(2\tau B_{\rm ref})$ is not an estimate. It is a **hard upper bound**.
 
 Anyone claiming more recovery than this is claiming a detector that beats the optimal detector. That is not a debating position, it is a violated theorem.
 """))
@@ -111,15 +111,15 @@ The theorem says $G_{\rm proc}$ grows without limit as $\tau \to \infty$. In pri
 
 1. **Link coherence time.** Coherent integration requires the signal phase to stay stable across $\tau$. A bomber at 100 m/s moving through a 31.5 MHz field ($\lambda$ = 9.5 m) decorrelates the path in a fraction of a second. Integrate longer than the coherence time and the extra samples add noise, not signal.
 
-2. **Navigation update rate.** Knickebein is a *navigation* beam. The pilot needs a fresh "am I in the dot sector or the dash sector" fix roughly every second to fly the equisignal. Integrate the tone for 10 seconds and you have averaged away 10 seconds of course information -- you have flown 1 km blind. You cannot integrate longer than the beam's own update requirement and still use it as a beam.
+2. **Navigation update rate.** Knickebein is a *navigation* beam. The pilot needs a fresh "am I in the dot sector or the dash sector" fix roughly every second to fly the equisignal. Integrate the tone for 10 seconds and you have averaged away 10 seconds of course information, having flown 1 km blind. You cannot integrate longer than the beam's own update requirement and still use it as a beam.
 
-3. **The ear is an incoherent detector.** The human ear is an energy detector, not a coherent matched filter. Incoherent integration gain is strictly *weaker* than the coherent bound. Using the coherent bound is therefore generous to the objection -- the real ear does worse.
+3. **The ear is an incoherent detector.** The human ear is an energy detector, not a coherent matched filter. Incoherent integration gain is strictly *weaker* than the coherent bound. Using the coherent bound is therefore generous to the objection, because the real ear does worse.
 
 Realistic ceiling on $\tau$: **0.1 s** for genuine course-keeping, **1 s** as a generous upper limit, **10 s** as a physically impossible extreme included only to show how far it can be pushed. All three use the coherent bound, which the incoherent ear cannot actually reach.
 """))
 
 # ----------------------------------------------------------------------
-cells.append(md(r"""## 4. Baseline GE SNR -- Stollberg Telefunken paths
+cells.append(md(r"""## 4. Baseline GE SNR for the Stollberg Telefunken paths
 
 The signal here is taken at the **most generous antenna setting**: full 99 m x 29 m aperture, peak gain (no crossover loss). That is the steelman maximum. Bullnyte's sub-aperture model (35 m x 20 m) is about 6 dB lower; the verdict below holds either way and the sub-aperture column is shown for reference.
 
@@ -179,9 +179,9 @@ for tname in ['TF 700 km','TF 800 km','TF 1000 km']:
     flown_str = (f"{flown_m:.2f} m" if flown_m < 1000
                  else f"{flown_m/1000:.1f} km" if flown_m < 1e6
                  else f"{flown_m/1e3:,.0f} km")
-    possible = ('yes -- marginal' if tau < 0.1
-                else 'no -- beam unflyable' if tau < 3600
-                else 'no -- absurd')
+    possible = ('yes, marginal' if tau < 0.1
+                else 'no, beam unflyable' if tau < 3600
+                else 'no, absurd')
     req_rows.append([tname, round(d_km,1), f"{deficit:.1f}",
                      tau_str, flown_str, possible])
 req_df = pd.DataFrame(req_rows, columns=['Path','d (km)','SNR deficit (dB)',
@@ -191,7 +191,7 @@ req_df = pd.DataFrame(req_rows, columns=['Path','d (km)','SNR deficit (dB)',
 req_df
 """))
 
-cells.append(md(r"""The 700 km path needs only a few milliseconds of integration -- achievable, and it lands the path on the detection boundary. The 800 km path needs over a second of perfectly coherent integration, during which the bomber flies past the point it was navigating to. The 1000 km path needs a coherent integration time measured in **hours**, during which the aircraft would fly thousands of km. There is no operator technique, no antenna, and no theorem that delivers that."""))
+cells.append(md(r"""The 700 km path needs only a few milliseconds of integration, which is achievable, and it lands the path on the detection boundary. The 800 km path needs over a second of perfectly coherent integration, during which the bomber flies past the point it was navigating to. The 1000 km path needs a coherent integration time measured in **hours**, during which the aircraft would fly thousands of km. There is no operator technique, no antenna, and no theorem that delivers that."""))
 
 # ----------------------------------------------------------------------
 cells.append(md(r"""## 6. Net SNR under the integration ceilings
@@ -224,7 +224,7 @@ Processing-gain ceilings applied:
 | tau = 10 s  | {G_proc_dB(10.0):.1f} dB | physically impossible for a beam-flying bomber |
 
 All three use the **coherent** matched-filter bound. The human ear is an
-incoherent detector and cannot reach these values -- so the real verdict
+incoherent detector and cannot reach these values, so the real verdict
 is worse for the objection than the table shows.
 '''))
 """))
@@ -248,9 +248,9 @@ bars = ax.bar(x, taus, 0.55, color=['#4CAF50','#FF9800','#FF1493'])
 ax.set_yscale('log')
 ax.axhspan(1e-4, 0.1, color='#4CAF50', alpha=0.12)
 ax.axhline(0.1, color='#4CAF50', lw=1.2, ls='--',
-           label='0.1 s -- realistic course-keeping limit')
+           label='0.1 s, realistic course-keeping limit')
 ax.axhline(1.0, color='#FF9800', lw=1.2, ls='--',
-           label='1 s -- generous upper limit')
+           label='1 s, generous upper limit')
 ax.set_xticks(x)
 ax.set_xticklabels([f"{p}\n({d:.0f} km)" for p,d in zip(paths,dkms)])
 ax.set_ylabel('Coherent integration time required for 0 dB SNR (s, log scale)')
@@ -307,7 +307,7 @@ cells.append(md(r"""## 8. Verdict
 
 The CW-below-the-noise-floor objection, stated correctly, is matched-filter processing gain. It is real, it is bounded by the matched-filter theorem, and it is bounded again by the integration time a beam-flying bomber can physically deliver.
 
-Taken at the **most generous** settings -- full aperture, peak gain, coherent matched filter (which the human ear cannot actually reach):
+Taken at the **most generous** settings (full aperture, peak gain, coherent matched filter, which the human ear cannot actually reach):
 
 - **TF 700 km** sits on the detection boundary. A few milliseconds of integration lifts it to 0 dB. This is the path where the objection has real force, and it matches the boundary already found in the antenna-recovery analysis.
 - **TF 800 km** needs over a second of perfectly coherent integration. Across that second the bomber flies past its waypoint with no course update. It does not work as a navigation beam.
