@@ -121,7 +121,7 @@ Realistic ceiling on $\tau$: **0.1 s** for genuine course-keeping, **1 s** as a 
 # ----------------------------------------------------------------------
 cells.append(md(r"""## 4. Baseline GE SNR for the Stollberg Telefunken paths
 
-The signal here is taken at the **most generous antenna setting**: full 99 m x 29 m aperture, peak gain (no crossover loss). That is the steelman maximum. Bullnyte's sub-aperture model (35 m x 20 m) is about 6 dB lower; the verdict below holds either way and the sub-aperture column is shown for reference.
+The signal is computed under Bullnyte's antenna model: the sub-aperture radiator of W = 35 m by H = 20 m, peak gain, no crossover loss. These are the parameters Bullnyte specified, so the whole calculation rests on his stated method.
 
 GE propagation is ITU-R P.526-16 Fock smooth-Earth diffraction. Stollberg (Kn-2) is the station that ran the documented July 1939 over-sea campaign, so its distance labels are 1:1.
 """))
@@ -138,23 +138,22 @@ cells.append(code(r"""def ge_snr_dB(W_m, H_m, target_name, station='Stollberg'):
     return d_m/1000, P_rx - N_dBW
 
 TF = ['TF 400 km','TF 500 km','TF 700 km','TF 800 km','TF 1000 km']
+W_sub, H_sub = 35.0, 20.0          # Bullnyte sub-aperture radiator
 rows = []
 for tname in TF:
-    d_km, snr_full = ge_snr_dB(99, 29, tname)
-    _,    snr_sub  = ge_snr_dB(35, 20, tname)
-    rows.append([tname, round(d_km,1), f"{snr_full:+.1f}", f"{snr_sub:+.1f}"])
+    d_km, snr = ge_snr_dB(W_sub, H_sub, tname)
+    rows.append([tname, round(d_km,1), f"{snr:+.1f}"])
 base_df = pd.DataFrame(rows, columns=['Path','d from Stollberg (km)',
-                                      'GE SNR full aperture (dB)',
-                                      'GE SNR Bullnyte sub-ap (dB)'])
+                                      'GE SNR (dB, neg = below floor)'])
 base_df
 """))
 
 # ----------------------------------------------------------------------
 cells.append(md(r"""## 5. Required integration time to reach 0 dB SNR
 
-Invert the processing-gain formula. To lift a path with SNR deficit $D$ dB up to 0 dB SNR you need $G_{\rm proc} = D$, which requires:
+Invert the processing-gain formula. Each path sits at a globe-model SNR of $S$ dB, reported below as a signed value: it is **negative** because the signal is below the 0 dB noise-floor baseline. The shortfall to be made up is the deficit magnitude $D = -S$. Reaching 0 dB needs $G_{\rm proc} = D$, which requires:
 
-$$\tau_{\rm req} = \frac{10^{D/10}}{2\,B_{\rm ref}}$$
+$$\tau_{\rm req} = \frac{10^{D/10}}{2\,B_{\rm ref}} = \frac{10^{-S/10}}{2\,B_{\rm ref}}$$
 
 This is the falsifiable artifact. It turns "perceptible below the noise floor" into a single number per path: the seconds of perfect coherent integration required. Then check whether a beam-flying bomber can physically deliver that time.
 """))
@@ -164,8 +163,8 @@ cells.append(code(r"""def tau_required_s(deficit_dB, B_ref=B_ref):
 
 req_rows = []
 for tname in ['TF 700 km','TF 800 km','TF 1000 km']:
-    d_km, snr_full = ge_snr_dB(99, 29, tname)
-    deficit = -snr_full
+    d_km, snr = ge_snr_dB(W_sub, H_sub, tname)
+    deficit = -snr
     tau = tau_required_s(deficit)
     flown_m = tau * v_air
     if tau < 1:
@@ -181,16 +180,16 @@ for tname in ['TF 700 km','TF 800 km','TF 1000 km']:
                  else f"{flown_m/1e3:,.0f} km")
     possible = ('Yes, within course-keeping limit' if tau < 0.1
                 else 'No, exceeds course-keeping limit')
-    req_rows.append([tname, round(d_km,1), f"{deficit:.1f}",
+    req_rows.append([tname, round(d_km,1), f"{snr:+.1f}",
                      tau_str, flown_str, possible])
-req_df = pd.DataFrame(req_rows, columns=['Path','d (km)','SNR deficit (dB)',
+req_df = pd.DataFrame(req_rows, columns=['Path','d (km)','GE SNR (dB, neg = below floor)',
                                          'tau required for 0 dB',
                                          'aircraft displacement during tau',
                                          'physically possible?'])
 req_df
 """))
 
-cells.append(md(r"""The 700 km path needs only a few milliseconds of integration, which is achievable, and it lands the path on the detection boundary. The 800 km path needs over a second of perfectly coherent integration, during which the bomber flies past the point it was navigating to. The 1000 km path needs a coherent integration time measured in **hours**, during which the aircraft would fly thousands of km. There is no operator technique, no antenna, and no theorem that delivers that."""))
+cells.append(md(r"""The 700 km path needs only a few tens of milliseconds of integration, which is achievable, and it lands the path on the detection boundary. The 800 km path needs several seconds of perfectly coherent integration, during which the bomber flies past the point it was navigating to. The 1000 km path needs a coherent integration time measured in **days**, during which the aircraft would fly thousands of km. There is no operator technique, no antenna, and no theorem that delivers that."""))
 
 # ----------------------------------------------------------------------
 cells.append(md(r"""## 6. Net SNR under the integration ceilings
@@ -201,10 +200,10 @@ Apply the three integration-time ceilings ($\tau$ = 0.1 s, 1 s, 10 s) to every S
 cells.append(code(r"""tau_ceilings = [0.1, 1.0, 10.0]
 net_rows = []
 for tname in TF:
-    d_km, snr_full = ge_snr_dB(99, 29, tname)
-    row = [tname, round(d_km,1), f"{snr_full:+.1f}"]
+    d_km, snr = ge_snr_dB(W_sub, H_sub, tname)
+    row = [tname, round(d_km,1), f"{snr:+.1f}"]
     for tau in tau_ceilings:
-        net = snr_full + G_proc_dB(tau)
+        net = snr + G_proc_dB(tau)
         row.append(f"{net:+.1f}")
     net_rows.append(row)
 cols = ['Path','d (km)','baseline GE SNR (dB)']
@@ -236,9 +235,9 @@ cells.append(md(r"""### 7.1 Required integration time per path"""))
 cells.append(code(r"""paths = ['TF 700 km','TF 800 km','TF 1000 km']
 taus, deficits, dkms = [], [], []
 for tname in paths:
-    d_km, snr_full = ge_snr_dB(99, 29, tname)
-    deficits.append(-snr_full)
-    taus.append(tau_required_s(-snr_full))
+    d_km, snr = ge_snr_dB(W_sub, H_sub, tname)
+    deficits.append(-snr)
+    taus.append(tau_required_s(-snr))
     dkms.append(d_km)
 
 fig, ax = plt.subplots(figsize=(11,6))
@@ -254,7 +253,7 @@ ax.set_xticks(x)
 ax.set_xticklabels([f"{p}\n({d:.0f} km)" for p,d in zip(paths,dkms)])
 ax.set_ylabel('Coherent integration time required for 0 dB SNR (s, log scale)')
 ax.set_title('Integration time the operator would need to recover each path '
-             '(full aperture, peak gain)')
+             '(Bullnyte sub-aperture, peak gain)')
 for b, tau in zip(bars, taus):
     if tau < 1:        lbl = f"{tau*1000:.1f} ms"
     elif tau < 3600:   lbl = f"{tau:.2f} s"
@@ -273,13 +272,13 @@ cells.append(code(r"""d_grid = np.linspace(300, 1100, 200)
 fig, ax = plt.subplots(figsize=(12,6))
 
 s = c.STATIONS['Stollberg']
-G_full = c.aperture_gain_dBi(99, 29, f_MHz)
+G_sub = c.aperture_gain_dBi(W_sub, H_sub, f_MHz)
 base = []
 for d_km in d_grid:
     d_m = d_km*1000
     L = c.fock_diff_loss_dB(d_m, s['h_tx_m'], 4000, f_MHz, 'sea', s['pol'])
     FSPL = c.fspl_dB(d_m, f_MHz)
-    P_rx = 10*math.log10(s['Ptx_W']) + G_full - FSPL - L
+    P_rx = 10*math.log10(s['Ptx_W']) + G_sub - FSPL - L
     base.append(P_rx - N_dBW)
 base = np.array(base)
 
@@ -306,15 +305,35 @@ cells.append(md(r"""## 8. Verdict
 
 The CW-below-the-noise-floor objection, stated correctly, is matched-filter processing gain. It is real, it is bounded by the matched-filter theorem, and it is bounded again by the integration time a beam-flying bomber can physically deliver.
 
-Taken at the **most generous** settings (full aperture, peak gain, coherent matched filter, which the human ear cannot actually reach):
+Computed entirely under Bullnyte's antenna model (sub-aperture W = 35 m by H = 20 m, peak gain, no crossover loss), and granting the coherent matched filter, which the human ear cannot actually reach:
 
-- **TF 700 km** sits on the detection boundary. A few milliseconds of integration lifts it to 0 dB. This is the path where the objection has real force, and it matches the boundary already found in the antenna-recovery analysis.
-- **TF 800 km** needs over a second of perfectly coherent integration. Across that second the bomber flies past its waypoint with no course update. It does not work as a navigation beam.
-- **TF 1000 km** needs a coherent integration time measured in hours. The aircraft would fly thousands of km. No theorem, antenna, or operator delivers this.
+- **TF 700 km** sits on the detection boundary. A few tens of milliseconds of integration lifts it to 0 dB. This is the path where the objection has real force.
+- **TF 800 km** needs several seconds of perfectly coherent integration. Across that interval the bomber flies past its waypoint with no course update. It does not work as a navigation beam.
+- **TF 1000 km** needs a coherent integration time measured in days. The aircraft would fly thousands of km. No theorem, antenna, or operator delivers this.
 
-The documented Telefunken July 1939 campaign reported usable audibility at every range out to 1000 km. The globe-with-Fock model puts 1000 km roughly 79 dB below noise at the most generous antenna setting. Processing gain does not close a 79 dB gap. The objection moves the 700 km boundary by a few dB; it does not rescue the globe model at the distances that decide the null hypothesis.
+The documented Telefunken July 1939 campaign reported usable audibility at every range out to 1000 km. Under Bullnyte's own parameters the globe-with-Fock model puts 1000 km roughly 86 dB below noise. Processing gain does not close an 86 dB gap. The objection moves the 700 km boundary by a few dB; it does not rescue the globe model at the distances that decide the null hypothesis.
 
 The clean demonstration the objection asked for is the table in section 5: state the reference bandwidth, compute the required integration time, and check it against physical reality. For 800 km and 1000 km that required time is not physically available.
+"""))
+
+# ----------------------------------------------------------------------
+cells.append(md(r"""## 9. Sources and equation provenance
+
+Every equation in this notebook comes from a published primary source. Each row gives the exact page and a link to the matching source note in the Obsidian vault. The vault note reproduces that page as a screenshot with a verbatim quote, so the equation can be checked directly. Clicking a vault link opens the note in Obsidian.
+
+| Quantity used here | Primary source | Exact location | Vault source note |
+|---|---|---|---|
+| Thermal noise floor $kTB$ | Nyquist, H. (1928). Thermal Agitation of Electric Charge in Conductors. *Physical Review*, 32, 110-113. | equation (4), p. 113 | [1928 Nyquist](obsidian://open?vault=multi_2&file=1928_Nyquist_Thermal_Agitation_Electric_Charge) |
+| Noise factor, original concept | North, D. O. (1942). The Absolute Sensitivity of Radio Receivers. *RCA Review*, 6(3), 332-343. | equation (4), p. 335 | [1942 North](obsidian://open?vault=multi_2&file=1942_North_Absolute_Sensitivity_Radio_Receivers) |
+| Noise factor $F$, 290 K reference temperature | Friis, H. T. (1944). Noise Figures of Radio Receivers. *Proceedings of the IRE*, 32(7), 419-422. | equation (4), p. 420 | [1944 Friis](obsidian://open?vault=multi_2&file=1944_Friis_Noise_Figures_Radio_Receivers) |
+| Galactic noise $F_a = 52 - 23\log f$ | ITU-R Recommendation P.372-16 (2022). *Radio noise*. Geneva: ITU. | Part 4 §4.1, equation (13), p. 16 | [2022 ITU-R P.372-16](obsidian://open?vault=multi_2&file=2022_ITU-R_P372-16_Radio_Noise) |
+| Fock smooth-Earth diffraction loss | ITU-R Recommendation P.526-16 (2025). *Propagation by diffraction*. Geneva: ITU. | §3.1.1.2, equations 13-19, pp. 9-10 | [2025 ITU-R P.526-16](obsidian://open?vault=multi_2&file=2025_ITU-R_P526-16_Diffraction) |
+| Matched filter, output SNR $= 2E/N_0$, optimality | North, D. O. (1943). An Analysis of the Factors which Determine Signal/Noise Discrimination in Pulsed-Carrier Systems. RCA Technical Report PTR-6C; reprinted in *Proceedings of the IEEE*, 51(7), 1016-1027 (1963). | reprint §A, equations 24-28, p. 1021 | [1943 North](obsidian://open?vault=multi_2&file=1943_North_Signal_Noise_Discrimination_Pulsed_Carrier) |
+| Optimal-detector basis (likelihood-ratio test) | Neyman, J., & Pearson, E. S. (1933). On the Problem of the Most Efficient Tests of Statistical Hypotheses. *Philosophical Transactions of the Royal Society A*, 231, 289-337. | best-critical-region criterion, p. 300 | [1933 Neyman & Pearson](obsidian://open?vault=multi_2&file=1933_Neyman_Pearson_Most_Efficient_Tests) |
+
+The remaining relations are algebra from the rows above, with no separate citation: the processing-gain definition $G_{\rm proc}=10\log_{10}(B_{\rm ref}/B_{\rm det})$, the integrate-and-dump noise-equivalent bandwidth $B_{\rm det}=1/(2\tau)$, their combination $G_{\rm proc}=10\log_{10}(2\tau B_{\rm ref})$, and its inverse $\tau_{\rm req}=10^{D/10}/(2B_{\rm ref})$.
+
+PDF copies of all seven sources are in the `equation_refs/` folder next to this notebook, with a `README.md` mapping each PDF to its equation and exact page.
 """))
 
 # ----------------------------------------------------------------------
