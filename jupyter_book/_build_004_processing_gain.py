@@ -179,9 +179,8 @@ for tname in ['TF 700 km','TF 800 km','TF 1000 km']:
     flown_str = (f"{flown_m:.2f} m" if flown_m < 1000
                  else f"{flown_m/1000:.1f} km" if flown_m < 1e6
                  else f"{flown_m/1e3:,.0f} km")
-    possible = ('yes, marginal' if tau < 0.1
-                else 'no, beam unflyable' if tau < 3600
-                else 'no, absurd')
+    possible = ('Yes, within course-keeping limit' if tau < 0.1
+                else 'No, exceeds course-keeping limit')
     req_rows.append([tname, round(d_km,1), f"{deficit:.1f}",
                      tau_str, flown_str, possible])
 req_df = pd.DataFrame(req_rows, columns=['Path','d (km)','SNR deficit (dB)',
